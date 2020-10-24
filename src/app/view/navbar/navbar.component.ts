@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { isBs3 } from 'ngx-bootstrap/utils';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,7 @@ import { isBs3 } from 'ngx-bootstrap/utils';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  AppComponent=AppComponent;
   LOGO_IMG_PATH = 'assets/logo.png';
 
   constructor() {}
@@ -15,6 +17,10 @@ export class NavbarComponent implements OnInit {
 
   getLogoImgPath(): string {
     return this.LOGO_IMG_PATH;
+  }
+
+  get userIsLogged(): boolean {
+    return AppComponent.userIsLogged;
   }
 
   //TODO: tmp
@@ -70,11 +76,6 @@ export class NavbarComponent implements OnInit {
     'Washington',
     'West Virginia',
     'Wisconsin',
-    'Wyoming'
+    'Wyoming',
   ];
-
-  test(){
-    console.log('test')
-  }
-
 }

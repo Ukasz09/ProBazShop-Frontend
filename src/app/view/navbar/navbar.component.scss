@@ -33,11 +33,14 @@ img {
 .custom-list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color:shared.$primary-color;
+  background-color: shared.$primary-color;
   border-color: shared.$border-color;
 }
 
-.account-btn{
-  background-color:shared.$primary-color;
-  border-color: black;
+.material-icons.md-30 {
+  font-size: 30px;
+}
+
+.logout-txt{
+  color: shared.$primary-color;
 }
