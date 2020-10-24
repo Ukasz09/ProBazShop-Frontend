@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <div class="h-100 navbar-brand">
+      <a href="#"><img src="{{ getLogoImgPath() }}" /></a>
+    </div>
+    <div class="w-100">
+      <input
+        [(ngModel)]="selected"
+        [typeahead]="states"
+        [isAnimated]="true"
+        [optionsListTemplate]="customListTemplate"
+        class="form-control w-100"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </div>
+    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+      Search
+    </button>
+  </div>
+    <div class="btn-group">
+      <div class="btn-group" dropdown #accountDropdown="bs-dropdown">
+        <button
+          id="button-animated"
+          dropdownToggle
+          type="button"
+          class="btn btn-outline-dark pb-0"
+          aria-controls="dropdown-animated"
+        >
+          <i class="material-icons">account_circle</i>
+          <span class="caret"></span>
+        </button>
+        <ul
+          id="dropdown-animated"
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right"
+          role="menu"
+          aria-labelledby="button-animated"
+        >
+          <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">Another action</a>
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+      Hello Lukasz
+    </button> -->
+</nav>
+
+<!-- TEMPLATES -->
+<ng-template
+  #customListTemplate
+  let-matches="matches"
+  let-query="query"
+  let-typeaheadTemplateMethods
+>
+  <ul class="custom-list-group" [class.dropdown-menu]="isBs3">
+    <li
+      class="custom-list-group-item"
+      *ngFor="let match of matches"
+      [class.active]="typeaheadTemplateMethods.isActive(match)"
+      (click)="typeaheadTemplateMethods.selectMatch(match, $event)"
+      (mouseenter)="typeaheadTemplateMethods.selectActive(match)"
+    >
+      {{ match.item }}
+    </li>
+  </ul>
+</ng-template>

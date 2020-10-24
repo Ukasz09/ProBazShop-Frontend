@@ -1,0 +1,43 @@
+@use 'src/app/shared/styles' as shared;
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+::ng-deep .dropdown-menu {
+  min-width: 50% !important;
+}
+
+::ng-deep typeahead-container {
+  width: 50% !important;
+}
+
+.custom-list-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 25em;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.custom-list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  background-color: #fff;
+}
+
+.custom-list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color:shared.$primary-color;
+  border-color: shared.$border-color;
+}
+
+.account-btn{
+  background-color:shared.$primary-color;
+  border-color: black;
+}
