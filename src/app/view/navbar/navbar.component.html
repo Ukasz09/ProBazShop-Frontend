@@ -1,12 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  [ngStyle]="{ 'height.%': navbarHeightPerc }"
+>
   <div class="container">
-    <div class="h-100 navbar-brand">
-      <a href="#"><img src="{{ getLogoImgPath() }}" /></a>
+    <div class="navbar-brand mx-5">
+      <a routerLink="/home"
+        ><img src="{{ AppComponent.getLogoImgPath() }}"
+      /></a>
     </div>
     <div class="w-100">
       <input
-        [(ngModel)]="selected"
-        [typeahead]="states"
+        [(ngModel)]="searchedPhrase"
+        [typeahead]="searchKeywords"
         [isAnimated]="true"
         [optionsListTemplate]="customListTemplate"
         class="form-control w-100"
@@ -20,7 +25,7 @@
 
   <!-- BUTTON FOR LOGGED USER -->
   <div *ngIf="userIsLogged" class="btn-group">
-    <button class="btn btn-outline-danger pb-0" type="submit">
+    <button class="btn btn-outline-danger pb-0">
       <i class="material-icons md-30">shopping_cart</i>
     </button>
     <div class="btn-group" dropdown #accountDropdown="bs-dropdown">
@@ -54,7 +59,7 @@
           </a>
         </li>
         <li role="menuitem">
-          <a class="dropdown-item" href="#" (click)="AppComponent.logoutUser()">
+          <a class="dropdown-item" (click)="AppComponent.logoutUser()">
             <i class="material-icons btn-group">logout</i
             ><span class="mx-3 logout-txt"> Logout </span>
           </a>
@@ -64,10 +69,14 @@
   </div>
   <!-- /BUTTON FOR LOGGED USER -->
   <!-- LOGIN BTN -->
-  <button *ngIf="!userIsLogged" class="btn btn-success pb-0" (click)="AppComponent.logonUser()">
-    <div class="btn-group">
-      <i id="login-icon" class="material-icons md-30">login</i>
-      <label class="mx-3 pt-1" for="login-icon">Login</label>
+  <button
+  *ngIf="!userIsLogged"
+    class="btn btn-success my-2 my-sm-0 pb-0"
+    routerLink="/authentication-page"
+  >
+    <div class="btn-group py-0">
+      <i id="login-icon" class="material-icons">login</i>
+      <label class="px-3 py-auto" for="login-icon">Login</label>
     </div>
   </button>
   <!-- /LOGIN BTN -->

@@ -6,11 +6,11 @@ img {
 }
 
 ::ng-deep .dropdown-menu {
-  min-width: 50% !important;
+  min-width: 45% !important;
 }
 
 ::ng-deep typeahead-container {
-  width: 50% !important;
+  width: 45% !important;
 }
 
 .custom-list-group {
@@ -43,4 +43,9 @@ img {
 
 .logout-txt{
   color: shared.$primary-color;
+}
+
+.form-control:focus {
+  border-color: shared.$primary-color;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px shared.$primary-color;
 }

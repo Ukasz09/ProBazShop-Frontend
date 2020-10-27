@@ -8,9 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AuthenticationPageComponent } from './view/authentication-page/authentication-page.component';
+import { HomeComponent } from './view/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, AuthenticationPageComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

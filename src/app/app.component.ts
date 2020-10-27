@@ -8,6 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ProBazShop';
   static userIsLogged = false;
+  static LOGO_IMG_PATH = 'assets/logo2.png';
+
+  static getLogoImgPath(): string {
+    return this.LOGO_IMG_PATH;
+  }
 
   //TODO: tmp mocked
   static logonUser() {
