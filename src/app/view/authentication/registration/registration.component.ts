@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { RegistrationFormModel } from 'src/app/model/form/registration-form.model';
+import { AlertBase } from '../../shared/alert-base';
+import { FormAlerts } from '../../shared/forms/form-alerts';
 import { FormLogicUtils } from '../../shared/forms/form-logic-utils';
 
 @Component({
@@ -10,11 +12,13 @@ import { FormLogicUtils } from '../../shared/forms/form-logic-utils';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent extends AlertBase implements OnInit {
   registrationForm: FormGroup;
   formDataModel: RegistrationFormModel;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    super();
+  }
 
   ngOnInit(): void {
     this.formDataModel = new RegistrationFormModel();
@@ -23,12 +27,14 @@ export class RegistrationComponent implements OnInit {
     );
   }
 
-  //TODO: tmp mocked
   onRegisterBtnClick() {
     if (this.registrationForm.dirty && this.registrationForm.valid) {
       AppComponent.registerUser();
       this.router.navigateByUrl('/home');
-    } else alert(`Data in form invalid`);
+    } else {
+      this.clearAllAlerts();
+      this.addAlert(FormAlerts.getInvalidDataInFormAlert());
+    }
   }
 
   onBackBtnClick() {

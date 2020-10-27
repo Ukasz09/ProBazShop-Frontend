@@ -13,6 +13,7 @@ import { FormLogicUtils } from '../../shared/forms/form-logic-utils';
 export class LoginComponent implements OnInit {
   formDataModel: LoginFormModel;
   loginForm: FormGroup;
+  needToShowInvalidFormAlert = false;
 
   constructor(private router: Router) {}
 

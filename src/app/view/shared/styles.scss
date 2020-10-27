@@ -1,2 +1,13 @@
 $primary-color: #f44e64;
 $border-color: #ff4461;
+
+$error-color: #e05563;
+$error-border-color: #ff4461;
+
+::ng-deep .alert-custom-danger {
+  text-align: center;
+  background-color: $error-color;
+  border-color: $error-border-color;
+  color: whitesmoke;
+  font-weight: bolder;
+}
