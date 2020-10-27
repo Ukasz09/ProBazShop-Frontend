@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarContainerComponent } from '../navbar/navbar-container/navbar-container.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get navbarHeightPerc(): number {
-    return NavbarComponent.navbarHeightPerc;
+    return NavbarContainerComponent.heightPerc;
   }
-
 }

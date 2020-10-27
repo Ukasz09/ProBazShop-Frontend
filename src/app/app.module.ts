@@ -8,11 +8,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AuthenticationPageComponent } from './view/authentication-page/authentication-page.component';
 import { HomeComponent } from './view/home/home.component';
+import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
+import { AuthenticationPageComponent } from './view/authentication/authentication-page/authentication-page.component';
+import { NavbarContainerComponent } from './view/navbar/navbar-container/navbar-container.component';
+import { RegistrationComponent } from './view/authentication/registration/registration.component';
+import { LoginComponent } from './view/authentication/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AuthenticationPageComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    AuthenticationPageComponent,
+    HomeComponent,
+    RegistrationComponent,
+    AuthenticationChoiceComponent,
+    NavbarContainerComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

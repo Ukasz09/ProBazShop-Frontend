@@ -1,7 +1,4 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-light"
-  [ngStyle]="{ 'height.%': navbarHeightPerc }"
->
+<app-navbar-container>
   <div class="container">
     <div class="navbar-brand mx-5">
       <a routerLink="/home"
@@ -59,7 +56,7 @@
           </a>
         </li>
         <li role="menuitem">
-          <a class="dropdown-item" (click)="AppComponent.logoutUser()">
+          <a class="dropdown-item" routerLink="/home" (click)="AppComponent.logoutUser()">
             <i class="material-icons btn-group">logout</i
             ><span class="mx-3 logout-txt"> Logout </span>
           </a>
@@ -70,9 +67,9 @@
   <!-- /BUTTON FOR LOGGED USER -->
   <!-- LOGIN BTN -->
   <button
-  *ngIf="!userIsLogged"
-    class="btn btn-success my-2 my-sm-0 pb-0"
-    routerLink="/authentication-page"
+    *ngIf="!userIsLogged"
+    class="btn btn-dark my-2 my-sm-0 pb-0"
+    routerLink="/authentication-choice"
   >
     <div class="btn-group py-0">
       <i id="login-icon" class="material-icons">login</i>
@@ -80,7 +77,7 @@
     </div>
   </button>
   <!-- /LOGIN BTN -->
-</nav>
+</app-navbar-container>
 
 <!-- TEMPLATES -->
 <ng-template

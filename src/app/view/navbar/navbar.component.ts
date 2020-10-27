@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
 import { ProductsService } from 'src/app/services/products.service';
@@ -10,7 +10,6 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class NavbarComponent implements OnInit {
   AppComponent = AppComponent;
-  static readonly navbarHeightPerc: number = 12;
   isBs3 = isBs3();
   searchedPhrase: string = '';
   searchKeywords: string[] = [];
@@ -21,9 +20,7 @@ export class NavbarComponent implements OnInit {
     this.searchKeywords = this.productsService.getProductsKeywords();
   }
 
-  get navbarHeightPerc(): number {
-    return NavbarComponent.navbarHeightPerc;
-  }
+
 
   get userIsLogged() {
     return AppComponent.userIsLogged;

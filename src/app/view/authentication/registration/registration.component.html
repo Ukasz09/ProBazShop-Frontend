@@ -1,0 +1,41 @@
+<app-authentication-page>
+  <div>
+    <div class="my-3">
+      <label for="name"><strong> Name </strong></label>
+      <input id="name" type="text" class="form-control w-100" />
+    </div>
+    <div class="my-3">
+      <label for="surname"><strong>Surname</strong></label>
+      <input id="surname" type="text" class="form-control w-100" />
+    </div>
+    <div class="my-3">
+      <label for="email"><strong>Email</strong></label>
+      <input id="email" type="email" class="form-control w-100" />
+    </div>
+    <div class="my-3">
+      <label for="password"><strong>Password</strong></label>
+      <input id="password" type="password" class="form-control w-100" />
+    </div>
+    <div class="my-3">
+      <label for="confirm_password"><strong>Confirm password</strong></label>
+      <input id="confirm_password" type="password" class="form-control w-100" />
+    </div>
+  </div>
+  <!-- BTNS AREA -->
+  <div class="d-flex flex-row-reverse my-3">
+    <!-- TODO: tmp click - change to form  -->
+    <button
+      class="btn btn-dark my-2 my-sm-0"
+      (click)="onRegisterClick()"
+      routerLink="/home"
+    >
+      Register
+    </button>
+    <button
+      class="btn btn-outline-danger my-2 my-sm-0"
+      routerLink="/authentication-choice"
+    >
+      Back
+    </button>
+  </div>
+</app-authentication-page>
