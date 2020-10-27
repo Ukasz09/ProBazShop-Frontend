@@ -1,0 +1,9 @@
+<div class="modal-body text-center">
+  <p>{{ modalTxt }}</p>
+  <button type="button" class="btn btn-success" (click)="confirmEmitter.emit()">
+    Yes
+  </button>
+  <button type="button" class="btn btn-danger" (click)="declineEmitter.emit()">
+    No
+  </button>
+</div>

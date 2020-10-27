@@ -9,10 +9,34 @@
 </div>
 <app-authentication-page>
   <app-form-ui-generator
+    *ngIf="!registrationIsDone; else loginTemplate"
     [formGroup]="registrationForm"
     [formDatamodel]="formDataModel"
     [submitBtnTxt]="'Register'"
     (onSubmitBtnClickEmitter)="onRegisterBtnClick()"
-    (onBackBtnClickEmitter)="onBackBtnClick()"
+    (onBackBtnClickEmitter)="onBackBtnClick(confirmModal)"
   ></app-form-ui-generator>
 </app-authentication-page>
+
+<ng-template #loginTemplate>
+  <div class="d-flex justify-content-center my-5">
+    <div class="btn-group">
+      <button
+        class="btn btn-dark my-2 my-sm-0 pb-0 mx-2"
+        routerLink="/authentication-choice/login"
+      >
+        <div class="btn-group py-0">
+          <i id="login-icon" class="material-icons">login</i>
+          <label class="px-3 py-auto" for="login-icon">Login</label>
+        </div>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #confirmModal>
+  <app-confirm-modal
+    (declineEmitter)="onBackDecline()"
+    (confirmEmitter)="onBackConfirm()"
+  ></app-confirm-modal>
+</ng-template>

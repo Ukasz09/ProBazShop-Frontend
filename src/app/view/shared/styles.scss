@@ -1,13 +1,18 @@
 $primary-color: #f44e64;
 $border-color: #ff4461;
 
-$error-color: #e05563;
-$error-border-color: #ff4461;
-
 ::ng-deep .alert-custom-danger {
   text-align: center;
-  background-color: $error-color;
-  border-color: $error-border-color;
-  color: whitesmoke;
+  background-color: #f8d7da;
+  // border-color: $error-border-color;
+  color: #77232B;//whitesmoke;
+  font-weight: bolder;
+}
+
+::ng-deep .alert-success {
+  text-align: center;
+  // background-color: $success-color;
+  // border-color: $success-border-color;
+  // color: whitesmoke;
   font-weight: bolder;
 }

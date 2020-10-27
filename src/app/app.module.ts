@@ -16,6 +16,8 @@ import { RegistrationComponent } from './view/authentication/registration/regist
 import { LoginComponent } from './view/authentication/login/login.component';
 import { FormUiGeneratorComponent } from './view/shared/forms/form-ui-generator/form-ui-generator.component';
 import { ControlMessagesComponent } from './view/shared/forms/control-messages/control-messages.component';
+import { ConfirmModalComponent } from './view/shared/modals/confirm-modal/confirm-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { ControlMessagesComponent } from './view/shared/forms/control-messages/c
     LoginComponent,
     ControlMessagesComponent,
     FormUiGeneratorComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { ControlMessagesComponent } from './view/shared/forms/control-messages/c
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
     AlertModule.forRoot(),

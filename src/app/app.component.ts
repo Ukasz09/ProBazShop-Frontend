@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertBase } from './view/shared/alert-base';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,6 @@ export class AppComponent {
 
   //TODO: tmp mocked
   static registerUser() {
-    AppComponent.userIsLogged = true;
+    // AppComponent.userIsLogged = true;
   }
 }
