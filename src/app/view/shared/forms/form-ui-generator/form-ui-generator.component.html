@@ -1,0 +1,36 @@
+<form [formGroup]="formGroup" (submit)="onSubmitBtnClickEmitter.emit()">
+  <div>
+    <div
+      *ngFor="let propertyId of formDatamodel.getPropertiesNameList()"
+      class="my-3"
+    >
+      <label [for]="propertyId"
+        ><strong>
+          {{ formDatamodel.getProperty(propertyId).name }}
+        </strong></label
+      >
+      <input
+        [formControl]="formGroup.get(propertyId)"
+        [id]="propertyId"
+        [type]="formDatamodel.getProperty(propertyId).type"
+        class="form-control w-100"
+      />
+      <app-control-messages
+        [control]="formGroup.get(propertyId)"
+      ></app-control-messages>
+    </div>
+  </div>
+  <!-- BTNS AREA -->
+  <div class="d-flex flex-row-reverse my-3">
+    <button class="btn btn-dark my-2 my-sm-0" type="submit">
+      {{ submitBtnTxt }}
+    </button>
+    <button
+      (click)="onBackBtnClickEmitter.emit()"
+      type="button"
+      class="btn btn-outline-danger my-2 my-sm-0"
+    >
+      {{ backBtnTxt }}
+    </button>
+  </div>
+</form>

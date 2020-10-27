@@ -22,4 +22,9 @@ export class AppComponent {
   static logoutUser() {
     AppComponent.userIsLogged = false;
   }
+
+  //TODO: tmp mocked
+  static registerUser() {
+    AppComponent.userIsLogged = true;
+  }
 }
