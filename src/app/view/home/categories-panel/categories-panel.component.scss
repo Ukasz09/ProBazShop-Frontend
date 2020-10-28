@@ -1,0 +1,30 @@
+@use 'src/app/view/shared/styles' as shared;
+
+.btn-category {
+  text-align: center;
+  color: shared.$dark-txt-color;
+  &:hover {
+    background-color: shared.$primary-color !important;
+    color: shared.$light-txt-color;
+  }
+  &:focus {
+    @include shared.primary-focus-shadow;
+  }
+}
+
+.categories-container {
+  width: fit-content;
+  background-color: shared.$content-color-1;
+}
+
+.category-container-header {
+  width: 250px;
+  background-color: shared.$content-color-1;
+  padding-top: 20px;
+  font-weight: bolder;
+}
+
+.custom-hr {
+  width: 70%;
+  background-color: shared.$primary-color;
+}

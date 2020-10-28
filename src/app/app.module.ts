@@ -18,6 +18,7 @@ import { FormUiGeneratorComponent } from './view/shared/forms/form-ui-generator/
 import { ControlMessagesComponent } from './view/shared/forms/control-messages/control-messages.component';
 import { ConfirmModalComponent } from './view/shared/modals/confirm-modal/confirm-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CategoriesPanelComponent } from './view/home/categories-panel/categories-panel.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ControlMessagesComponent,
     FormUiGeneratorComponent,
     ConfirmModalComponent,
+    CategoriesPanelComponent,
   ],
   imports: [
     BrowserModule,

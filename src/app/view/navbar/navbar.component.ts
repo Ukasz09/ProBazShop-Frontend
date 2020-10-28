@@ -20,8 +20,6 @@ export class NavbarComponent implements OnInit {
     this.searchKeywords = this.productsService.getProductsKeywords();
   }
 
-
-
   get userIsLogged() {
     return AppComponent.userIsLogged;
   }
