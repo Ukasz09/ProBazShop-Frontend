@@ -1,4 +1,14 @@
 <app-navbar></app-navbar>
-<div [ngStyle]="{ 'height.%': 100 - navbarHeightPerc}" style="background-color: #ECEFF1;">
-    <app-categories-panel></app-categories-panel>
+<div
+  [ngStyle]="{ 'height.%': 100 - navbarHeightPerc }"
+  style="background-color: #eceff1"
+>
+  <div class="container pt-5">
+    <div class="d-flex flex-row bg-light">
+      <app-categories-panel></app-categories-panel>
+      <div class="flex-fill">
+        <app-products-list></app-products-list>
+      </div>
+    </div>
+  </div>
 </div>

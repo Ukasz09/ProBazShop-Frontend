@@ -19,7 +19,10 @@ import { ControlMessagesComponent } from './view/shared/forms/control-messages/c
 import { ConfirmModalComponent } from './view/shared/modals/confirm-modal/confirm-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CategoriesPanelComponent } from './view/home/categories-panel/categories-panel.component';
-
+import { ProductsListComponent } from './view/home/products-list/products-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductItemRowComponent } from './view/home/products-list/product-item-row/product-item-row.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +37,11 @@ import { CategoriesPanelComponent } from './view/home/categories-panel/categorie
     FormUiGeneratorComponent,
     ConfirmModalComponent,
     CategoriesPanelComponent,
+    ProductsListComponent,
+    ProductItemRowComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -45,6 +51,7 @@ import { CategoriesPanelComponent } from './view/home/categories-panel/categorie
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
     AlertModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

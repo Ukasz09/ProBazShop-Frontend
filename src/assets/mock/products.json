@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "name": "Faux Shearling Jacket",
+    "description": "Jacket in soft faux shearling with faux leather details. Collar, zipper at front, and diagonal front pockets with zipper. Unlined.",
+    "imageURI": "assets/productsImages/hmgoepprod.jpeg",
+    "size": "XL",
+    "color": "white",
+    "price": 79.99,
+    "releaseDate": "March 19, 2012",
+    "starRating": 4.4
+  },
+  {
+    "id": 2,
+    "name": "Slim Fit Turtleneck Shirt",
+    "description": "Long-sleeved, turtleneck shirt in cotton jersey. Slim Fit – tapered at chest and waist with slightly narrower sleeves for a tailored silhouette.",
+    "imageURI": "assets/productsImages/hmgoepprod2.jpeg",
+    "size": "M",
+    "color": "brown",
+    "price": 17.99,
+    "releaseDate": "April 9, 2016",
+    "starRating": 5
+  },
+  {
+    "id": 3,
+    "name": "Derby Shoes",
+    "description": "Derby shoes in faux leather with lacing at front and a welt seam around soles. Cotton canvas lining and insoles. Chunky, patterned soles. Heel height 1 1/4 in.",
+    "imageURI": "assets/productsImages/hmgoepprod3.jpeg",
+    "size": "43",
+    "color": "black",
+    "price": 49.99,
+    "releaseDate": "June 27, 2020",
+    "starRating": 3.1
+  },
+  {
+    "id": 4,
+    "name": "Lined Denim Jacket",
+    "description": "Straight-cut jacket in thick cotton denim with a faux shearling collar. Buttons at front and button at cuffs. Chest pockets with flap and button, patch front pockets, and one inner pocket. Lightly padded. Quilted lining in woven cotton fabric.",
+    "imageURI": "assets/productsImages/hmgoepprod4.jpeg",
+    "size": "S",
+    "color": "blue",
+    "price": 59.99,
+    "releaseDate": "June 25, 2020",
+    "starRating": 4.9
+  },
+  {
+    "id": 5,
+    "name": "Printed Hoodie",
+    "description": "Sweatshirt with a printed design and jersey-lined, drawstring hood with wrapover front. Kangaroo pocket, long sleeves, and ribbing at cuffs and hem. Soft, brushed inside.",
+    "imageURI": "assets/productsImages/hmgoepprod5.jpeg",
+    "size": "M",
+    "color": "green",
+    "price": 29.99,
+    "releaseDate": "January 14, 2020",
+    "starRating": 2
+  },
+  {
+    "id": 6,
+    "name": "Ribbed Turtleneck Top",
+    "description": "Fitted top in ribbed cotton jersey with a turtleneck and long sleeves.",
+    "imageURI": "assets/productsImages/hmgoepprod6.jpeg",
+    "size": "S",
+    "color": "black",
+    "price": 12.99,
+    "releaseDate": "March 10, 2019",
+    "starRating": 4.7
+  },
+  {
+    "id": 7,
+    "name": "Ankle Boots",
+    "description": "Ankle boots in faux suede with block heels, elastic side panels, and loop at back. Fabric lining, fabric insoles, and patterned soles. Heel height 3 in.",
+    "imageURI": "assets/productsImages/hmgoepprod7.jpeg",
+    "size": "38",
+    "color": "black",
+    "price": 34.99,
+    "releaseDate": "December 11, 2019",
+    "starRating": 4.9
+  },
+  {
+    "id": 8,
+    "name": "Rib-knit Skirt",
+    "description": "Fitted, calf-length skirt in soft, rib-knit fabric with wool content. High waist, covered, elasticized waistband, and a slit at one side. Unlined",
+    "imageURI": "assets/productsImages/hmgoepprod8.jpeg",
+    "size": "L",
+    "color": "brown",
+    "price": 24.99,
+    "releaseDate": "July 5, 2018",
+    "starRating": 2.1
+  },
+  {
+    "id": 9,
+    "name": "Faux Leather Anorak",
+    "description": "Anorak in faux leather with a drawstring hood. Half-zip, drawstring at waist, and kangaroo pocket. Dropped shoulders and long sleeves with covered elastic at cuffs. Unlined.",
+    "imageURI": "assets/productsImages/hmgoepprod8.jpeg",
+    "size": "S",
+    "color": "darkgreen",
+    "price": 69.99,
+    "releaseDate": "February 12, 2000",
+    "starRating": 1.4
+  }
+]

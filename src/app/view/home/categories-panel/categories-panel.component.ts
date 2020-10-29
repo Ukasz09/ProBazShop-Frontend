@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-categories-panel',
@@ -7,19 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesPanelComponent implements OnInit {
   //TODO: tmp mocked
-  categories: string[] = [
-    'Buty',
-    'Plaszcze',
-    'Spodnie',
-    'T-shirty',
-    'Kurtki',
-    'Polary',
-    'Spodenki',
-    'Sukienki',
-    'Spódnice',
-  ];
+  categories: string[] = [];
 
-  constructor() {}
+  constructor(private productService: ProductsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categories = this.productService.getCategories();
+  }
 }

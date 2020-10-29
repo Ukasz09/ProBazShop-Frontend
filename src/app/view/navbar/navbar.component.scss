@@ -13,6 +13,12 @@ img {
   width: 45% !important;
 }
 
+::ng-deep .dropdown-item{
+  &:focus{
+    background-color: shared.$primary-color !important;
+  }
+}
+
 .custom-list-group {
   display: flex;
   flex-direction: column;

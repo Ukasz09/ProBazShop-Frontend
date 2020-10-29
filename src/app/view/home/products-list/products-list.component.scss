@@ -1,0 +1,33 @@
+@use 'src/app/view/shared/styles' as shared;
+
+::ng-deep .pagination > li > a {
+  color: shared.$dark-txt-color;
+}
+
+@mixin pagination-li {
+  color: shared.$light-txt-color;
+  background-color: shared.$primary-color;
+  border-color: shared.$border-color;
+}
+
+::ng-deep .pagination > li > a:focus,
+::ng-deep .pagination > li > span:focus {
+  @include pagination-li;
+  @include shared.primary-focus-shadow;
+}
+
+::ng-deep .pagination > li > a:hover,
+::ng-deep .pagination > li > span:hover {
+    @include pagination-li;
+}
+
+::ng-deep .pagination > .active > a {
+  color: shared.$light-txt-color;
+  background-color: shared.$primary-color !important;
+  border: solid 1px shared.$border-color !important;
+}
+
+::ng-deep .pagination > .active > a:hover {
+  background-color: darken(shared.$primary-color, 20) !important;
+  border: solid 1px darken(shared.$border-color, 20);
+}
