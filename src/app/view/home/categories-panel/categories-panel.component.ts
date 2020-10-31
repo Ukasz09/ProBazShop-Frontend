@@ -7,7 +7,6 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./categories-panel.component.scss'],
 })
 export class CategoriesPanelComponent implements OnInit {
-  //TODO: tmp mocked
   categories: string[] = [];
 
   constructor(private productService: ProductsService) {}

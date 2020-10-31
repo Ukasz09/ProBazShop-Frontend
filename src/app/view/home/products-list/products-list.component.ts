@@ -9,7 +9,14 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products-list.component.scss'],
 })
 export class ProductsListComponent implements OnInit {
+  private static readonly SORTING_METHODS = {
+    newest: 'From newest',
+    low: 'Price: low to high',
+    high: 'Price: high to low',
+  };
+
   itemsPerPage = 5;
+  actualSortingMethod = ProductsListComponent.SORTING_METHODS.newest;
   products: Product[] = [];
   productsPerPage: Product[] = [];
 
@@ -43,5 +50,18 @@ export class ProductsListComponent implements OnInit {
         window.clearInterval(scrollToTop);
       }
     }, 16);
+  }
+
+  changeSortingMethod(methodKey: string) {
+    this.actualSortingMethod = methodKey;
+  }
+
+  get sorthingMethodsKeys(): string[] {
+    return Object.keys(ProductsListComponent.SORTING_METHODS);
+  }
+
+  getSortingMethodLabelTxt(methodKey: string): string {
+    let labelTxt = ProductsListComponent.SORTING_METHODS[methodKey];
+    return labelTxt ?? methodKey;
   }
 }

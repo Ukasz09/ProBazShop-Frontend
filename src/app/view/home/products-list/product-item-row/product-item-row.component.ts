@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Product } from 'src/app/model/product';
 
 @Component({
@@ -8,8 +9,13 @@ import { Product } from 'src/app/model/product';
 })
 export class ProductItemRowComponent implements OnInit {
   @Input() product: Product;
-
-  constructor() {}
+  modalRef: BsModalRef;
+  
+  constructor(private modalService: BsModalService) {}
 
   ngOnInit(): void {}
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 }

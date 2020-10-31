@@ -31,3 +31,8 @@
   background-color: darken(shared.$primary-color, 20) !important;
   border: solid 1px darken(shared.$border-color, 20);
 }
+
+.custom-hr {
+  width: 90%;
+  background-color: shared.$primary-color;
+}

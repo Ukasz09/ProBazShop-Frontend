@@ -23,6 +23,7 @@ import { ProductsListComponent } from './view/home/products-list/products-list.c
 import { HttpClientModule } from '@angular/common/http';
 import { ProductItemRowComponent } from './view/home/products-list/product-item-row/product-item-row.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ProductItemDetailsComponent } from './view/home/products-list/product-item-details/product-item-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     CategoriesPanelComponent,
     ProductsListComponent,
     ProductItemRowComponent,
+    ProductItemDetailsComponent,
   ],
   imports: [
     HttpClientModule,

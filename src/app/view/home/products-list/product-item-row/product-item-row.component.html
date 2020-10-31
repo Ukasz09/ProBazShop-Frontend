@@ -1,5 +1,13 @@
-<div class="w-100 bg-dark my-5" style="height: 205px;">
-    <img [src]="product.imageURI" alt="test" height="200px">
-    <label>{{product.name}}</label>
-    <label>{{product.price}}</label>
+<div
+  class="w-100 mb-5 d-flex align-items-center btn btn-light"
+  style="height: 205px; "
+  (click)="openModal(details)"
+>
+  <img [src]="product.imageURI" class="mx-2" height="90%"/>
+  <label>{{ product.name }}</label>
+  <label>{{ product.price }}</label>
 </div>
+
+<ng-template #details>
+  <app-product-item-details [product]="product"></app-product-item-details>
+</ng-template>
