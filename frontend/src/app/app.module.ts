@@ -11,7 +11,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './view/home/home.component';
 import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
 import { AuthenticationPageComponent } from './view/authentication/authentication-page/authentication-page.component';
-import { NavbarContainerComponent } from './view/navbar/navbar-container/navbar-container.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
 import { LoginComponent } from './view/authentication/login/login.component';
 import { FormUiGeneratorComponent } from './view/shared/forms/form-ui-generator/form-ui-generator.component';
@@ -24,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductItemRowComponent } from './view/home/products-list/product-item-row/product-item-row.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductItemDetailsComponent } from './view/home/products-list/product-item-details/product-item-details.component';
+import { NgxStarsModule } from 'ngx-stars';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,6 @@ import { ProductItemDetailsComponent } from './view/home/products-list/product-i
     HomeComponent,
     RegistrationComponent,
     AuthenticationChoiceComponent,
-    NavbarContainerComponent,
     LoginComponent,
     ControlMessagesComponent,
     FormUiGeneratorComponent,
@@ -49,6 +49,7 @@ import { ProductItemDetailsComponent } from './view/home/products-list/product-i
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxStarsModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),

@@ -1,11 +1,26 @@
 <div
-  class="w-100 mb-5 d-flex align-items-center btn btn-light"
-  style="height: 205px; "
+  class="w-100 d-flex align-items-center btn btn-light border"
+  [style.height.px]="205"
   (click)="openModal(details)"
 >
-  <img [src]="product.imageURI" class="mx-2" height="90%"/>
-  <label>{{ product.name }}</label>
-  <label>{{ product.price }}</label>
+  <img id="image" [src]="product.imageURI" class="mx-2" height="90%" />
+  <div class="d-flex h-100 align-items-center">
+    <div class="d-flex flex-column mx-4">
+      <label for="image"
+        ><strong>{{ product.name }}</strong></label
+      >
+      <ngx-stars
+        [readonly]="true"
+        [color]="'orangered'"
+        [size]="1"
+        [initialStars]="product.starRating"
+        [maxStars]="5"
+      ></ngx-stars>
+    </div>
+  </div>
+  <div class="d-flex flex-fill h-100 align-items-center justify-content-end">
+    <label class="h5 mr-4">{{ product.price | currency }}</label>
+  </div>
 </div>
 
 <ng-template #details>

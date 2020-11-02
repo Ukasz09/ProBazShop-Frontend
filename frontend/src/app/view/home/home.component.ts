@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarContainerComponent } from '../navbar/navbar-container/navbar-container.component';
 import { AlertBase } from '../shared/alert-base';
 
 @Component({
@@ -13,8 +12,4 @@ export class HomeComponent extends AlertBase implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  get navbarHeightPerc(): number {
-    return NavbarContainerComponent.heightPerc;
-  }
 }

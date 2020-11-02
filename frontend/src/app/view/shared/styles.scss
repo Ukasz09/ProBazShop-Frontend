@@ -2,14 +2,15 @@ $primary-color: #f44e64;
 $border-color: #ff4461;
 
 $content-color-1: whitesmoke;
+$home-content-color: #eceff1;
+
 $dark-txt-color: #212121;
 $light-txt-color: whitesmoke;
 
 ::ng-deep .alert-custom-danger {
   text-align: center;
   background-color: #f8d7da;
-  // border-color: $error-border-color;
-  color: #77232b; //whitesmoke;
+  color: #77232b;
   font-weight: bolder;
 }
 
