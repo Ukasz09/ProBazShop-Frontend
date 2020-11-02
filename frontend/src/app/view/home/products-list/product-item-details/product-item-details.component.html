@@ -1,14 +1,82 @@
-<div class="m-2">
-    <div class="d-flex flex-row">
-      <div class="w-25">
-        <img [src]="product.imageURI" alt="test" class="w-100" />
+<div class="m-2 modal-body">
+  <div class="d-flex flex-row">
+    <div class="w-50 bg-light">
+      <img [src]="product.imageURI" alt="test" class="w-100" />
+    </div>
+    <div class="w-50 d-flex flex-column bg-light">
+      <div class="text-center my-3">
+        <span class="h3"
+          ><strong>{{ product.name }}</strong>
+        </span>
       </div>
-      <div class="d-flex align-items-center m-2">
+      <div class="d-flex justify-content-center">
+        <ngx-stars
+          [readonly]="true"
+          [color]="'orangered'"
+          [size]="1"
+          [initialStars]="product.starRating"
+          [maxStars]="maxStars"
+        ></ngx-stars>
+      </div>
+
+      <div class="text-center mt-4">
+        <span class="h5 font-weight-bold">{{ product.price | currency }}</span>
+      </div>
+
+      <!-- QTY BTNS -->
+      <div class="d-flex justify-content-center my-4">
+        <div class="d-flex flex-column">
+          <div class="text-center pt-0 text-secondary">
+            <span for="qty-picker">Liczba sztuk:</span>
+          </div>
+          <div>
+            <div id="qty-picker" class="btn-group">
+              <button
+                type="button"
+                class="btn btn-danger"
+                [disabled]="minusBtnDisabled"
+                (click)="decQtyClick()"
+              >
+                -
+              </button>
+              <button
+                id="chosenQty"
+                type="button"
+                class="btn btn-outline-danger text-dark"
+                disabled
+              >
+                {{ chosenProductQty }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                [disabled]="plusBtnDisabled"
+                (click)="incQtyClick()"
+              >
+                +
+              </button>
+            </div>
+            <label for="chosenQty" class="text-secondary mx-1">
+              z {{ product.availableQty }} szt
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- QTY BTNS -->
+      <div class="d-flex justify-content-center mx-2">
+        <button class="btn btn-danger w-100 text-uppercase">
+          Dodaj do koszyka
+        </button>
+      </div>
+
+      <!-- <div class="d-flex flex-row m-2 bg-danger w-100">
         <div>{{ product.name }}</div>
         <div>{{ product.price }}</div>
       </div>
     </div>
-    <div>
+    <div class="d-flex flex-row">
       <span>{{ product.description }}</span>
+    </div> -->
     </div>
   </div>
+</div>

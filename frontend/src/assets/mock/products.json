@@ -8,7 +8,8 @@
     "color": "white",
     "price": 79.99,
     "releaseDate": "March 19, 2012",
-    "starRating": 4.4
+    "starRating": 4.4,
+    "availableQty": 32
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "color": "brown",
     "price": 17.99,
     "releaseDate": "April 9, 2016",
-    "starRating": 5
+    "starRating": 5,
+    "availableQty": 1
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "color": "black",
     "price": 49.99,
     "releaseDate": "June 27, 2020",
-    "starRating": 3.1
+    "starRating": 3.1,
+    "availableQty": 121
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "color": "blue",
     "price": 59.99,
     "releaseDate": "June 25, 2020",
-    "starRating": 4.9
+    "starRating": 4.9,
+    "availableQty": 2
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "color": "green",
     "price": 29.99,
     "releaseDate": "January 14, 2020",
-    "starRating": 2
+    "starRating": 2,
+    "availableQty": 999
   },
   {
     "id": 6,
@@ -63,7 +68,8 @@
     "color": "black",
     "price": 12.99,
     "releaseDate": "March 10, 2019",
-    "starRating": 4.7
+    "starRating": 4.7,
+    "availableQty": 53
   },
   {
     "id": 7,
@@ -74,7 +80,8 @@
     "color": "black",
     "price": 34.99,
     "releaseDate": "December 11, 2019",
-    "starRating": 4.9
+    "starRating": 4.9,
+    "availableQty": 112
   },
   {
     "id": 8,
@@ -85,7 +92,8 @@
     "color": "brown",
     "price": 24.99,
     "releaseDate": "July 5, 2018",
-    "starRating": 2.1
+    "starRating": 2.1,
+    "availableQty": 171
   },
   {
     "id": 9,
@@ -96,6 +104,7 @@
     "color": "darkgreen",
     "price": 69.99,
     "releaseDate": "February 12, 2000",
-    "starRating": 1.4
+    "starRating": 1.4,
+    "availableQty": 9
   }
 ]

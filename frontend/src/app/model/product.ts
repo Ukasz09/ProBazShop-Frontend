@@ -8,6 +8,9 @@ export class Product {
     public color: string,
     public price: number,
     public releaseDate: Date,
-    public starRating: number
+    public starRating: number,
+
+    public category: string = 'unknown',
+    public availableQty: number
   ) {}
 }

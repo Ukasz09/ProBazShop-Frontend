@@ -24,6 +24,7 @@ import { ProductItemRowComponent } from './view/home/products-list/product-item-
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductItemDetailsComponent } from './view/home/products-list/product-item-details/product-item-details.component';
 import { NgxStarsModule } from 'ngx-stars';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { NgxStarsModule } from 'ngx-stars';
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
     AlertModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

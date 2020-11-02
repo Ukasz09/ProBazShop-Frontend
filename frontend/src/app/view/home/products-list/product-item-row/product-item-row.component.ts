@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Product } from 'src/app/model/product';
+import { ProductsListComponent } from '../products-list.component';
 
 @Component({
   selector: 'app-product-item-row',
@@ -10,12 +11,17 @@ import { Product } from 'src/app/model/product';
 export class ProductItemRowComponent implements OnInit {
   @Input() product: Product;
   modalRef: BsModalRef;
-  
+
   constructor(private modalService: BsModalService) {}
 
   ngOnInit(): void {}
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    const config: ModalOptions = { class: 'modal-lg' };
+    this.modalRef = this.modalService.show(template, config);
+  }
+
+  get maxStars(): number {
+    return ProductsListComponent.MAX_STARS_NUMBER;
   }
 }

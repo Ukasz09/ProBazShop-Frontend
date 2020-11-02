@@ -9,6 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products-list.component.scss'],
 })
 export class ProductsListComponent implements OnInit {
+  static readonly MAX_STARS_NUMBER = 5;
   private static readonly SORTING_METHODS = {
     newest: 'From newest',
     low: 'Price: low to high',

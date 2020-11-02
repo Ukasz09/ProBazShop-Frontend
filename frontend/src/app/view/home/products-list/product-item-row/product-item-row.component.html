@@ -3,7 +3,13 @@
   [style.height.px]="205"
   (click)="openModal(details)"
 >
-  <img id="image" [src]="product.imageURI" class="mx-2" height="90%" />
+  <img
+    id="image"
+    alt="image not loaded"
+    [src]="product.imageURI"
+    class="mx-2"
+    height="90%"
+  />
   <div class="d-flex h-100 align-items-center">
     <div class="d-flex flex-column mx-4">
       <label for="image"
@@ -14,7 +20,7 @@
         [color]="'orangered'"
         [size]="1"
         [initialStars]="product.starRating"
-        [maxStars]="5"
+        [maxStars]="maxStars"
       ></ngx-stars>
     </div>
   </div>
