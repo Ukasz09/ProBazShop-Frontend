@@ -1,9 +1,40 @@
 <div class="d-flex flex-column bg-light">
-    <label class="text-center category-container-header mt-3">Kategorie</label>
+  <label class="text-center category-container-header mt-3">Categories</label>
   <hr class="custom-hr" />
+
+  <!-- CATEGORIES -->
   <div *ngFor="let category of categories">
     <button type="button" class="btn btn-category w-100">
       {{ category }}
     </button>
   </div>
+  <!-- /CATEGORIES -->
+  <!-- COLORS BAR -->
+  <div><hr /></div>
+  <label class="text-center category-container-header">Colors</label>
+  <div class="justify-content-center row mx-0">
+    <div
+      *ngFor="let color of colors"
+      class="col-sm-3 px-0 my-1 d-flex justify-content-center"
+    >
+      <div
+        class="border border-secondary btn"
+        style="height: 25px"
+        [ngStyle]="{ 'background-color': color }"
+      ></div>
+    </div>
+  </div>
+  <!-- /COLORS BAR -->
+  <!-- COLORS BAR -->
+  <div><hr /></div>
+  <label class="text-center category-container-header">Sizes</label>
+  <div class="justify-content-center row mx-0">
+    <div
+      *ngFor="let size of sizes"
+      class="col-sm-3 px-0 my-1 d-flex justify-content-center"
+    >
+      <div class="border border-secondary btn btn-light">{{size}}</div>
+    </div>
+  </div>
+  <!-- /COLORS BAR -->
 </div>

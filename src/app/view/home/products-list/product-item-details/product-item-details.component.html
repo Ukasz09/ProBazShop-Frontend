@@ -9,6 +9,7 @@
           ><strong>{{ product.name }}</strong>
         </span>
       </div>
+      <!-- STARS -->
       <div class="d-flex justify-content-center">
         <ngx-stars
           [readonly]="true"
@@ -18,16 +19,17 @@
           [maxStars]="maxStars"
         ></ngx-stars>
       </div>
+      <!-- /STARS -->
 
       <div class="text-center mt-4">
-        <span class="h5 font-weight-bold">{{ product.price | currency }}</span>
+        <span class="h4 font-weight-bold">{{ product.price | currency }}</span>
       </div>
 
       <!-- QTY BTNS -->
       <div class="d-flex justify-content-center my-4">
         <div class="d-flex flex-column">
           <div class="text-center pt-0 text-secondary">
-            <span for="qty-picker">Liczba sztuk:</span>
+            <span for="qty-picker">Number of items:</span>
           </div>
           <div>
             <div id="qty-picker" class="btn-group">
@@ -57,26 +59,48 @@
               </button>
             </div>
             <label for="chosenQty" class="text-secondary mx-1">
-              z {{ product.availableQty }} szt
+              of {{ product.availableQty }} pieces
             </label>
           </div>
         </div>
       </div>
-      <!-- QTY BTNS -->
+      <!-- /QTY BTNS -->
       <div class="d-flex justify-content-center mx-2">
-        <button class="btn btn-danger w-100 text-uppercase">
-          Dodaj do koszyka
-        </button>
+        <button class="btn btn-danger w-100 text-uppercase">Add to cart</button>
+      </div>
+      <div>
+        <hr />
       </div>
 
-      <!-- <div class="d-flex flex-row m-2 bg-danger w-100">
-        <div>{{ product.name }}</div>
-        <div>{{ product.price }}</div>
+      <!-- COLOR AND SIZE -->
+      <div class="btn-group mx-3 my-2 justify-content-center">
+        <div class="d-flex align-items-center font-weight-bold mr-2">
+          COLOR:
+        </div>
+        <div
+          class="rounded border border-secondary"
+          style="width: 55px; height: 25px"
+          [ngStyle]="{ 'background-color': product.color }"
+        ></div>
+        <div class="d-flex align-items-center font-weight-bold mx-3">
+          SIZE: {{ product.size }}
+        </div>
       </div>
-    </div>
-    <div class="d-flex flex-row">
-      <span>{{ product.description }}</span>
-    </div> -->
+      <!-- /COLOR AND SIZE -->
+      <div>
+        <hr />
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="mx-3">
+        <div class="py-2 text-center font-weight-bold" style="font-size: 1.2em">
+          DESCRIPTION
+        </div>
+        <div class="text-center">
+          {{ product.description }}
+        </div>
+      </div>
+      <!-- /DESCRIPTION -->
     </div>
   </div>
 </div>

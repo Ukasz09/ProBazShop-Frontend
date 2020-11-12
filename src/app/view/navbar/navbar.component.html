@@ -8,7 +8,8 @@
     <div class="w-100">
       <input
         [(ngModel)]="searchedPhrase"
-        [typeahead]="searchKeywords"
+        [typeahead]="products"
+        typeaheadOptionField="name"
         [isAnimated]="true"
         [optionsListTemplate]="customListTemplate"
         class="form-control w-100"
@@ -98,7 +99,7 @@
       (click)="typeaheadTemplateMethods.selectMatch(match, $event)"
       (mouseenter)="typeaheadTemplateMethods.selectActive(match)"
     >
-      {{ match.item }}
+      {{ match.item.name }}
     </li>
   </ul>
 </ng-template>

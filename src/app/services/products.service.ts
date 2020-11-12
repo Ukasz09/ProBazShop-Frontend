@@ -9,38 +9,9 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  //TODO: tmp mocked - change to async based on title
-  getProductsKeywords(): string[] {
-    return [
-      'spodnie',
-      'jeans',
-      'kurtka',
-      'skórzana',
-      'futerko',
-      'buty',
-      'adidasy',
-      'trampki',
-      'skórzane',
-      'zamszowe',
-      'duże',
-      'spódnica',
-      'sukienka',
-    ];
-  }
-
   //TODO: tmp mocked
-  getCategories(): string[] {
-    return [
-      'Buty',
-      'Plaszcze',
-      'Spodnie',
-      'T-shirty',
-      'Kurtki',
-      'Polary',
-      'Spodenki',
-      'Sukienki',
-      'Spódnice',
-    ];
+  getProductCategories(): Observable<string[]> {
+    return this.http.get<string[]>('/assets/mock/categories.json');
   }
 
   //TODO: tmp mocked
