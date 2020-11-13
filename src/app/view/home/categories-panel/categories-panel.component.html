@@ -1,40 +1,58 @@
 <div class="d-flex flex-column bg-light">
-  <label class="text-center category-container-header mt-3">Categories</label>
+  <label class="text-center category-container-header mt-3">FILTERS</label>
   <hr class="custom-hr" />
 
+  <!-- ACTUAL FILTERS -->
+  <div class="w-100 h-100 text-center category-container-header">
+    <app-applied-filters [filters]="appliedFilters"></app-applied-filters>
+  </div>
+  <!-- /ACTUAL FILTERS -->
+
   <!-- CATEGORIES -->
+  <label class="text-center category-container-header my-3">Categories:</label>
   <div *ngFor="let category of categories">
-    <button type="button" class="btn btn-category w-100">
-      {{ category }}
+    <button
+      type="button"
+      class="btn btn-category w-100"
+      (click)="addFilter(category, FilterType.TEXT)"
+    >
+      {{ category | titlecase }}
     </button>
   </div>
   <!-- /CATEGORIES -->
   <!-- COLORS BAR -->
   <div><hr /></div>
-  <label class="text-center category-container-header">Colors</label>
-  <div class="justify-content-center row mx-0">
+  <label class="text-center category-container-header">Colors:</label>
+  <div class="justify-content-center row mx-0 px-3">
     <div
       *ngFor="let color of colors"
       class="col-sm-3 px-0 my-1 d-flex justify-content-center"
     >
-      <div
+      <button
         class="border border-secondary btn"
-        style="height: 25px"
+        style="height: 20px; width: 20px"
         [ngStyle]="{ 'background-color': color }"
-      ></div>
+        (click)="addFilter(color, FilterType.BUTTON)"
+      ></button>
     </div>
   </div>
   <!-- /COLORS BAR -->
-  <!-- COLORS BAR -->
+  <!-- SIZES BAR -->
   <div><hr /></div>
-  <label class="text-center category-container-header">Sizes</label>
-  <div class="justify-content-center row mx-0">
+  <label class="text-center category-container-header">Sizes:</label>
+  <div class="justify-content-center row mx-0 preferences-panel px-3">
     <div
       *ngFor="let size of sizes"
       class="col-sm-3 px-0 my-1 d-flex justify-content-center"
     >
-      <div class="border border-secondary btn btn-light">{{size}}</div>
+      <button
+        style="font-size: small"
+        class="border-dark btn btn-light w-100 mx-1"
+        (click)="addFilter(size, FilterType.TEXT)"
+      >
+        {{ size }}
+      </button>
     </div>
   </div>
-  <!-- /COLORS BAR -->
+  <!-- /SIZES BAR -->
 </div>

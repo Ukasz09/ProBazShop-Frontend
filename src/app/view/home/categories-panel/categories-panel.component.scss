@@ -1,5 +1,7 @@
 @use 'src/app/view/shared/styles' as shared;
 
+$prefernces-panel-width: 250px;
+
 .btn-category {
   text-align: center;
   color: shared.$dark-txt-color;
@@ -13,8 +15,12 @@
 }
 
 .category-container-header {
-  width: 250px;
+  width: $prefernces-panel-width;
   font-weight: bolder;
+}
+
+.preferences-panel {
+  width: $prefernces-panel-width;
 }
 
 .custom-hr {

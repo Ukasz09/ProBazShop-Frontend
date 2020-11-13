@@ -25,6 +25,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductItemDetailsComponent } from './view/home/products-list/product-item-details/product-item-details.component';
 import { NgxStarsModule } from 'ngx-stars';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { AppliedFiltersComponent } from './view/home/applied-filters/applied-filters.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     ProductsListComponent,
     ProductItemRowComponent,
     ProductItemDetailsComponent,
+    AppliedFiltersComponent,
   ],
   imports: [
     HttpClientModule,
