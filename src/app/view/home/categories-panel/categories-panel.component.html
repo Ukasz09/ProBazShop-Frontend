@@ -1,4 +1,4 @@
-<div class="d-flex flex-column bg-light">
+<div class="d-flex flex-column bg-light border">
   <label class="text-center category-container-header mt-3">FILTERS</label>
   <hr class="custom-hr" />
 
@@ -16,7 +16,7 @@
   <div *ngFor="let category of categories">
     <button
       type="button"
-      class="btn btn-category w-100"
+      class="btn btn-outline-danger border-0 btn-category w-100"
       (click)="addFilter(category, FilterType.TEXT)"
     >
       {{ category | titlecase }}
@@ -32,7 +32,7 @@
       class="col-sm-3 px-0 my-1 d-flex justify-content-center"
     >
       <button
-        class="border border-secondary btn"
+        class="border border-secondary btn btn-outline-danger"
         style="height: 20px; width: 20px"
         [ngStyle]="{ 'background-color': color }"
         (click)="addFilter(color, FilterType.BUTTON)"
@@ -62,7 +62,7 @@
   <div><hr /></div>
   <label class="text-center category-container-header pb-2"> Price: </label>
   <div class="custom-slider mx-auto pb-4" style="width: 80%">
-    <ngx-slider #priceSlider
+    <ngx-slider
       [formControl]="priceSliderControl"
       [options]="priceSliderOptions"
       (userChangeEnd)="updatePriceFilter($event)"

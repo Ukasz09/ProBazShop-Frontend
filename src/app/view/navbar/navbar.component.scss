@@ -26,7 +26,7 @@ img {
 
 .custom-list-group-item.active {
   z-index: 2;
-  color: shared.$light-txt-color;
+  color: white;
   background-color: shared.$primary-color;
   border-color: shared.$border-color;
 }
@@ -35,7 +35,7 @@ img {
   font-size: 30px;
 }
 
-.logout-txt{
+.logout-txt {
   color: shared.$primary-color;
 }
 

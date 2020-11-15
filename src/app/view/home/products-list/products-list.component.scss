@@ -5,7 +5,7 @@
 }
 
 @mixin pagination-li {
-  color: shared.$light-txt-color;
+  color: white;
   background-color: shared.$primary-color;
   border-color: shared.$border-color;
 }
@@ -22,7 +22,7 @@
 }
 
 ::ng-deep .pagination > .active > a {
-  color: shared.$light-txt-color;
+  color: white;
   background-color: shared.$primary-color !important;
   border: solid 1px shared.$border-color !important;
 }

@@ -3,14 +3,9 @@
 $prefernces-panel-width: 250px;
 
 .btn-category {
-  text-align: center;
   color: shared.$dark-txt-color;
   &:hover {
-    background-color: shared.$primary-color !important;
-    color: shared.$light-txt-color;
-  }
-  &:focus {
-    @include shared.primary-focus-shadow;
+    color: white;
   }
 }
 

@@ -14,12 +14,13 @@
         </ng-container>
         <div *ngSwitchCase="FilterTypes.BUTTON" class="d-flex flex-fill">
           <button
-            class="border border-secondary btn d-flex w-100 custom-btn"
+            class="border border-secondary rounded w-100 custom-btn"
             [ngStyle]="{ 'background-color': filter.value }"
+            disabled
           ></button>
         </div>
       </ng-container>
-      <!-- REMOVE BTN -->
+      <!-- BTN REMOVE  -->
       <div>
         <button
           class="btn btn-outline-danger align-items-center text-center d-flex px-1"
@@ -28,9 +29,8 @@
           <span class="material-icons md-14"> close </span>
         </button>
       </div>
-      <!-- /REMOVE BTN -->
+      <!-- /BTN REMOVE -->
     </div>
-
     <!-- TEMPLATES -->
     <ng-template #normalText>
       <div

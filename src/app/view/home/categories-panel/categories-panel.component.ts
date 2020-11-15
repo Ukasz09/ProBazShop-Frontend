@@ -1,10 +1,8 @@
 import {
   ChangeContext,
-  NgxSliderModule,
   Options,
 } from '@angular-slider/ngx-slider';
-import { SliderComponent } from '@angular-slider/ngx-slider/slider.component';
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { FilterElem, FilterType } from '../applied-filters/filter-model';
@@ -16,9 +14,6 @@ import { FilterElem, FilterType } from '../applied-filters/filter-model';
 })
 export class CategoriesPanelComponent implements OnInit {
   FilterType = FilterType;
-
-  @ViewChild('priceSlider') priceSlider: SliderComponent;
-
   priceSliderControl = new FormControl([0, 500]);
   priceSliderOptions: Options = {
     floor: 0,
@@ -29,14 +24,14 @@ export class CategoriesPanelComponent implements OnInit {
   };
   categories: string[] = [];
   colors: string[] = [
-    'white',
-    'red',
-    'green',
-    'blue',
-    'yellow',
-    'black',
-    'brown',
-    'gray',
+    '#FFFFFF',
+    '#F44336',
+    '#4CAF50',
+    '#2196F3',
+    '#FFC107',
+    '#212121',
+    '#795548',
+    '#9E9E9E',
   ];
   sizes: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
   appliedFilters: FilterElem[] = [];
