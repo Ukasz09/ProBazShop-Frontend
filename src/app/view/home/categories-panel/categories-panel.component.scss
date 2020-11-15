@@ -27,3 +27,37 @@ $prefernces-panel-width: 250px;
   width: 70%;
   background-color: shared.$primary-color;
 }
+
+//Styling doc:  https://github.com/angular-slider/ngx-slider/blob/master/STYLING.md
+::ng-deep {
+  .custom-slider {
+    .ngx-slider {
+      .ngx-slider-bar {
+        background: darkgray;
+        height: 2px;
+      }
+      .ngx-slider-selection {
+        background: shared.$primary-color;
+      }
+      .ngx-slider-bubble {
+        color: shared.$primary-color !important;
+        font-weight: bold;
+      }
+      .ngx-slider-limit {
+        color: darkgray !important;
+        font-weight: normal;
+      }
+      .ngx-slider-pointer {
+        width: 12px;
+        height: 12px;
+        top: -5px;
+        bottom: 0;
+        background: shared.$primary-color;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}

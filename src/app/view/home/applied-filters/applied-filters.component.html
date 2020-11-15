@@ -1,29 +1,46 @@
 <ng-container *ngIf="filters.length > 0">
-  <div class="pb-3">Applied:</div>
+  <div class="pb-3">Applied filters:</div>
   <div *ngFor="let filter of filters" class="mb-2">
-    <div class="btn-group">
+    <div class="btn-group w-75">
       <ng-container [ngSwitch]="filter.type">
-        <div
-          *ngSwitchCase="FilterTypes.TEXT"
-          class="bg-light border border-secondary align-items-center btn d-flex py-0"
-        >
-          {{ filter.value }}
-        </div>
-        <div *ngSwitchCase="FilterTypes.BUTTON">
+        <ng-container *ngSwitchCase="FilterTypes.TEXT">
+          <ng-container *ngTemplateOutlet="normalText"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="FilterTypes.PRICE_LOW">
+          <ng-container *ngTemplateOutlet="normalText"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="FilterTypes.PRICE_HIGH">
+          <ng-container *ngTemplateOutlet="normalText"></ng-container>
+        </ng-container>
+        <div *ngSwitchCase="FilterTypes.BUTTON" class="d-flex flex-fill">
           <button
-            class="border border-secondary align-items-center btn d-flex"
-            style="height: 20px; width: 20px"
+            class="border border-secondary btn d-flex w-100 custom-btn"
             [ngStyle]="{ 'background-color': filter.value }"
           ></button>
         </div>
       </ng-container>
-      <button
-        class="btn btn-outline-danger align-items-center d-flex py-0 px-0"
-        (click)="onCloseClick(filter)"
-      >
-        <span class="material-icons md-14"> close </span>
-      </button>
+      <!-- REMOVE BTN -->
+      <div>
+        <button
+          class="btn btn-outline-danger align-items-center text-center d-flex px-1"
+          (click)="onCloseClick(filter)"
+        >
+          <span class="material-icons md-14"> close </span>
+        </button>
+      </div>
+      <!-- /REMOVE BTN -->
     </div>
+
+    <!-- TEMPLATES -->
+    <ng-template #normalText>
+      <div
+        class="bg-light border border-secondary justify-content-center btn d-flex py-0 custom-btn"
+      >
+        <span>
+          {{ filter.value }}
+        </span>
+      </div>
+    </ng-template>
   </div>
   <hr class="custom-hr" />
 </ng-container>

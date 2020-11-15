@@ -4,7 +4,10 @@
 
   <!-- ACTUAL FILTERS -->
   <div class="w-100 h-100 text-center category-container-header">
-    <app-applied-filters [filters]="appliedFilters"></app-applied-filters>
+    <app-applied-filters
+      [filters]="appliedFilters"
+      (deleteElementClick)="onDeleteFilterClick($event)"
+    ></app-applied-filters>
   </div>
   <!-- /ACTUAL FILTERS -->
 
@@ -22,7 +25,7 @@
   <!-- /CATEGORIES -->
   <!-- COLORS BAR -->
   <div><hr /></div>
-  <label class="text-center category-container-header">Colors:</label>
+  <label class="text-center category-container-header">Color:</label>
   <div class="justify-content-center row mx-0 px-3">
     <div
       *ngFor="let color of colors"
@@ -39,7 +42,7 @@
   <!-- /COLORS BAR -->
   <!-- SIZES BAR -->
   <div><hr /></div>
-  <label class="text-center category-container-header">Sizes:</label>
+  <label class="text-center category-container-header">Size:</label>
   <div class="justify-content-center row mx-0 preferences-panel px-3">
     <div
       *ngFor="let size of sizes"
@@ -47,7 +50,7 @@
     >
       <button
         style="font-size: small"
-        class="border-dark btn btn-light w-100 mx-1"
+        class="border-dark btn btn-outline-dark w-100 mx-1"
         (click)="addFilter(size, FilterType.TEXT)"
       >
         {{ size }}
@@ -55,4 +58,15 @@
     </div>
   </div>
   <!-- /SIZES BAR -->
+  <!-- PRICE SLIDER -->
+  <div><hr /></div>
+  <label class="text-center category-container-header pb-2"> Price: </label>
+  <div class="custom-slider mx-auto pb-4" style="width: 80%">
+    <ngx-slider #priceSlider
+      [formControl]="priceSliderControl"
+      [options]="priceSliderOptions"
+      (userChangeEnd)="updatePriceFilter($event)"
+    ></ngx-slider>
+  </div>
+  <!-- /PRICE SLIDER -->
 </div>

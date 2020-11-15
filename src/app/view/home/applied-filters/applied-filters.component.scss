@@ -1,11 +1,14 @@
 @use 'src/app/view/shared/styles' as shared;
 
-
 .material-icons.md-14 {
   font-size: 14px;
 }
 
 .custom-hr {
-    width: 70%;
-    background-color: shared.$primary-color;
-  }
+  width: 70%;
+  background-color: shared.$primary-color;
+}
+
+.custom-btn {
+  cursor: default !important;
+}

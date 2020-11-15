@@ -26,7 +26,7 @@ import { ProductItemDetailsComponent } from './view/home/products-list/product-i
 import { NgxStarsModule } from 'ngx-stars';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AppliedFiltersComponent } from './view/home/applied-filters/applied-filters.component';
-
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +59,7 @@ import { AppliedFiltersComponent } from './view/home/applied-filters/applied-fil
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

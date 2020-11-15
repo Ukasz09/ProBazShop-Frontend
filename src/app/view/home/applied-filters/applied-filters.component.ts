@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FilterElem, FilterType } from './filter-model';
 
 @Component({
@@ -9,17 +9,13 @@ import { FilterElem, FilterType } from './filter-model';
 export class AppliedFiltersComponent implements OnInit {
   FilterTypes = FilterType;
   @Input() filters: FilterElem[] = [];
+  @Output() deleteElementClick: EventEmitter<FilterElem> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   onCloseClick(filter: FilterElem) {
-    this.deleteElemFromArr(filter);
-  }
-
-  private deleteElemFromArr(elem: FilterElem) {
-    const index = this.filters.indexOf(elem, 0);
-    if (index > -1) this.filters.splice(index, 1);
+    this.deleteElementClick.emit(filter);
   }
 }
