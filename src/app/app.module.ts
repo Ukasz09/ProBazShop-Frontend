@@ -25,8 +25,11 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductItemDetailsComponent } from './view/home/products-list/product-item-details/product-item-details.component';
 import { NgxStarsModule } from 'ngx-stars';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { AppliedFiltersComponent } from './view/home/applied-filters/applied-filters.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { AppliedFiltersComponent } from './view/home/categories-panel/applied-filters/applied-filters.component';
+import { CartComponent } from './view/home/cart/cart.component';
+import { CartProductRowComponent } from './view/home/cart/cart-product-row/cart-product-row.component';
+import { DataLoadingComponent } from './view/shared/data-loading/data-loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +47,9 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     ProductItemRowComponent,
     ProductItemDetailsComponent,
     AppliedFiltersComponent,
+    CartComponent,
+    CartProductRowComponent,
+    DataLoadingComponent,
   ],
   imports: [
     HttpClientModule,

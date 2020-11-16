@@ -13,15 +13,17 @@
 
   <!-- CATEGORIES -->
   <label class="text-center category-container-header my-3">Categories:</label>
-  <div *ngFor="let category of categories">
-    <button
-      type="button"
-      class="btn btn-outline-danger border-0 btn-category w-100"
-      (click)="addFilter(category, FilterType.TEXT)"
-    >
-      {{ category | titlecase }}
-    </button>
-  </div>
+  <ng-container *ngIf="categoriesDataReady; else dataLoadingPanel">
+    <div *ngFor="let category of categories">
+      <button
+        type="button"
+        class="btn btn-outline-danger border-0 btn-category w-100"
+        (click)="addFilter(category, FilterType.TEXT)"
+      >
+        {{ category | titlecase }}
+      </button>
+    </div>
+  </ng-container>
   <!-- /CATEGORIES -->
   <!-- COLORS BAR -->
   <div><hr /></div>
@@ -70,3 +72,8 @@
   </div>
   <!-- /PRICE SLIDER -->
 </div>
+
+<!-- TEMPLATES -->
+<ng-template #dataLoadingPanel>
+  <app-data-loading></app-data-loading>
+</ng-template>

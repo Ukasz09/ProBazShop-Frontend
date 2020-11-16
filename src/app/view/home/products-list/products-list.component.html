@@ -7,7 +7,7 @@
     <hr class="custom-hr" />
   </div>
 
-  <div class="content-wrapper">
+  <div *ngIf="productsDataReady; else dataLoadingPanel" class="content-wrapper">
     <p class="content-item">
       <app-product-item-row
         *ngFor="let product of productsPerPage"
@@ -54,4 +54,8 @@
       </li>
     </ul>
   </div>
+</ng-template>
+
+<ng-template #dataLoadingPanel>
+  <app-data-loading></app-data-loading>
 </ng-template>

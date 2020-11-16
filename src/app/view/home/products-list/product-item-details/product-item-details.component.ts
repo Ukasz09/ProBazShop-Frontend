@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { ProductsListComponent } from '../products-list.component';
 
@@ -9,6 +10,7 @@ import { ProductsListComponent } from '../products-list.component';
 })
 export class ProductItemDetailsComponent implements OnInit {
   @Input() product: Product;
+  @Output() addToCartClick: EventEmitter<CartProduct> = new EventEmitter();
   chosenProductQty: number = 1;
 
   constructor() {}
@@ -45,6 +47,10 @@ export class ProductItemDetailsComponent implements OnInit {
         this.chosenProductQty = this.product.availableQty;
       else if (this.chosenProductQty < 1) this.chosenProductQty = 1;
     }
-    console.log(this.chosenProductQty)
+  }
+
+  onAddToCartClick() {
+    let cartProduct = new CartProduct(this.product.id, this.chosenProductQty);
+    this.addToCartClick.emit(cartProduct);
   }
 }

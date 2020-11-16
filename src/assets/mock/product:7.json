@@ -1,0 +1,12 @@
+{
+    "id": 7,
+    "name": "Ankle Boots",
+    "description": "Ankle boots in faux suede with block heels, elastic side panels, and loop at back. Fabric lining, fabric insoles, and patterned soles. Heel height 3 in.",
+    "imageURI": "assets/productsImages/hmgoepprod7.jpeg",
+    "size": "38",
+    "color": "black",
+    "price": 34.99,
+    "releaseDate": "December 11, 2019",
+    "starRating": 4.9,
+    "availableQty": 112
+  }

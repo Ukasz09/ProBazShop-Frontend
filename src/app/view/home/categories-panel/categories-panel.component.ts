@@ -1,11 +1,8 @@
-import {
-  ChangeContext,
-  Options,
-} from '@angular-slider/ngx-slider';
+import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
-import { FilterElem, FilterType } from '../applied-filters/filter-model';
+import { FilterElem, FilterType } from './applied-filters/filter-model';
 
 @Component({
   selector: 'app-categories-panel',
@@ -22,6 +19,7 @@ export class CategoriesPanelComponent implements OnInit {
       return '$' + value;
     },
   };
+  categoriesDataReady = false;
   categories: string[] = [];
   colors: string[] = [
     '#FFFFFF',
@@ -42,6 +40,7 @@ export class CategoriesPanelComponent implements OnInit {
     this.productService.getProductCategories().subscribe((data: string[]) => {
       this.categories = data;
       this.categories.sort();
+      this.categoriesDataReady = true;
     });
   }
 

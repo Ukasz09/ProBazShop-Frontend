@@ -1,0 +1,12 @@
+{
+    "id": 5,
+    "name": "Printed Hoodie",
+    "description": "Sweatshirt with a printed design and jersey-lined, drawstring hood with wrapover front. Kangaroo pocket, long sleeves, and ribbing at cuffs and hem. Soft, brushed inside.",
+    "imageURI": "assets/productsImages/hmgoepprod5.jpeg",
+    "size": "M",
+    "color": "green",
+    "price": 29.99,
+    "releaseDate": "January 14, 2020",
+    "starRating": 2,
+    "availableQty": 999
+  }

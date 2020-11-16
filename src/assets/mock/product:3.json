@@ -1,0 +1,12 @@
+{
+    "id": 3,
+    "name": "Derby Shoes",
+    "description": "Derby shoes in faux leather with lacing at front and a welt seam around soles. Cotton canvas lining and insoles. Chunky, patterned soles. Heel height 1 1/4 in.",
+    "imageURI": "assets/productsImages/hmgoepprod3.jpeg",
+    "size": "43",
+    "color": "black",
+    "price": 49.99,
+    "releaseDate": "June 27, 2020",
+    "starRating": 3.1,
+    "availableQty": 121
+  }

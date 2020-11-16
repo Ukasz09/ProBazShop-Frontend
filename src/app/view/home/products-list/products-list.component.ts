@@ -15,7 +15,7 @@ export class ProductsListComponent implements OnInit {
     low: 'Price: low to high',
     high: 'Price: high to low',
   };
-
+  productsDataReady = false;
   itemsPerPage = 5;
   actualSortingMethod = ProductsListComponent.SORTING_METHODS.newest;
   products: Product[] = [];
@@ -31,6 +31,7 @@ export class ProductsListComponent implements OnInit {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
       this.products = data;
       this.productsPerPage = this.products.slice(0, this.itemsPerPage);
+      this.productsDataReady = true;
     });
   }
 

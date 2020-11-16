@@ -1,0 +1,12 @@
+{
+    "id": 2,
+    "name": "Slim Fit Turtleneck Shirt",
+    "description": "Long-sleeved, turtleneck shirt in cotton jersey. Slim Fit – tapered at chest and waist with slightly narrower sleeves for a tailored silhouette.",
+    "imageURI": "assets/productsImages/hmgoepprod2.jpeg",
+    "size": "M",
+    "color": "brown",
+    "price": 17.99,
+    "releaseDate": "April 9, 2016",
+    "starRating": 5,
+    "availableQty": 1
+  }

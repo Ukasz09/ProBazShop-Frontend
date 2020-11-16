@@ -1,7 +1,6 @@
-<div
+<!-- <div
   class="w-100 d-flex align-items-center btn btn-light border"
   [style.height.px]="205"
-  (click)="openModal(details)"
 >
   <img
     id="image"
@@ -15,20 +14,9 @@
       <label for="image"
         ><strong>{{ product.name }}</strong></label
       >
-      <ngx-stars
-        [readonly]="true"
-        [color]="'orangered'"
-        [size]="1"
-        [initialStars]="product.starRating"
-        [maxStars]="maxStars"
-      ></ngx-stars>
     </div>
   </div>
   <div class="d-flex flex-fill h-100 align-items-center justify-content-end">
     <label class="h5 mr-4">{{ product.price | currency }}</label>
   </div>
-</div>
-
-<ng-template #details>
-  <app-product-item-details [product]="product" (addToCartClick)="onAddToCartClick($event)"></app-product-item-details>
-</ng-template>
+</div> -->
