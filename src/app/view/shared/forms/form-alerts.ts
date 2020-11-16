@@ -1,16 +1,13 @@
 import { AlertModel } from 'src/app/model/alert.model';
 
 export class FormAlerts {
-  static getInvalidDataInFormAlert(): AlertModel {
-    return new AlertModel(
-      'custom-danger',
-      'Data in form is invalid',
-      3000,
-      true
-    );
-  }
+  static readonly INVALID_DATA_ALERT_ID = 'data_invalid';
+  static readonly SUCCESSFUL_REGISTRATION_ALERT_ID = 'successful_registration';
 
-  static getSuccessFormAlert(msg: string): AlertModel {
-    return new AlertModel('success', msg, 4000, true);
+  static getSuccessFormAlert(id: string, msg: string): AlertModel {
+    return new AlertModel(id, 'success', msg, 4000, true);
+  }
+  static getDangerFormAlert(id: string, msg: string): AlertModel {
+    return new AlertModel(id, 'custom-danger', msg, 4000, true);
   }
 }

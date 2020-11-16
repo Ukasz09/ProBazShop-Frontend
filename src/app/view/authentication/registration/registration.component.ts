@@ -3,27 +3,28 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AppComponent } from 'src/app/app.component';
+import { AlertModel } from 'src/app/model/alert.model';
 import { RegistrationFormModel } from 'src/app/model/form/registration-form.model';
-import { AlertBase } from '../../shared/alert-base';
+import { AlertsService } from 'src/app/services/alerts.service';
 import { FormAlerts } from '../../shared/forms/form-alerts';
 import { FormLogicUtils } from '../../shared/forms/form-logic-utils';
-import { ModalBase } from '../../shared/modals/modal-base';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent extends AlertBase implements OnInit {
+export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   formDataModel: RegistrationFormModel;
   registrationIsDone: boolean;
-  modalBase: ModalBase;
   modalRef: BsModalRef;
 
-  constructor(private router: Router, private modalService: BsModalService) {
-    super();
-  }
+  constructor(
+    private router: Router,
+    private modalService: BsModalService,
+    private alertService: AlertsService
+  ) {}
 
   ngOnInit(): void {
     this.formDataModel = new RegistrationFormModel();
@@ -37,13 +38,20 @@ export class RegistrationComponent extends AlertBase implements OnInit {
     if (this.registrationForm.dirty && this.registrationForm.valid) {
       AppComponent.registerUser();
       this.registrationIsDone = true;
-      this.clearAllAlerts();
-      this.addAlert(
-        FormAlerts.getSuccessFormAlert('Successful account registration')
+      this.alertService.removeAlertFromId(FormAlerts.INVALID_DATA_ALERT_ID);
+      this.alertService.addAlert(
+        FormAlerts.getSuccessFormAlert(
+          FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+          'Successful account registration'
+        )
       );
     } else {
-      this.clearAllAlerts();
-      this.addAlert(FormAlerts.getInvalidDataInFormAlert());
+      this.alertService.addAlert(
+        FormAlerts.getDangerFormAlert(
+          FormAlerts.INVALID_DATA_ALERT_ID,
+          'Invalid data in form'
+        )
+      );
     }
   }
 

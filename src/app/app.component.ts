@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertBase } from './view/shared/alert-base';
+import { AlertModel } from './model/alert.model';
+import { AlertsService } from './services/alerts.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,13 @@ export class AppComponent {
   static userIsLogged = false;
   static LOGO_IMG_PATH = 'assets/logo2.png';
 
+  constructor(private alertService: AlertsService) {}
+
   static getLogoImgPath(): string {
     return this.LOGO_IMG_PATH;
   }
 
+  //TODO: change to service
   //TODO: tmp mocked
   static logonUser() {
     AppComponent.userIsLogged = true;
@@ -27,5 +31,13 @@ export class AppComponent {
   //TODO: tmp mocked
   static registerUser() {
     // AppComponent.userIsLogged = true;
+  }
+
+  get alerts(): AlertModel[] {
+    return Array.from(this.alertService.alerts.values());
+  }
+
+  removeAlert(id: string) {
+    this.alertService.removeAlertFromId(id);
   }
 }

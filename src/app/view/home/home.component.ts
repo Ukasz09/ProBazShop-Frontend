@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/model/product';
-import { AlertBase } from '../shared/alert-base';
 import { ProductsListComponent } from './products-list/products-list.component';
 
 @Component({
@@ -8,12 +7,10 @@ import { ProductsListComponent } from './products-list/products-list.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent extends AlertBase implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(ProductsListComponent) productListComponent: ProductsListComponent;
 
-  constructor() {
-    super();
-  }
+  constructor() {}
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
