@@ -4,6 +4,11 @@
     <div *ngIf="dataReady; else dataLoadingTemplate" class="d-flex flex-row">
       <!-- PRODUCTS -->
       <div style="width: 65%">
+        <div class="bg-light text-center border rounded py-2">
+          <span class="text-uppercase font-weight-bold" style="font-size: 1.2em"
+            >your cart</span
+          >
+        </div>
         <div *ngFor="let productEntry of productsInCart | keyvalue">
           <div class="w-100">
             <app-cart-product-row

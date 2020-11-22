@@ -1,7 +1,7 @@
 <div
   class="w-100 d-flex align-items-center btn btn-light border"
   [style.height.px]="205"
-  (click)="openModal(details)"
+  (click)="productRowClick.emit()"
 >
   <img
     id="image"
@@ -16,7 +16,7 @@
         ><strong>{{ product.name }}</strong></label
       >
       <ngx-stars
-      style="z-index: 1;"
+        style="z-index: 1"
         [readonly]="true"
         [color]="'orangered'"
         [size]="1"
@@ -29,10 +29,3 @@
     <label class="h5 mr-4">{{ product.price | currency }}</label>
   </div>
 </div>
-
-<ng-template #details>
-  <app-product-item-details
-    [product]="product"
-    (addToCartClick)="onAddToCartClick($event)"
-  ></app-product-item-details>
-</ng-template>

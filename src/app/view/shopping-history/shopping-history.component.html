@@ -1,1 +1,8 @@
-<p>shopping-history works!</p>
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <div class="w-50">
+    <ng-container *ngFor="let product of productsHistory">
+      <app-product-item-row [product]="product"></app-product-item-row>
+    </ng-container>
+  </div>
+</div>

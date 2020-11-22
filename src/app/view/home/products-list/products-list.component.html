@@ -9,10 +9,21 @@
 
   <div *ngIf="productsDataReady; else dataLoadingPanel" class="content-wrapper">
     <p class="content-item">
-      <app-product-item-row
-        *ngFor="let product of productsPerPage"
-        [product]="product"
-      ></app-product-item-row>
+      <ng-container *ngFor="let product of productsPerPage">
+        <app-product-item-row
+          [product]="product"
+          (productRowClick)="openModal(details)"
+        ></app-product-item-row>
+
+        <!-- DETAILS TEMPLATE  -->
+        <ng-template #details>
+          <app-product-item-details
+            [product]="product"
+            (addToCartClick)="onAddToCartClick($event, product)"
+          ></app-product-item-details>
+        </ng-template>
+        <!-- /DETAILS TEMPLATE  -->
+      </ng-container>
     </p>
   </div>
 </div>
