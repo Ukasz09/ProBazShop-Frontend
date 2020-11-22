@@ -4,12 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CartService {
-  productsInCart: Map<string, number> = new Map(); //id,qty
+  productsInCart: Map<string, number> = new Map(); //id, qty
 
   constructor() {}
 
   /**
-   *
    * @return false - qtyToAdd is not valid, true  - otherwise
    */
   addProductWithQtyValidation(
@@ -36,5 +35,16 @@ export class CartService {
 
   removeProductFromCart(id: string): boolean {
     return this.productsInCart.delete(id);
+  }
+
+  /**
+   * @return false - not update, true  - otherwise
+   */
+  updateProductsQty(productId: string, qty: number): boolean {
+    if (qty >= 1 && this.productsInCart.get(productId) !== undefined) {
+      this.productsInCart.set(productId, qty);
+      return true;
+    }
+    return false;
   }
 }

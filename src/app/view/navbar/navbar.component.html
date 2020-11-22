@@ -24,7 +24,7 @@
 
   <!-- BUTTON FOR LOGGED USER -->
   <div *ngIf="userIsLogged" class="btn-group">
-    <button class="btn btn-outline-danger pb-0">
+    <button class="btn btn-outline-danger pb-0" routerLink="/cart">
       <i class="material-icons md-30">shopping_cart</i>
     </button>
     <div class="btn-group" dropdown #accountDropdown="bs-dropdown">

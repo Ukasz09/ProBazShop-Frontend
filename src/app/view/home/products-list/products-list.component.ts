@@ -24,10 +24,10 @@ export class ProductsListComponent implements OnInit {
   constructor(private productService: ProductsService) {}
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.fetchAllProducts();
   }
 
-  private getAllProducts() {
+  private fetchAllProducts() {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
       this.products = data;
       this.productsPerPage = this.products.slice(0, this.itemsPerPage);

@@ -9,7 +9,7 @@ import { AlertsService } from './services/alerts.service';
 })
 export class AppComponent {
   title = 'ProBazShop';
-  static userIsLogged = false;
+  static userIsLogged = true;
   static LOGO_IMG_PATH = 'assets/logo2.png';
 
   constructor(private alertService: AlertsService) {}

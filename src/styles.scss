@@ -1,6 +1,7 @@
 @use 'src/app/view/shared/styles' as shared;
 body {
   color: shared.$dark-txt-color;
+  background-color: shared.$default-content-color;
   ::-moz-selection {
     color: white;
     background: shared.$primary-color;

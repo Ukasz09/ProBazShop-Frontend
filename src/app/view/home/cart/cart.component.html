@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <ng-container *ngIf="productsInCart.size > 0; else cartEmptyTemplate">
+    <div
+      *ngFor="let productEntry of productsInCart | keyvalue"
+      class="d-flex flex-row"
+    >
+      <div class="w-50">
+        <app-cart-product-row
+          [product]="productEntry.key"
+          [qty]="productEntry.value"
+          (incChosenProductQtyClick)="onIncProductQtyClick(productEntry.key)"
+          (decChosenProductQtyClick)="onDecProductQtyClick(productEntry.key)"
+          (removeFromCartClick)="onRemoveProductFromCartClick(productEntry.key)"
+        ></app-cart-product-row>
+      </div>
+      <div class="bg-primary w-50"></div>
+    </div>
+  </ng-container>
+</div>
+
+<!-- TEMPLATES -->
+<ng-template #cartEmptyTemplate>
+  <div class="d-flex flex-column py-5">
+    <div class="text-center">
+      <img
+        src="assets/emptyCart.png"
+        width="50%"
+        alt="cart-empty-image"
+      />
+    </div>
+    <div
+      class="text-center py-5 h4 empty-cart-label text-capitalize"
+    >
+      Your cart is empty
+    </div>
+  </div>
+</ng-template>

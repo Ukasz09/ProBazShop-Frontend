@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/model/product';
 
 @Component({
@@ -7,7 +7,11 @@ import { Product } from 'src/app/model/product';
   styleUrls: ['./cart-product-row.component.scss'],
 })
 export class CartProductRowComponent implements OnInit {
-  productsInCart: Product[] = [];
+  @Input() product: Product;
+  @Input() qty = 1;
+  @Output() incChosenProductQtyClick = new EventEmitter();
+  @Output() decChosenProductQtyClick = new EventEmitter();
+  @Output() removeFromCartClick: EventEmitter<Product> = new EventEmitter();
 
   constructor() {}
 

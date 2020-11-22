@@ -8,14 +8,8 @@ import { ProductsListComponent } from './products-list/products-list.component';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild(ProductsListComponent) productListComponent: ProductsListComponent;
-
   constructor() {}
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
-
-  get products(): Product[] {
-    return this.productListComponent?.products ?? [];
-  }
 }

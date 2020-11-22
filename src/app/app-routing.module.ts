@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
 import { LoginComponent } from './view/authentication/login/login.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
+import { CartComponent } from './view/home/cart/cart.component';
 import { HomeComponent } from './view/home/home.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   },
   { path: 'authentication-choice/login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'cart', component: CartComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

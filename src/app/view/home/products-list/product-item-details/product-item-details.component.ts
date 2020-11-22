@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
+import { ProductsQtyPickerComponent } from 'src/app/view/shared/views/products-qty-picker/products-qty-picker.component';
 import { ProductsListComponent } from '../products-list.component';
 
 @Component({
@@ -11,23 +19,14 @@ import { ProductsListComponent } from '../products-list.component';
 export class ProductItemDetailsComponent implements OnInit {
   @Input() product: Product;
   @Output() addToCartClick: EventEmitter<CartProduct> = new EventEmitter();
-  chosenProductQty: number = 1;
+  get maxStars(): number {
+    return ProductsListComponent.MAX_STARS_NUMBER;
+  }
+  chosenProductQty = 1;
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  get maxStars(): number {
-    return ProductsListComponent.MAX_STARS_NUMBER;
-  }
-
-  get minusBtnDisabled(): boolean {
-    return this.chosenProductQty <= 1 ? true : false;
-  }
-
-  get plusBtnDisabled(): boolean {
-    return this.chosenProductQty >= this.product.availableQty ? true : false;
-  }
 
   decQtyClick() {
     this.chosenProductQty--;
@@ -38,15 +37,6 @@ export class ProductItemDetailsComponent implements OnInit {
     this.chosenProductQty++;
     if (this.chosenProductQty > this.product.availableQty)
       this.chosenProductQty = this.product.availableQty;
-  }
-
-  onProductQtyChange(input: string) {
-    if (Number.isInteger(input)) {
-      this.chosenProductQty = parseInt(input);
-      if (this.chosenProductQty > this.product.availableQty)
-        this.chosenProductQty = this.product.availableQty;
-      else if (this.chosenProductQty < 1) this.chosenProductQty = 1;
-    }
   }
 
   onAddToCartClick() {

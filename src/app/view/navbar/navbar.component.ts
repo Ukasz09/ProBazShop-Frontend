@@ -13,16 +13,22 @@ export class NavbarComponent implements OnInit {
   AppComponent = AppComponent;
   isBs3 = isBs3();
   searchedPhrase: string = '';
-  @Input() products: Product[] = [];
   searchKeywords: string[] = [];
-
-  constructor() {}
-
-  ngOnInit(): void {
-    console.log(this.products)
-  }
+  products: Product[] = [];
 
   get userIsLogged() {
     return AppComponent.userIsLogged;
+  }
+
+  constructor(private productService: ProductsService) {}
+
+  private fetchAllProducts() {
+    this.productService.getAllProducts().subscribe((data: Product[]) => {
+      this.products = data;
+    });
+  }
+
+  ngOnInit(): void {
+    this.fetchAllProducts();
   }
 }

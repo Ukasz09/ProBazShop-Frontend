@@ -1,22 +1,47 @@
-<!-- <div
-  class="w-100 d-flex align-items-center btn btn-light border"
+<div
+  class="w-100 d-flex align-items-center btn border bg-light"
   [style.height.px]="205"
 >
-  <img
-    id="image"
-    alt="image not loaded"
-    [src]="product.imageURI"
-    class="mx-2 rounded"
-    height="90%"
-  />
-  <div class="d-flex h-100 align-items-center">
-    <div class="d-flex flex-column mx-4">
-      <label for="image"
-        ><strong>{{ product.name }}</strong></label
-      >
+  <ng-container *ngIf="product; else dataLoadingTemplate">
+    <img
+      id="image"
+      alt="image not loaded"
+      [src]="product.imageURI"
+      class="mx-2 rounded"
+      height="90%"
+    />
+    <div class="d-flex h-100 align-items-center" style="width: 35%">
+      <div class="d-flex flex-column mx-4">
+        <label for="image"
+          ><strong>{{ product.name }}</strong></label
+        >
+      </div>
     </div>
-  </div>
-  <div class="d-flex flex-fill h-100 align-items-center justify-content-end">
-    <label class="h5 mr-4">{{ product.price | currency }}</label>
-  </div>
-</div> -->
+    <div class="d-flex h-100 align-items-center">
+      <app-products-qty-picker
+        [chosenProductQty]="qty"
+        [availableQty]="product.availableQty"
+        (incBtnClick)="incChosenProductQtyClick.emit()"
+        (decBtnClick)="decChosenProductQtyClick.emit()"
+      ></app-products-qty-picker>
+    </div>
+    <div
+      class="d-flex h-100 align-items-center justify-content-center d-flex w-25"
+    >
+      <h5 class="font-weight-bold">{{ product.price | currency }}</h5>
+    </div>
+    <div class="d-flex flex-fill h-100 align-items-center" style="width: 10%">
+      <button
+        class="btn btn-danger pb-0 px-1"
+        (click)="removeFromCartClick.emit()"
+      >
+        <span class="material-icons"> delete </span>
+      </button>
+    </div>
+  </ng-container>
+</div>
+
+<!-- TEMPLATE -->
+<ng-template #dataLoadingTemplate>
+  <app-data-loading></app-data-loading>
+</ng-template>
