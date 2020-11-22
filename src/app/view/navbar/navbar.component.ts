@@ -10,11 +10,16 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  static readonly NAVBAR_HEIGHT_PX = 120;
   AppComponent = AppComponent;
   isBs3 = isBs3();
   searchedPhrase: string = '';
   searchKeywords: string[] = [];
   products: Product[] = [];
+
+  get navbarHeightPx(): number {
+    return NavbarComponent.NAVBAR_HEIGHT_PX;
+  }
 
   get userIsLogged() {
     return AppComponent.userIsLogged;

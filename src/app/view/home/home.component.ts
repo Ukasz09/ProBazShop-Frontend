@@ -1,6 +1,4 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Product } from 'src/app/model/product';
-import { ProductsListComponent } from './products-list/products-list.component';
 
 @Component({
   selector: 'app-home',

@@ -1,20 +1,65 @@
 <app-navbar></app-navbar>
 <div class="container my-5">
   <ng-container *ngIf="productsInCart.size > 0; else cartEmptyTemplate">
-    <div
-      *ngFor="let productEntry of productsInCart | keyvalue"
-      class="d-flex flex-row"
-    >
-      <div class="w-50">
-        <app-cart-product-row
-          [product]="productEntry.key"
-          [qty]="productEntry.value"
-          (incChosenProductQtyClick)="onIncProductQtyClick(productEntry.key)"
-          (decChosenProductQtyClick)="onDecProductQtyClick(productEntry.key)"
-          (removeFromCartClick)="onRemoveProductFromCartClick(productEntry.key)"
-        ></app-cart-product-row>
+    <div class="d-flex flex-row">
+      <!-- PRODUCTS -->
+      <div style="width: 65%">
+        <div *ngFor="let productEntry of productsInCart | keyvalue">
+          <div class="w-100">
+            <app-cart-product-row
+              [product]="productEntry.key"
+              [qty]="productEntry.value"
+              (incChosenProductQtyClick)="
+                onIncProductQtyClick(productEntry.key)
+              "
+              (decChosenProductQtyClick)="
+                onDecProductQtyClick(productEntry.key)
+              "
+              (removeFromCartClick)="
+                onRemoveProductFromCartClick(productEntry.key)
+              "
+            ></app-cart-product-row>
+          </div>
+        </div>
       </div>
-      <div class="bg-primary w-50"></div>
+      <!-- /PRODUCTS -->
+      <!-- FINALIZE PANEL -->
+      <div class="px-1" style="width: 35%">
+        <div
+          class="d-flex flex-column bg-light border rounded px-4 py-3 finalize-panel"
+          [style.top.px]="navbarHeightPx"
+        >
+          <!-- PRICE TO PAY INFO -->
+          <div class="mb-2">
+            <div class="d-flex justify-content-end align-items-end">
+              <div class="text-uppercase px-2 text-secondary">to pay</div>
+              <div class="h3 my-0 font-weight-bold text-dark">
+                {{ priceToPay | currency }}
+              </div>
+            </div>
+            <div
+              class="text-uppercase text-secondary d-flex justify-content-end"
+              style="font-size: 0.85em"
+            >
+              + shipping costs
+            </div>
+          </div>
+          <!-- /PRICE TO PAY INFO -->
+          <button
+            class="btn btn-danger text-uppercase"
+            style="font-size: inherit"
+          >
+            shipment and payment
+          </button>
+          <button
+            class="btn btn-light text-uppercase"
+            style="font-size: inherit"
+          >
+            continue shopping
+          </button>
+        </div>
+      </div>
+      <!-- /FINALIZE PANEL -->
     </div>
   </ng-container>
 </div>
@@ -23,15 +68,9 @@
 <ng-template #cartEmptyTemplate>
   <div class="d-flex flex-column py-5">
     <div class="text-center">
-      <img
-        src="assets/emptyCart.png"
-        width="50%"
-        alt="cart-empty-image"
-      />
+      <img src="assets/emptyCart.png" width="50%" alt="cart-empty-image" />
     </div>
-    <div
-      class="text-center py-5 h4 empty-cart-label text-capitalize"
-    >
+    <div class="text-center py-5 h4 empty-cart-label text-capitalize">
       Your cart is empty
     </div>
   </div>

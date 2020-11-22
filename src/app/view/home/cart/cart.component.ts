@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +11,11 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CartComponent implements OnInit {
   productsInCart: Map<Product, number> = new Map(); // product, qty
+  priceToPay = 0;
+  dataReady = false;
+  get navbarHeightPx(): number {
+    return NavbarComponent.NAVBAR_HEIGHT_PX;
+  }
 
   constructor(
     private cartService: CartService,
@@ -18,7 +24,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProductsFromCart();
-    // this.fetchProductsMocked();
   }
 
   private fetchProductsFromCart() {
@@ -27,20 +32,10 @@ export class CartComponent implements OnInit {
       let qty = cartItemProperty[1];
       this.productService.getProduct(productId).subscribe((data: Product) => {
         this.productsInCart.set(data, qty);
+        this.dataReady = true;
+        this.priceToPay += data.price * qty;
       });
     }
-  }
-
-  private fetchProductsMocked() {
-    this.productService.getProduct('1').subscribe((data: Product) => {
-      this.productsInCart.set(data, 5);
-    });
-    this.productService.getProduct('2').subscribe((data: Product) => {
-      this.productsInCart.set(data, 2);
-    });
-    this.productService.getProduct('4').subscribe((data: Product) => {
-      this.productsInCart.set(data, 4);
-    });
   }
 
   onIncProductQtyClick(product: Product) {
@@ -48,18 +43,24 @@ export class CartComponent implements OnInit {
     chosenProductQty++;
     if (chosenProductQty > product.availableQty)
       chosenProductQty = product.availableQty;
+    else this.priceToPay += product.price;
+
     this.productsInCart.set(product, chosenProductQty);
     this.cartService.updateProductsQty(product.id, chosenProductQty);
   }
+
   onDecProductQtyClick(product: Product) {
     let chosenProductQty = this.productsInCart.get(product);
     chosenProductQty--;
     if (chosenProductQty < 1) chosenProductQty = 1;
+    else this.priceToPay -= product.price;
     this.productsInCart.set(product, chosenProductQty);
     this.cartService.updateProductsQty(product.id, chosenProductQty);
   }
 
   onRemoveProductFromCartClick(product: Product) {
+    let qtyOfRemovedProduct = this.productsInCart.get(product);
+    this.priceToPay -= product.price * qtyOfRemovedProduct;
     this.cartService.removeProductFromCart(product.id);
     this.productsInCart.delete(product);
   }
