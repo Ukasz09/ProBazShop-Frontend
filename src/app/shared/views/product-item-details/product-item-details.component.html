@@ -25,24 +25,26 @@
         <span class="h4 font-weight-bold">{{ product.price | currency }}</span>
       </div>
 
-      <!-- QTY BTNS -->
-      <div>
-        <app-products-qty-picker
-          [chosenProductQty]="chosenProductQty"
-          [availableQty]="product.availableQty"
-          (incBtnClick)="incQtyClick()"
-          (decBtnClick)="decQtyClick()"
-        ></app-products-qty-picker>
-      </div>
-      <!-- /QTY BTNS -->
-      <div class="d-flex justify-content-center mx-2">
-        <button
-          class="btn btn-danger w-100 text-uppercase"
-          (click)="onAddToCartClick()"
-        >
-          Add to cart
-        </button>
-      </div>
+      <ng-container *ngIf="withAddToCartBtn">
+        <!-- QTY BTNS -->
+        <div>
+          <app-products-qty-picker
+            [chosenProductQty]="chosenProductQty"
+            [availableQty]="product.availableQty"
+            (incBtnClick)="incQtyClick()"
+            (decBtnClick)="decQtyClick()"
+          ></app-products-qty-picker>
+        </div>
+        <!-- /QTY BTNS -->
+        <div class="d-flex justify-content-center mx-2">
+          <button
+            class="btn btn-danger w-100 text-uppercase"
+            (click)="onAddToCartClick()"
+          >
+            Add to cart
+          </button>
+        </div>
+      </ng-container>
       <div>
         <hr />
       </div>

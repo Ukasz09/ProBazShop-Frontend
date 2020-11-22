@@ -1,4 +1,13 @@
 <app-navbar></app-navbar>
+<div *ngFor="let alert of alerts" [style.top.px]="navbarHeightPx" class="sticky-alert">
+  <alert
+    [type]="alert.type"
+    [dismissOnTimeout]="alert.timeout"
+    [dismissible]="true"
+    (onClosed)="removeAlert(alert.id)"
+    >{{ alert.msg }}</alert
+  >
+</div>
 <div>
   <div class="container pt-5">
     <div class="d-flex flex-row">

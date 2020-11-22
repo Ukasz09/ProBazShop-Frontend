@@ -3,11 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AppComponent } from 'src/app/app.component';
-import { AlertModel } from 'src/app/model/alert.model';
 import { RegistrationFormModel } from 'src/app/model/form/registration-form.model';
 import { AlertsService } from 'src/app/services/alerts.service';
-import { FormAlerts } from '../../shared/forms/form-alerts';
-import { FormLogicUtils } from '../../shared/forms/form-logic-utils';
+import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({
   selector: 'app-registration',
@@ -38,7 +37,7 @@ export class RegistrationComponent implements OnInit {
     if (this.registrationForm.dirty && this.registrationForm.valid) {
       AppComponent.registerUser();
       this.registrationIsDone = true;
-      this.alertService.removeAlertFromId(FormAlerts.INVALID_DATA_ALERT_ID);
+      this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
       this.alertService.addAlert(
         FormAlerts.getSuccessFormAlert(
           FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,

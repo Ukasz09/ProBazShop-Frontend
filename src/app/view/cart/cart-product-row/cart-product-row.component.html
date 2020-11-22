@@ -4,15 +4,17 @@
 >
   <ng-container *ngIf="product; else dataLoadingTemplate">
     <img
-      id="image"
+      id="productImage"
       alt="image not loaded"
       [src]="product.imageURI"
       class="mx-2 rounded"
       height="90%"
+      (click)="openModal(details)"
     />
     <div class="d-flex h-100 align-items-center" style="width: 35%">
       <div class="d-flex flex-column mx-4">
-        <label for="image"
+        <label for="productImage" (click)="openModal(details)"
+          class="pointer-cursor"
           ><strong>{{ product.name }}</strong></label
         >
       </div>
@@ -45,3 +47,12 @@
 <ng-template #dataLoadingTemplate>
   <app-data-loading></app-data-loading>
 </ng-template>
+
+<!-- PRODUCT DETAIL TEMPLATE -->
+<ng-template #details>
+  <app-product-item-details
+    [product]="product"
+    [withAddToCartBtn]="false"
+  ></app-product-item-details>
+</ng-template>
+<!-- PRODUCT DETAIL TEMPLATE -->

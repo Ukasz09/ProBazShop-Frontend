@@ -12,7 +12,7 @@ export class AppComponent {
   static userIsLogged = true;
   static LOGO_IMG_PATH = 'assets/logo2.png';
 
-  constructor(private alertService: AlertsService) {}
+  constructor() {}
 
   static getLogoImgPath(): string {
     return this.LOGO_IMG_PATH;
@@ -31,13 +31,5 @@ export class AppComponent {
   //TODO: tmp mocked
   static registerUser() {
     // AppComponent.userIsLogged = true;
-  }
-
-  get alerts(): AlertModel[] {
-    return Array.from(this.alertService.alerts.values());
-  }
-
-  removeAlert(id: string) {
-    this.alertService.removeAlertFromId(id);
   }
 }

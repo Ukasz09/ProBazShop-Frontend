@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Product } from 'src/app/model/product';
 
 @Component({
@@ -13,7 +21,14 @@ export class CartProductRowComponent implements OnInit {
   @Output() decChosenProductQtyClick = new EventEmitter();
   @Output() removeFromCartClick: EventEmitter<Product> = new EventEmitter();
 
-  constructor() {}
+  modalRef: BsModalRef;
+
+  constructor(private modalService: BsModalService) {}
 
   ngOnInit(): void {}
+
+  openModal(template: TemplateRef<any>) {
+    const config: ModalOptions = { class: 'modal-lg' };
+    this.modalRef = this.modalService.show(template, config);
+  }
 }

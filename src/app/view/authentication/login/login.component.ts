@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LoginFormModel } from 'src/app/model/form/login-form.model';
-import { FormLogicUtils } from '../../shared/forms/form-logic-utils';
+import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({
   selector: 'app-login',

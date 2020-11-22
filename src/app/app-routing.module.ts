@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
 import { LoginComponent } from './view/authentication/login/login.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
-import { CartComponent } from './view/home/cart/cart.component';
+import { CartComponent } from './view/cart/cart.component';
 import { HomeComponent } from './view/home/home.component';
+import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'authentication-choice/login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'client/history', component: ShoppingHistoryComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -3,7 +3,7 @@ export class AlertModel {
     public id: string,
     public type: string,
     public msg: string,
-    public timeout: number,
-    public dismissible: boolean
+    public timeout: number = 3000,
+    public dismissible: boolean = true
   ) {}
 }

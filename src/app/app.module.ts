@@ -13,24 +13,25 @@ import { AuthenticationChoiceComponent } from './view/authentication/authenticat
 import { AuthenticationPageComponent } from './view/authentication/authentication-page/authentication-page.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
 import { LoginComponent } from './view/authentication/login/login.component';
-import { FormUiGeneratorComponent } from './view/shared/forms/form-ui-generator/form-ui-generator.component';
-import { ControlMessagesComponent } from './view/shared/forms/control-messages/control-messages.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CategoriesPanelComponent } from './view/home/categories-panel/categories-panel.component';
 import { ProductsListComponent } from './view/home/products-list/products-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductItemRowComponent } from './view/home/products-list/product-item-row/product-item-row.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { ProductItemDetailsComponent } from './view/home/products-list/product-item-details/product-item-details.component';
 import { NgxStarsModule } from 'ngx-stars';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AppliedFiltersComponent } from './view/home/categories-panel/applied-filters/applied-filters.component';
-import { CartComponent } from './view/home/cart/cart.component';
-import { CartProductRowComponent } from './view/home/cart/cart-product-row/cart-product-row.component';
-import { ProductsQtyPickerComponent } from './view/shared/views/products-qty-picker/products-qty-picker.component';
-import { ConfirmModalComponent } from './view/shared/views/modals/confirm-modal/confirm-modal.component';
-import { DataLoadingComponent } from './view/shared/views/data-loading/data-loading.component';
+import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
+import { ControlMessagesComponent } from './shared/forms/control-messages/control-messages.component';
+import { FormUiGeneratorComponent } from './shared/forms/form-ui-generator/form-ui-generator.component';
+import { DataLoadingComponent } from './shared/views/data-loading/data-loading.component';
+import { ConfirmModalComponent } from './shared/views/modals/confirm-modal/confirm-modal.component';
+import { ProductItemDetailsComponent } from './shared/views/product-item-details/product-item-details.component';
+import { ProductsQtyPickerComponent } from './shared/views/products-qty-picker/products-qty-picker.component';
+import { CartProductRowComponent } from './view/cart/cart-product-row/cart-product-row.component';
+import { CartComponent } from './view/cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { DataLoadingComponent } from './view/shared/views/data-loading/data-load
     CartProductRowComponent,
     DataLoadingComponent,
     ProductsQtyPickerComponent,
+    ShoppingHistoryComponent,
   ],
   imports: [
     HttpClientModule,

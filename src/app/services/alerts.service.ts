@@ -13,7 +13,7 @@ export class AlertsService {
     this.alerts.set(alert.id, alert);
   }
 
-  removeAlertFromId(id: string) {
+  removeAlertWithId(id: string) {
     if (this.alerts.has(id)) this.alerts.delete(id);
   }
 

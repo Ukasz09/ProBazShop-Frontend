@@ -16,6 +16,7 @@
         ><strong>{{ product.name }}</strong></label
       >
       <ngx-stars
+      style="z-index: 1;"
         [readonly]="true"
         [color]="'orangered'"
         [size]="1"
@@ -30,5 +31,8 @@
 </div>
 
 <ng-template #details>
-  <app-product-item-details [product]="product" (addToCartClick)="onAddToCartClick($event)"></app-product-item-details>
+  <app-product-item-details
+    [product]="product"
+    (addToCartClick)="onAddToCartClick($event)"
+  ></app-product-item-details>
 </ng-template>

@@ -21,4 +21,8 @@ export class ProductsService {
   getProduct(id: string): Observable<Product> {
     return this.http.get<Product>('/assets/mock/product:' + id + '.json');
   }
+
+  getClientShoppingHistory(clientId: string): Observable<Product[]> {
+    return this.http.get<Product[]>('/assets/mock/shopping-history.json');
+  }
 }

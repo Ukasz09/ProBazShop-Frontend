@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container my-5">
-  <ng-container *ngIf="productsInCart.size > 0; else cartEmptyTemplate">
-    <div class="d-flex flex-row">
+  <ng-container *ngIf="!cartIsEmpty; else cartEmptyTemplate">
+    <div *ngIf="dataReady; else dataLoadingTemplate" class="d-flex flex-row">
       <!-- PRODUCTS -->
       <div style="width: 65%">
         <div *ngFor="let productEntry of productsInCart | keyvalue">
@@ -49,11 +49,12 @@
             class="btn btn-danger text-uppercase"
             style="font-size: inherit"
           >
-            shipment and payment
+            buy and pay
           </button>
           <button
             class="btn btn-light text-uppercase"
             style="font-size: inherit"
+            routerLink="/home"
           >
             continue shopping
           </button>
@@ -74,4 +75,8 @@
       Your cart is empty
     </div>
   </div>
+</ng-template>
+
+<ng-template #dataLoadingTemplate>
+  <app-data-loading [text]="'Loading cart\'s data'"></app-data-loading>
 </ng-template>

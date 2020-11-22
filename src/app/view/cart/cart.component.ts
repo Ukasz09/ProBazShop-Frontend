@@ -12,9 +12,16 @@ import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 export class CartComponent implements OnInit {
   productsInCart: Map<Product, number> = new Map(); // product, qty
   priceToPay = 0;
-  dataReady = false;
+  get dataReady() {
+    return this.productsInCart.size == this.cartService.productsInCart.size;
+  }
+
   get navbarHeightPx(): number {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
+  }
+
+  get cartIsEmpty(): boolean {
+    return this.cartService.productsInCart.size == 0;
   }
 
   constructor(
@@ -32,7 +39,6 @@ export class CartComponent implements OnInit {
       let qty = cartItemProperty[1];
       this.productService.getProduct(productId).subscribe((data: Product) => {
         this.productsInCart.set(data, qty);
-        this.dataReady = true;
         this.priceToPay += data.price * qty;
       });
     }
