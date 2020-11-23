@@ -26,13 +26,14 @@ import { AppliedFiltersComponent } from './view/home/categories-panel/applied-fi
 import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
 import { ControlMessagesComponent } from './shared/forms/control-messages/control-messages.component';
 import { FormUiGeneratorComponent } from './shared/forms/form-ui-generator/form-ui-generator.component';
-import { DataLoadingComponent } from './shared/views/data-loading/data-loading.component';
-import { ConfirmModalComponent } from './shared/views/modals/confirm-modal/confirm-modal.component';
-import { ProductItemDetailsComponent } from './shared/views/product-item-details/product-item-details.component';
-import { ProductsQtyPickerComponent } from './shared/views/products-qty-picker/products-qty-picker.component';
 import { CartProductRowComponent } from './view/cart/cart-product-row/cart-product-row.component';
 import { CartComponent } from './view/cart/cart.component';
 import { OrderedProductRowComponent } from './view/shopping-history/ordered-product-row/ordered-product-row.component';
+import { DataLoadingComponent } from './shared/components/data-loading/data-loading.component';
+import { ConfirmModalComponent } from './shared/components/modals/confirm-modal/confirm-modal.component';
+import { ProductItemDetailsComponent } from './shared/components/product-item-details/product-item-details.component';
+import { ProductsQtyPickerComponent } from './shared/components/products-qty-picker/products-qty-picker.component';
+import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { OrderedProductRowComponent } from './view/shopping-history/ordered-prod
     ProductsQtyPickerComponent,
     ShoppingHistoryComponent,
     OrderedProductRowComponent,
+    SortBtnComponent,
   ],
   imports: [
     HttpClientModule,

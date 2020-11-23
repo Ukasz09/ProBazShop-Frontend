@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderedProduct } from 'src/app/model/ordered-product';
+import { SortMethod } from 'src/app/model/sort-method';
 import { UserService } from 'src/app/services/user.service';
 import { SortUtils } from 'src/app/shared/logic/SortUtils';
 
@@ -9,20 +10,23 @@ import { SortUtils } from 'src/app/shared/logic/SortUtils';
   styleUrls: ['./shopping-history.component.scss'],
 })
 export class ShoppingHistoryComponent implements OnInit {
-  private static readonly SORTING_METHODS = {
-    newest: {
-      text: 'From newest',
-      comp: ShoppingHistoryComponent.byDateDscComparator,
-    },
-    oldest: {
-      text: 'From oldest',
-      comp: ShoppingHistoryComponent.byDateAscComparator,
-    },
-  };
-  actualSortingMethod = ShoppingHistoryComponent.SORTING_METHODS.newest;
-  get sorthingMethodsKeys(): string[] {
-    return Object.keys(ShoppingHistoryComponent.SORTING_METHODS);
-  }
+  availableSortMethods = new Map([
+    [
+      'newest',
+      new SortMethod(
+        'From newest',
+        ShoppingHistoryComponent.byDateDscComparator
+      ),
+    ],
+    [
+      'oldest',
+      new SortMethod(
+        'From oldest',
+        ShoppingHistoryComponent.byDateAscComparator
+      ),
+    ],
+  ]);
+  initSortMethodKey = 'newest';
   shoppingHistoryFetched = false;
   shoppingHistory: OrderedProduct[] = [];
   actualDisplayedProduct: OrderedProduct = undefined;
@@ -33,7 +37,10 @@ export class ShoppingHistoryComponent implements OnInit {
     this.userServices
       .getClientShoppingHistory('')
       .subscribe((data: OrderedProduct[]) => {
-        this.shoppingHistory = data.sort(this.actualSortingMethod.comp);
+        let actualSortMethod = this.availableSortMethods.get(
+          this.initSortMethodKey
+        );
+        this.shoppingHistory = data.sort(actualSortMethod.comp);
         if (this.shoppingHistory.length > 0)
           this.actualDisplayedProduct = this.shoppingHistory[0];
         this.shoppingHistoryFetched = true;
@@ -44,23 +51,12 @@ export class ShoppingHistoryComponent implements OnInit {
     this.actualDisplayedProduct = product;
   }
 
-  changeSortingMethod(methodKey: string) {
-    this.actualSortingMethod =
-      ShoppingHistoryComponent.SORTING_METHODS[methodKey];
-    this.shoppingHistory = this.shoppingHistory.sort(
-      this.actualSortingMethod.comp
-    );
+  changeSortingMethod(sortMethod: SortMethod<OrderedProduct>) {
+    this.sortShopingHistoryInPlace(sortMethod);
   }
 
-  getSortingMethodLabelTxt(methodKey: string): string {
-    let labelTxt = ShoppingHistoryComponent.SORTING_METHODS[methodKey].text;
-    return labelTxt ?? methodKey;
-  }
-
-  getSortingMethod(
-    methodKey: string
-  ): { text: string; com: (a: OrderedProduct, b: OrderedProduct) => number } {
-    return ShoppingHistoryComponent.SORTING_METHODS[methodKey];
+  private sortShopingHistoryInPlace(sortMethod: SortMethod<OrderedProduct>) {
+    this.shoppingHistory = this.shoppingHistory.sort(sortMethod.comp);
   }
 
   private static byDateDscComparator(
