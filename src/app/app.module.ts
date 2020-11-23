@@ -32,6 +32,7 @@ import { ProductItemDetailsComponent } from './shared/views/product-item-details
 import { ProductsQtyPickerComponent } from './shared/views/products-qty-picker/products-qty-picker.component';
 import { CartProductRowComponent } from './view/cart/cart-product-row/cart-product-row.component';
 import { CartComponent } from './view/cart/cart.component';
+import { OrderedProductRowComponent } from './view/shopping-history/ordered-product-row/ordered-product-row.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { CartComponent } from './view/cart/cart.component';
     DataLoadingComponent,
     ProductsQtyPickerComponent,
     ShoppingHistoryComponent,
+    OrderedProductRowComponent,
   ],
   imports: [
     HttpClientModule,

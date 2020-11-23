@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DataLoadingComponent implements OnInit {
   @Input() text = 'Loading data';
+  @Input() spinnerSize = '2em';
 
   constructor() {}
 

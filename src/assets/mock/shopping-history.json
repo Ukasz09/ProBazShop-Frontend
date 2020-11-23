@@ -6,10 +6,9 @@
     "imageURI": "assets/productsImages/hmgoepprod.jpeg",
     "size": "XL",
     "color": "white",
-    "price": 79.99,
-    "releaseDate": "March 19, 2012",
-    "starRating": 4.4,
-    "availableQty": 1
+    "pricePerItem": 79.99,
+    "orderDate": "March 19, 2012",
+    "orderedQty": 1
   },
   {
     "id": 2,
@@ -18,10 +17,9 @@
     "imageURI": "assets/productsImages/hmgoepprod2.jpeg",
     "size": "M",
     "color": "brown",
-    "price": 17.99,
-    "releaseDate": "April 9, 2016",
-    "starRating": 5,
-    "availableQty": 1
+    "pricePerItem": 17.99,
+    "orderDate": "April 9, 2016",
+    "orderedQty": 1
   },
   {
     "id": 3,
@@ -30,10 +28,9 @@
     "imageURI": "assets/productsImages/hmgoepprod3.jpeg",
     "size": "43",
     "color": "black",
-    "price": 49.99,
-    "releaseDate": "June 27, 2020",
-    "starRating": 3.1,
-    "availableQty": 1
+    "pricePerItem": 49.99,
+    "orderDate": "June 27, 2020",
+    "orderedQty": 1
   },
   {
     "id": 4,
@@ -42,10 +39,9 @@
     "imageURI": "assets/productsImages/hmgoepprod4.jpeg",
     "size": "S",
     "color": "blue",
-    "price": 59.99,
-    "releaseDate": "June 25, 2020",
-    "starRating": 4.9,
-    "availableQty": 2
+    "pricePerItem": 59.99,
+    "orderDate": "June 25, 2020",
+    "orderedQty": 2
   },
   {
     "id": 5,
@@ -54,9 +50,8 @@
     "imageURI": "assets/productsImages/hmgoepprod5.jpeg",
     "size": "M",
     "color": "green",
-    "price": 29.99,
-    "releaseDate": "January 14, 2020",
-    "starRating": 2,
-    "availableQty": 3
+    "pricePerItem": 29.99,
+    "orderDate": "January 14, 2020",
+    "orderedQty": 3
   }
 ]

@@ -7,7 +7,6 @@ import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { ProductItemRowComponent } from './product-item-row/product-item-row.component';
 
 @Component({
   selector: 'app-products-list',
@@ -23,9 +22,12 @@ export class ProductsListComponent implements OnInit {
     low: 'Price: low to high',
     high: 'Price: high to low',
   };
+  actualSortingMethod = ProductsListComponent.SORTING_METHODS.newest;
+  get sorthingMethodsKeys(): string[] {
+    return Object.keys(ProductsListComponent.SORTING_METHODS);
+  }
   productsDataReady = false;
   itemsPerPage = 5;
-  actualSortingMethod = ProductsListComponent.SORTING_METHODS.newest;
   products: Product[] = [];
   productsPerPage: Product[] = [];
   modalRef: BsModalRef;
@@ -60,20 +62,14 @@ export class ProductsListComponent implements OnInit {
     // window.scroll(0,0);
     let scrollToTop = window.setInterval(() => {
       let pos = window.pageYOffset;
-      if (pos > 0) {
-        window.scrollTo(0, pos - 30); // how far to scroll on each step
-      } else {
-        window.clearInterval(scrollToTop);
-      }
+      if (pos > 0) window.scrollTo(0, pos - 30);
+      // how far to scroll on each step
+      else window.clearInterval(scrollToTop);
     }, 16);
   }
 
   changeSortingMethod(methodKey: string) {
     this.actualSortingMethod = methodKey;
-  }
-
-  get sorthingMethodsKeys(): string[] {
-    return Object.keys(ProductsListComponent.SORTING_METHODS);
   }
 
   getSortingMethodLabelTxt(methodKey: string): string {
@@ -93,21 +89,26 @@ export class ProductsListComponent implements OnInit {
       cartProduct.qty,
       product.availableQty
     );
-    if (succeed) {
-      let alertModel = new AlertModel(
-        ProductsListComponent.SUCCESSFUL_ADD_TO_CART_ALERT_ID,
-        'success',
-        'Successful add to cart'
-      );
-      this.alertService.addAlert(alertModel);
-    } else {
-      let alertModel = new AlertModel(
-        ProductsListComponent.UNSUCCESSFUL_ADD_TO_CART_ALERT_ID,
-        'custom-danger',
-        "Don't add - in cart already maximum quantity of this product",
-        5000
-      );
-      this.alertService.addAlert(alertModel);
-    }
+    if (succeed) this.showSuccessfulAddToCartAlert();
+    else this.showUnsuccessfulAddToCartAlert();
+  }
+
+  private showSuccessfulAddToCartAlert() {
+    let alertModel = new AlertModel(
+      ProductsListComponent.SUCCESSFUL_ADD_TO_CART_ALERT_ID,
+      'success',
+      'Successful add to cart'
+    );
+    this.alertService.addAlert(alertModel);
+  }
+
+  private showUnsuccessfulAddToCartAlert() {
+    let alertModel = new AlertModel(
+      ProductsListComponent.UNSUCCESSFUL_ADD_TO_CART_ALERT_ID,
+      'custom-danger',
+      "Don't add - in cart already maximum quantity of this product",
+      5000
+    );
+    this.alertService.addAlert(alertModel);
   }
 }
