@@ -1,5 +1,5 @@
 <div
-  class="w-100 d-flex align-items-center btn btn-light border"
+  class="w-100 d-flex flex-row align-items-center btn btn-light border"
   [style.height.px]="205"
   (click)="rowClick.emit()"
 >
@@ -10,28 +10,40 @@
     class="mx-2 rounded"
     height="90%"
   />
-  <div class="d-flex h-100 align-items-center mx-2 w-25">
-    <label for="image" class="font-weight-bold w-100 text-center">{{
-      orderedProduct.name
-    }}</label>
-  </div>
-  <div class="d-flex flex-fill h-100 align-items-center justify-content-center">
-    <h4>
-      <div class="badge badge-danger rounded">
-        {{ orderedProduct.orderedQty }}
+  <div class="d-flex flex-column flex-fill mx-3 text-left" style="height: 90%; overflow: hidden;">
+    <!-- NAME -->
+    <div class="align-items-center d-flex">
+      <div class="font-weight-bold">Name:</div>
+      <div class="mx-1 text-truncate">
+        {{ orderedProduct.name }}
       </div>
-    </h4>
-    <label class="mx-2">*</label>
-    <label class="text-secondary">
-      {{ PayedPrice | currency }}
-    </label>
-    <label class="mx-2">=</label>
-    <h4>
-      <div class="badge badge-danger rounded">{{ PayedPrice | currency }}</div>
-    </h4>
-  </div>
-  <!-- TODO: -->
-  <div>
-    {{ orderedProduct.orderDate}}
+    </div>
+    <!-- /NAME -->
+    <!-- PRICE PER PIECE -->
+    <div class="mt-2">
+      <span class="font-weight-bold my-auto">Price for 1 piece:</span>
+      <span class="mx-1">{{ orderedProduct.pricePerItem | currency }}</span>
+    </div>
+    <!-- /PRICE -->
+    <!-- QTY -->
+    <div class="mt-2">
+      <span class="font-weight-bold">Ordered qunatity:</span
+      ><span class="mx-1">{{ orderedProduct.orderedQty }}</span>
+    </div>
+    <!-- /QTY -->
+    <!-- PURCHASE DATE -->
+    <div class="mt-2">
+      <span class="font-weight-bold"> Purchase date:</span>
+      <span class="mx-1">{{ orderedProduct.orderDate }}</span>
+    </div>
+    <!-- /PURCHASE DATE -->
+    <!-- TOTAL PRICE -->
+    <div class="mt-2">
+      <span class="font-weight-bold">Total price:</span>
+      <div class="mx-1 badge badge-dark rounded" style="font-size: 1.1em">
+        {{ PayedPrice | currency }}
+      </div>
+    </div>
+    <!-- /TOTAL PRICE -->
   </div>
 </div>

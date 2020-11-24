@@ -4,7 +4,7 @@
     <ng-container *ngIf="shoppingHistory.length > 0; else emptyHistoryTemplate">
       <div class="row">
         <!-- ITEMS LIST -->
-        <div class="col">
+        <div class="col-5">
           <app-sort-btn
             [sortingMethods]="availableSortMethods"
             [initSortMethod]="availableSortMethods.get(initSortMethodKey)"
@@ -20,8 +20,14 @@
         <!-- /ITEMS LIST -->
 
         <!-- CONTENT -->
-        <div class="col">
-          <div class="bg-warning">content</div>
+        <div class="col-7">
+          <div class="bg-light rounded product-details" [style.top.px]="navbarHeightPx">
+            <app-product-item-details
+              [product]="actualDisplayedProduct"
+              [withAddToCartBtn]="false"
+              [withStarRating]="false"
+            ></app-product-item-details>
+          </div>
         </div>
         <!-- /CONTENT -->
       </div>

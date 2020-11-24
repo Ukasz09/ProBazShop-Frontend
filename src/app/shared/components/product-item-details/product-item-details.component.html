@@ -10,7 +10,7 @@
         </span>
       </div>
       <!-- STARS -->
-      <div class="d-flex justify-content-center">
+      <div *ngIf="withStarRating" class="d-flex justify-content-center">
         <ngx-stars
           [readonly]="true"
           [color]="'orangered'"
@@ -20,7 +20,6 @@
         ></ngx-stars>
       </div>
       <!-- /STARS -->
-
       <div class="text-center mt-4">
         <span class="h4 font-weight-bold">{{ product.price | currency }}</span>
       </div>

@@ -3,6 +3,7 @@ import { OrderedProduct } from 'src/app/model/ordered-product';
 import { SortMethod } from 'src/app/model/sort-method';
 import { UserService } from 'src/app/services/user.service';
 import { SortUtils } from 'src/app/shared/logic/SortUtils';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-shopping-history',
@@ -30,7 +31,10 @@ export class ShoppingHistoryComponent implements OnInit {
   shoppingHistoryFetched = false;
   shoppingHistory: OrderedProduct[] = [];
   actualDisplayedProduct: OrderedProduct = undefined;
-
+  get navbarHeightPx(): number {
+    return NavbarComponent.NAVBAR_HEIGHT_PX;
+  }
+  
   constructor(private userServices: UserService) {}
 
   ngOnInit(): void {
@@ -49,6 +53,7 @@ export class ShoppingHistoryComponent implements OnInit {
 
   onRowClick(product: OrderedProduct) {
     this.actualDisplayedProduct = product;
+    console.log(this.actualDisplayedProduct);
   }
 
   changeSortingMethod(sortMethod: SortMethod<OrderedProduct>) {

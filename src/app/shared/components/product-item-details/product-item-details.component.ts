@@ -10,9 +10,10 @@ import { ProductsListComponent } from 'src/app/view/home/products-list/products-
 })
 export class ProductItemDetailsComponent implements OnInit {
   @Input() withAddToCartBtn = true;
+  @Input() withStarRating = true;
   @Input() product: Product;
   @Output() addToCartClick: EventEmitter<CartProduct> = new EventEmitter();
-  
+
   get maxStars(): number {
     return ProductsListComponent.MAX_STARS_NUMBER;
   }
