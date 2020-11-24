@@ -34,6 +34,7 @@ import { ConfirmModalComponent } from './shared/components/modals/confirm-modal/
 import { ProductItemDetailsComponent } from './shared/components/product-item-details/product-item-details.component';
 import { ProductsQtyPickerComponent } from './shared/components/products-qty-picker/products-qty-picker.component';
 import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.component';
+import { EmptyResultsComponent } from './shared/components/empty-results/empty-results.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.componen
     ShoppingHistoryComponent,
     OrderedProductRowComponent,
     SortBtnComponent,
+    EmptyResultsComponent,
   ],
   imports: [
     HttpClientModule,

@@ -14,14 +14,14 @@
   </div>
 
   <div *ngIf="productsDataReady; else dataLoadingPanel" class="content-wrapper">
-    <p class="content-item">
+    <ng-container *ngIf="products.length > 0; else emptyResultsTemplate">
       <ng-container *ngFor="let product of productsPerPage">
         <app-product-item-row
           [product]="product"
           (productRowClick)="onProductRowClick(product)"
         ></app-product-item-row>
       </ng-container>
-    </p>
+    </ng-container>
   </div>
 </div>
 <div class="d-flex flex-row-reverse">
@@ -42,3 +42,20 @@
     ></app-data-loading>
   </div>
 </ng-template>
+
+<ng-template #emptyResultsTemplate>
+  <div class="bg-light w-100">
+    <div class="w-50 mx-auto py-4">
+      <app-empty-results></app-empty-results>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <div class="d-flex flex-column py-5 bg-info w-100">
+  <div class="text-center">
+    <img src="assets/emptyCart.png" width="50%" alt="cart-empty-image" />
+  </div>
+  <div class="text-center py-5 h4 empty-cart-label text-capitalize">
+    Your cart is empty
+  </div>
+</div> -->

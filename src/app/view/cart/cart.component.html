@@ -72,16 +72,16 @@
 
 <!-- TEMPLATES -->
 <ng-template #cartEmptyTemplate>
-  <div class="d-flex flex-column py-5">
-    <div class="text-center">
-      <img src="assets/emptyCart.png" width="50%" alt="cart-empty-image" />
-    </div>
-    <div class="text-center py-5 h4 empty-cart-label text-capitalize">
-      Your cart is empty
+  <div>
+    <div class="w-50 mx-auto">
+      <app-empty-results text="Your cart is empty"></app-empty-results>
     </div>
   </div>
 </ng-template>
 
 <ng-template #dataLoadingTemplate>
-  <app-data-loading [text]="'Loading cart\'s data'" spinnerSize="3em"></app-data-loading>
+  <app-data-loading
+    [text]="'Loading cart\'s data'"
+    spinnerSize="3em"
+  ></app-data-loading>
 </ng-template>

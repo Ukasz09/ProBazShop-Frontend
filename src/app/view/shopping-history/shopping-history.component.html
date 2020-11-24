@@ -44,14 +44,9 @@
 </ng-template>
 
 <ng-template #emptyHistoryTemplate>
-  <div class="d-flex flex-column py-5">
-    <div class="text-center">
-      <img src="assets/emptyCart.png" width="50%" alt="cart-empty-image" />
-    </div>
-    <div
-      class="text-center py-5 h4 empty-cart-label text-capitalize font-weight-bold"
-    >
-      your shopping history is empty
+  <div>
+    <div class="w-50 mx-auto">
+      <app-empty-results text="your shopping history is empty"></app-empty-results>
     </div>
   </div>
 </ng-template>
