@@ -4,6 +4,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { AlertModel } from 'src/app/model/alert.model';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
+import { SortMethod } from 'src/app/model/sort-method';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -17,15 +18,12 @@ export class ProductsListComponent implements OnInit {
   static readonly SUCCESSFUL_ADD_TO_CART_ALERT_ID = 'successful_add_to_cart';
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
   static readonly MAX_STARS_NUMBER = 5;
-  private static readonly SORTING_METHODS = {
-    newest: 'From newest',
-    low: 'Price: low to high',
-    high: 'Price: high to low',
-  };
-  actualSortingMethod = ProductsListComponent.SORTING_METHODS.newest;
-  get sorthingMethodsKeys(): string[] {
-    return Object.keys(ProductsListComponent.SORTING_METHODS);
-  }
+  readonly availableSortMethods = new Map([
+    ['newest', new SortMethod<Product>('From newest')],
+    ['low', new SortMethod<Product>('Price: low to high')],
+    ['high', new SortMethod<Product>('Price: high to low')],
+  ]);
+  initSortMethodKey = 'newest';
   productsDataReady = false;
   itemsPerPage = 5;
   products: Product[] = [];
@@ -68,15 +66,10 @@ export class ProductsListComponent implements OnInit {
     }, 16);
   }
 
-  changeSortingMethod(methodKey: string) {
-    this.actualSortingMethod = methodKey;
+  changeSortingMethod(sortMethod: SortMethod<Product>) {
+    console.log('Need to apply sort for: ', sortMethod.labelText);
   }
-
-  getSortingMethodLabelTxt(methodKey: string): string {
-    let labelTxt = ProductsListComponent.SORTING_METHODS[methodKey];
-    return labelTxt ?? methodKey;
-  }
-
+  
   openModal(template: TemplateRef<any>) {
     const config: ModalOptions = { class: 'modal-lg' };
     this.modalRef = this.modalService.show(template, config);
