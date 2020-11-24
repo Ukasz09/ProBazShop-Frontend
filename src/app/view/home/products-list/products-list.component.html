@@ -1,8 +1,8 @@
 <div class="d-flex flex-column border border-left-0">
   <div class="bg-light pb-0 text-center">
     <div class="mt-2 d-flex flex-row w-100 justify-content-center">
-      <div class="text-secondary mx-2  my-auto">Sorting method:</div>
-      <div style="width: 20%;">
+      <div class="text-secondary mx-2 my-auto">Sorting method:</div>
+      <div style="width: 20%">
         <app-sort-btn
           [sortingMethods]="availableSortMethods"
           [initSortMethod]="availableSortMethods.get(initSortMethodKey)"
@@ -18,17 +18,8 @@
       <ng-container *ngFor="let product of productsPerPage">
         <app-product-item-row
           [product]="product"
-          (productRowClick)="openModal(details)"
+          (productRowClick)="onProductRowClick(product)"
         ></app-product-item-row>
-
-        <!-- DETAILS TEMPLATE  -->
-        <ng-template #details>
-          <app-product-item-details
-            [product]="product"
-            (addToCartClick)="onAddToCartClick($event, product)"
-          ></app-product-item-details>
-        </ng-template>
-        <!-- /DETAILS TEMPLATE  -->
       </ng-container>
     </p>
   </div>
@@ -42,6 +33,7 @@
   </pagination>
 </div>
 
+<!-- TEMPLATES -->
 <ng-template #dataLoadingPanel>
   <div class="bg-light">
     <app-data-loading

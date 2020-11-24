@@ -15,6 +15,7 @@
         typeaheadOptionField="name"
         [isAnimated]="true"
         [optionsListTemplate]="customListTemplate"
+        (typeaheadOnSelect)="onSuggestionSelect($event.item)"
         class="form-control w-100"
         type="search"
         [typeaheadMinLength]="0"

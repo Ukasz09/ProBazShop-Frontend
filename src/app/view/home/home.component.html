@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar (suggestionSelect)="showProductDetails($event, details)"></app-navbar>
 <div
   *ngFor="let alert of alerts"
   [style.top.px]="navbarHeightPx"
@@ -17,8 +17,17 @@
     <div class="d-flex flex-row">
       <app-categories-panel></app-categories-panel>
       <div class="flex-fill">
-        <app-products-list></app-products-list>
+        <app-products-list (productRowClick)="showProductDetails($event, details)" (addToCartClick)="onAddToCartClick($event[0], $event[1])"></app-products-list>
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- TEMPLATES -->
+<ng-template #details>
+  <app-product-item-details
+    [product]="chosenProduct"
+    (addToCartClick)="onAddToCartClick($event, chosenProduct)"
+  ></app-product-item-details>
+</ng-template>

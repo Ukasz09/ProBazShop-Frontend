@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
 import { Product } from 'src/app/model/product';
@@ -12,6 +12,8 @@ import { ProductsService } from 'src/app/services/products.service';
 export class NavbarComponent implements OnInit {
   static readonly NAVBAR_HEIGHT_PX = 120;
   AppComponent = AppComponent;
+  @Output() suggestionSelect: EventEmitter<Product> = new EventEmitter();
+
   isBs3 = isBs3();
   searchedPhrase: string = '';
   searchKeywords: string[] = [];
@@ -27,13 +29,17 @@ export class NavbarComponent implements OnInit {
 
   constructor(private productService: ProductsService) {}
 
+  ngOnInit(): void {
+    this.fetchAllProducts();
+  }
+
   private fetchAllProducts() {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
       this.products = data;
     });
   }
 
-  ngOnInit(): void {
-    this.fetchAllProducts();
+  onSuggestionSelect(selectedProduct: Product) {
+    this.suggestionSelect.emit(selectedProduct);
   }
 }

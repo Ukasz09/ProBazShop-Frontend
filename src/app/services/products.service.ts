@@ -15,7 +15,10 @@ export class ProductsService {
   }
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('/assets/mock/products.json');
+    return this.http.get<Product[]>(
+      '/assets/mock/products.json'
+      // '/assets/mock/empty-arr.json'
+    );
   }
 
   getProduct(id: string): Observable<Product> {

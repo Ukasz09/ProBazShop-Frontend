@@ -34,7 +34,7 @@ export class ShoppingHistoryComponent implements OnInit {
   get navbarHeightPx(): number {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
-  
+
   constructor(private userServices: UserService) {}
 
   ngOnInit(): void {
@@ -53,7 +53,6 @@ export class ShoppingHistoryComponent implements OnInit {
 
   onRowClick(product: OrderedProduct) {
     this.actualDisplayedProduct = product;
-    console.log(this.actualDisplayedProduct);
   }
 
   changeSortingMethod(sortMethod: SortMethod<OrderedProduct>) {
