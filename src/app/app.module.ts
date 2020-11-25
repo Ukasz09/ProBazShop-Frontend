@@ -36,6 +36,7 @@ import { ProductsQtyPickerComponent } from './shared/components/products-qty-pic
 import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.component';
 import { EmptyResultsComponent } from './shared/components/empty-results/empty-results.component';
 import { UserInfoComponent } from './view/user-info/user-info.component';
+import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { UserInfoComponent } from './view/user-info/user-info.component';
     SortBtnComponent,
     EmptyResultsComponent,
     UserInfoComponent,
+    ShipmentPageComponent,
   ],
   imports: [
     HttpClientModule,

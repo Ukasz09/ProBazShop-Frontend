@@ -14,7 +14,6 @@ export class ControlMessagesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //TODO: check how often is called
   get errorMessage(): string | null {
     for (let propertyName in this.control.errors) {
       if (

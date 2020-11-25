@@ -2,9 +2,9 @@ import { ValidatorFn } from '@angular/forms';
 
 export type FormProperty = {
   name: string;
-  type: string;
+  type?: string;
   validators: ValidatorFn[];
-  defaultValue: string;
+  defaultValue?: string;
 };
 
 export abstract class FormModel {

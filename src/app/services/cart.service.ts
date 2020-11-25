@@ -37,6 +37,10 @@ export class CartService {
     return this.productsInCart.delete(id);
   }
 
+  clearProductList() {
+    this.productsInCart.clear();
+  }
+
   /**
    * @return false - not update, true  - otherwise
    */

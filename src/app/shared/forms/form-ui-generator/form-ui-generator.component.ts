@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {  FormGroup } from '@angular/forms';
 import { FormModel } from 'src/app/model/form/form-model';
 
 @Component({
