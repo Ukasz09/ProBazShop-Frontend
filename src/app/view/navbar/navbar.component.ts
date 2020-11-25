@@ -3,6 +3,7 @@ import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
 import { Product } from 'src/app/model/product';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class NavbarComponent implements OnInit {
   static readonly NAVBAR_HEIGHT_PX = 120;
   AppComponent = AppComponent;
+
   @Output() suggestionSelect: EventEmitter<Product> = new EventEmitter();
 
   isBs3 = isBs3();
@@ -23,11 +25,14 @@ export class NavbarComponent implements OnInit {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
 
-  get userIsLogged() {
-    return AppComponent.userIsLogged;
+  get userIsLogged(): boolean {
+    return this.userService.userIsLogged;
   }
 
-  constructor(private productService: ProductsService) {}
+  constructor(
+    private productService: ProductsService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.fetchAllProducts();
@@ -40,6 +45,11 @@ export class NavbarComponent implements OnInit {
   }
 
   onSuggestionSelect(selectedProduct: Product) {
+    this.searchedPhrase = '';
     this.suggestionSelect.emit(selectedProduct);
+  }
+
+  logoutUser() {
+    this.userService.logoutUser();
   }
 }

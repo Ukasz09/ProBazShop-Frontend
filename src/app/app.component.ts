@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertModel } from './model/alert.model';
+import { User } from './model/user';
 import { AlertsService } from './services/alerts.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,27 +11,11 @@ import { AlertsService } from './services/alerts.service';
 })
 export class AppComponent {
   title = 'ProBazShop';
-  static userIsLogged = true;
   static LOGO_IMG_PATH = 'assets/logo2.png';
 
   constructor() {}
 
   static getLogoImgPath(): string {
     return this.LOGO_IMG_PATH;
-  }
-
-  //TODO: change to service
-  //TODO: tmp mocked
-  static logonUser() {
-    AppComponent.userIsLogged = true;
-  }
-  //TODO: tmp mocked
-  static logoutUser() {
-    AppComponent.userIsLogged = false;
-  }
-
-  //TODO: tmp mocked
-  static registerUser() {
-    // AppComponent.userIsLogged = true;
   }
 }

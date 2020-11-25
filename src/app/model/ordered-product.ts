@@ -8,7 +8,6 @@ export class OrderedProduct {
     public color: string,
     public pricePerItem: number,
     public orderedQty: number,
-    public orderDate: Date,
-    public category: string = 'unknown'
+    public orderDate: Date
   ) {}
 }

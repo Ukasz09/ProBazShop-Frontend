@@ -35,6 +35,7 @@ import { ProductItemDetailsComponent } from './shared/components/product-item-de
 import { ProductsQtyPickerComponent } from './shared/components/products-qty-picker/products-qty-picker.component';
 import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.component';
 import { EmptyResultsComponent } from './shared/components/empty-results/empty-results.component';
+import { UserInfoComponent } from './view/user-info/user-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { EmptyResultsComponent } from './shared/components/empty-results/empty-r
     OrderedProductRowComponent,
     SortBtnComponent,
     EmptyResultsComponent,
+    UserInfoComponent,
   ],
   imports: [
     HttpClientModule,

@@ -6,6 +6,7 @@ import { RegistrationComponent } from './view/authentication/registration/regist
 import { CartComponent } from './view/cart/cart.component';
 import { HomeComponent } from './view/home/home.component';
 import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
+import { UserInfoComponent } from './view/user-info/user-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
   { path: 'client/history', component: ShoppingHistoryComponent },
+  { path: 'client/info', component: UserInfoComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
