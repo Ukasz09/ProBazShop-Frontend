@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { userInfo } from 'os';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
+import { UserService } from 'src/app/services/user.service';
 import { ProductsListComponent } from 'src/app/view/home/products-list/products-list.component';
 
 @Component({
@@ -17,9 +19,14 @@ export class ProductItemDetailsComponent implements OnInit {
   get maxStars(): number {
     return ProductsListComponent.MAX_STARS_NUMBER;
   }
+
+  get needToShowAddToCartBtn(): boolean {
+    return this.withAddToCartBtn && this.userService.userIsLogged;
+  }
+
   chosenProductQty = 1;
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 

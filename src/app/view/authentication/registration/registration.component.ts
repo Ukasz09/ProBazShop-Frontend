@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AppComponent } from 'src/app/app.component';
+import { AlertModel } from 'src/app/model/alert.model';
 import { RegistrationFormModel } from 'src/app/model/form/registration-form.model';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,6 +19,10 @@ export class RegistrationComponent implements OnInit {
   formDataModel: RegistrationFormModel;
   registrationIsDone: boolean;
   modalRef: BsModalRef;
+
+  get alerts(): AlertModel[] {
+    return Array.from(this.alertService.alerts.values());
+  }
 
   constructor(
     private router: Router,
@@ -76,5 +80,9 @@ export class RegistrationComponent implements OnInit {
 
   private backConfirmAction() {
     this.router.navigateByUrl('/authentication-choice');
+  }
+
+  removeAlert(id: string) {
+    this.alertService.removeAlertWithId(id);
   }
 }

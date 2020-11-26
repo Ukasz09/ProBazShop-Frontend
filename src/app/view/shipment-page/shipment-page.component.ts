@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertModel } from 'src/app/model/alert.model';
 import { ShipmentFormModel } from 'src/app/model/form/shipment-form-model';
 import { AlertsService } from 'src/app/services/alerts.service';
@@ -15,6 +16,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class ShipmentPageComponent implements OnInit {
   states = [
+    null,
     'Alabama',
     'Alaska',
     'American Samoa',
@@ -84,6 +86,7 @@ export class ShipmentPageComponent implements OnInit {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
   constructor(
+    private router: Router,
     private cartService: CartService,
     private alertService: AlertsService
   ) {}
@@ -95,9 +98,13 @@ export class ShipmentPageComponent implements OnInit {
   private initShipmentForm() {
     this.formDataModel = new ShipmentFormModel();
     this.shipmentForm = FormLogicUtils.makeFormFromModel(this.formDataModel);
+    let stateFormControl = this.shipmentForm.get('state');
+    // stateFormControl.setValue(this.states[1]);
+    console.log(this.shipmentForm);
   }
 
   onBuyBtnClick() {
+    console.log(this.shipmentForm)
     if (this.shipmentForm.dirty && this.shipmentForm.valid) {
       this.cartService.clearProductList();
       this.alertService.addAlert(
@@ -106,6 +113,7 @@ export class ShipmentPageComponent implements OnInit {
           'Successful products purchase'
         )
       );
+      this.router.navigateByUrl('/home');
     } else {
       this.alertService.addAlert(
         FormAlerts.getDangerFormAlert(

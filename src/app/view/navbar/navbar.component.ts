@@ -2,8 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
 import { Product } from 'src/app/model/product';
+import { AlertsService } from 'src/app/services/alerts.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
+import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +33,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private userService: UserService
+    private userService: UserService,
+    private alertService: AlertsService
   ) {}
 
   ngOnInit(): void {
@@ -51,5 +54,11 @@ export class NavbarComponent implements OnInit {
 
   logoutUser() {
     this.userService.logoutUser();
+    this.alertService.addAlert(
+      FormAlerts.getSuccessFormAlert(
+        FormAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,
+        'Successful log off'
+      )
+    );
   }
 }

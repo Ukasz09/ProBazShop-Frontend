@@ -1,3 +1,12 @@
+<div *ngFor="let alert of alerts" class="sticky-top">
+  <alert
+    [type]="alert.type"
+    [dismissOnTimeout]="alert.timeout"
+    [dismissible]="true"
+    (onClosed)="removeAlert(alert.id)"
+    >{{ alert.msg }}</alert
+  >
+</div>
 <app-authentication-page>
   <app-form-ui-generator
     *ngIf="!registrationIsDone; else loginTemplate"

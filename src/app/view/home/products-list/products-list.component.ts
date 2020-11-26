@@ -14,7 +14,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products-list.component.scss'],
 })
 export class ProductsListComponent implements OnInit {
- static readonly MAX_STARS_NUMBER = 5;
+  static readonly MAX_STARS_NUMBER = 5;
   readonly availableSortMethods = new Map([
     ['newest', new SortMethod<Product>('From newest')],
     ['low', new SortMethod<Product>('Price: low to high')],
@@ -75,34 +75,4 @@ export class ProductsListComponent implements OnInit {
   onProductRowClick(selectedProduct: Product) {
     this.productRowClick.emit(selectedProduct);
   }
-
-  // onAddToCartClick(cartProduct: CartProduct, product: Product) {
-  //   this.modalRef.hide();
-  //   let succeed = this.cartService.addProductWithQtyValidation(
-  //     cartProduct.id,
-  //     cartProduct.qty,
-  //     product.availableQty
-  //   );
-  //   if (succeed) this.showSuccessfulAddToCartAlert();
-  //   else this.showUnsuccessfulAddToCartAlert();
-  // }
-
-  // private showSuccessfulAddToCartAlert() {
-  //   let alertModel = new AlertModel(
-  //     ProductsListComponent.SUCCESSFUL_ADD_TO_CART_ALERT_ID,
-  //     'success',
-  //     'Successful add to cart'
-  //   );
-  //   this.alertService.addAlert(alertModel);
-  // }
-
-  // private showUnsuccessfulAddToCartAlert() {
-  //   let alertModel = new AlertModel(
-  //     ProductsListComponent.UNSUCCESSFUL_ADD_TO_CART_ALERT_ID,
-  //     'custom-danger',
-  //     "Don't add - in cart already maximum quantity of this product",
-  //     5000
-  //   );
-  //   this.alertService.addAlert(alertModel);
-  // }
 }

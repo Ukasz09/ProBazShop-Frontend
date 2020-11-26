@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
 
+  get alerts(): AlertModel[] {
+    return Array.from(this.alertService.alerts.values());
+  }
+
   constructor(
     private alertService: AlertsService,
     private modalService: BsModalService,
@@ -29,10 +33,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
-  get alerts(): AlertModel[] {
-    return Array.from(this.alertService.alerts.values());
-  }
 
   removeAlert(id: string) {
     this.alertService.removeAlertWithId(id);
