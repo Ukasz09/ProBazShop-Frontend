@@ -63,9 +63,7 @@
         </div>
       </div>
       <!-- /COLOR AND SIZE -->
-      <div>
-        <hr />
-      </div>
+      <div><hr /></div>
 
       <!-- DESCRIPTION -->
       <div class="mx-3">
@@ -77,6 +75,20 @@
         </div>
       </div>
       <!-- /DESCRIPTION -->
+      <div><hr /></div>
+      <!-- DELETE PRODUCT -->
+      <div *ngIf="userHasAdministrativePrivileges" class="px-2">
+        <button
+          class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
+          (click)="onDeleteProductBtnClick()"
+        >
+          <span class="mx-1 my-auto">Delete this product</span
+          ><span class="material-icons" style="font-size: 2.2em">
+            delete_forever
+          </span>
+        </button>
+      </div>
+      <!-- /DELETE PRODUCT -->
     </div>
   </div>
 </div>

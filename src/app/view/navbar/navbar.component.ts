@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   }
 
   get userIsLogged(): boolean {
-    return this.userService.userIsLogged;
+    return this.userService.UserIsLogged;
   }
 
   constructor(

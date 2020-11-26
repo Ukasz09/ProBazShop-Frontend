@@ -5,6 +5,7 @@ import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
+import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
@@ -61,21 +62,43 @@ export class HomeComponent implements OnInit {
   }
 
   private showSuccessfulAddToCartAlert() {
-    let alertModel = new AlertModel(
+    let alertModel = FormAlerts.getSuccessFormAlert(
       HomeComponent.SUCCESSFUL_ADD_TO_CART_ALERT_ID,
-      'success',
       'Successful add to cart'
     );
     this.alertService.addAlert(alertModel);
   }
 
   private showUnsuccessfulAddToCartAlert() {
-    let alertModel = new AlertModel(
+    let alertModel = FormAlerts.getDangerFormAlert(
       HomeComponent.UNSUCCESSFUL_ADD_TO_CART_ALERT_ID,
-      'custom-danger',
-      "Don't add - in cart already maximum quantity of this product",
-      5000
+      "Don't add - in cart already maximum quantity of this product"
     );
     this.alertService.addAlert(alertModel);
+  }
+
+  onDeleteProductDecline() {
+    this.modalRef.hide();
+    this.alertService.addAlert(
+      FormAlerts.getWarningFormAlert(
+        FormAlerts.PRODUCT_REMOVE_NOT_CONFIRMED_ID,
+        'Product remove NOT confirmed'
+      )
+    );
+  }
+
+  onDeleteProductConfirm() {
+    this.modalRef.hide();
+    this.alertService.addAlert(
+      FormAlerts.getSuccessFormAlert(
+        FormAlerts.PRODUCT_REMOVE_CONFIRMED_ID,
+        'Product remove confirmed'
+      )
+    );
+  }
+
+  onDeleteProductBtnClick(template: TemplateRef<any>) {
+    this.modalRef?.hide();
+    this.openModal(template);
   }
 }

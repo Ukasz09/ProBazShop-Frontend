@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./confirm-modal.component.scss'],
 })
 export class ConfirmModalComponent implements OnInit {
-  modalTxt = 'All your unsaved changes will be discarded. Continue?';
+  @Input() modalTxt = 'All your unsaved changes will be discarded. Continue?';
   @Output() confirmEmitter: EventEmitter<any> = new EventEmitter();
   @Output() declineEmitter: EventEmitter<any> = new EventEmitter();
 

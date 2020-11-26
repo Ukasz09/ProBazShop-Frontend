@@ -14,14 +14,14 @@ export class UserService {
     '234324@sad.com',
     "213131",
     [],
-    UserAccountType.CLIENT
+    UserAccountType.EMPLOYEE
   );
 
-  get userIsLogged() {
-    return this.loggedUser !== undefined;
+  get UserIsLogged() {
+    return this.LoggedUser !== undefined;
   }
 
-  get loggedUser(): User {
+  get LoggedUser(): User {
     return this._loggedUser;
   }
 

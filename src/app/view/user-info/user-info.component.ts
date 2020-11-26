@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserInfoComponent implements OnInit {
   get user(): User {
-    return this.userService.loggedUser;
+    return this.userService.LoggedUser;
   }
 
   get AccountTypeString(): string {

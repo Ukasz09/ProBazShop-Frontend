@@ -31,7 +31,7 @@ import { CartComponent } from './view/cart/cart.component';
 import { OrderedProductRowComponent } from './view/shopping-history/ordered-product-row/ordered-product-row.component';
 import { DataLoadingComponent } from './shared/components/data-loading/data-loading.component';
 import { ConfirmModalComponent } from './shared/components/modals/confirm-modal/confirm-modal.component';
-import { ProductItemDetailsComponent } from './shared/components/product-item-details/product-item-details.component';
+import { ProductItemDetailsComponent } from './shared/components/modals/product-item-details/product-item-details.component';
 import { ProductsQtyPickerComponent } from './shared/components/products-qty-picker/products-qty-picker.component';
 import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.component';
 import { EmptyResultsComponent } from './shared/components/empty-results/empty-results.component';
