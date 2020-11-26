@@ -16,7 +16,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class HomeComponent implements OnInit {
   static readonly SUCCESSFUL_ADD_TO_CART_ALERT_ID = 'successful_add_to_cart';
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
+  deatilsModalOptions: ModalOptions = { class: 'modal-lg' };
+  confirmModalOptions: ModalOptions = { class: 'modal-sm' };
   chosenProduct: Product = undefined;
+  editedProduct: Product;
   modalRef: BsModalRef;
 
   get navbarHeightPx(): number {
@@ -39,15 +42,14 @@ export class HomeComponent implements OnInit {
     this.alertService.removeAlertWithId(id);
   }
 
-  openModal(template: TemplateRef<any>) {
-    const config: ModalOptions = { class: 'modal-lg' };
-    this.modalRef = this.modalService.show(template, config);
+  openModal(template: TemplateRef<any>, options: ModalOptions) {
+    this.modalRef = this.modalService.show(template, options);
   }
 
   showProductDetails(selectedProduct: Product, template: TemplateRef<any>) {
     this.chosenProduct = selectedProduct;
     this.modalRef?.hide();
-    this.openModal(template);
+    this.openModal(template, this.deatilsModalOptions);
   }
 
   onAddToCartClick(cartProduct: CartProduct, product: Product) {
@@ -97,8 +99,35 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  onUpdateProductDecline() {
+    this.modalRef.hide();
+    this.alertService.addAlert(
+      FormAlerts.getWarningFormAlert(
+        FormAlerts.PRODUCT_UPDATE_NOT_CONFIRMED_ID,
+        'Product update NOT procedeed'
+      )
+    );
+  }
+
+  onUpdateProductConfirm() {
+    this.modalRef.hide();
+    this.alertService.addAlert(
+      FormAlerts.getSuccessFormAlert(
+        FormAlerts.PRODUCT_UPDATE_CONFIRMED_ID,
+        'Product update confirmed'
+      )
+    );
+    console.log(this.editedProduct);
+  }
+
   onDeleteProductBtnClick(template: TemplateRef<any>) {
     this.modalRef?.hide();
-    this.openModal(template);
+    this.openModal(template, this.confirmModalOptions);
+  }
+
+  onUpdateProductBtnClick(editedProduct: Product, template: TemplateRef<any>) {
+    this.modalRef?.hide();
+    this.openModal(template, this.confirmModalOptions);
+    this.editedProduct = editedProduct;
   }
 }

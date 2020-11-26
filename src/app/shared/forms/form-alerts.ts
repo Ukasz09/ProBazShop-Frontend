@@ -7,6 +7,8 @@ export class FormAlerts {
   static readonly SUCCESSFUL_LOGOFF_ALERT_ID = 'successful_logoff';
   static readonly PRODUCT_REMOVE_NOT_CONFIRMED_ID = 'delete_not_confirmed';
   static readonly PRODUCT_REMOVE_CONFIRMED_ID = 'delete_confirmed';
+  static readonly PRODUCT_UPDATE_CONFIRMED_ID = 'delete_not_confirmed';
+  static readonly PRODUCT_UPDATE_NOT_CONFIRMED_ID = 'delete_confirmed';
 
   static getSuccessFormAlert(id: string, msg: string): AlertModel {
     return new AlertModel(id, 'success', msg, 2000, true);

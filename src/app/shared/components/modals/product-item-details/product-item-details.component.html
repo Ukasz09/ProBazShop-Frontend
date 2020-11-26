@@ -4,11 +4,21 @@
       <img [src]="product.imageURI" alt="product_image" class="w-100 rounded" />
     </div>
     <div class="w-50 d-flex flex-column bg-light">
-      <div class="text-center my-3">
+      <div
+        *ngIf="!userHasAdministrativePrivileges; else editableName"
+        class="text-center my-3"
+      >
         <span class="h3"
           ><strong>{{ product.name }}</strong>
         </span>
       </div>
+      <ng-template #editableName>
+        <input
+          class="text-center my-3 font-weight-bold rounded form-control-lg"
+          [formControl]="editableNameControl"
+          style="background-color: transparent"
+        />
+      </ng-template>
       <!-- STARS -->
       <div *ngIf="withStarRating" class="d-flex justify-content-center">
         <ngx-stars
@@ -20,10 +30,29 @@
         ></ngx-stars>
       </div>
       <!-- /STARS -->
-      <div class="text-center mt-4">
+      <!-- PRICE -->
+      <div
+        *ngIf="!userHasAdministrativePrivileges; else editablePrice"
+        class="text-center mt-4"
+      >
         <span class="h4 font-weight-bold">{{ product.price | currency }}</span>
       </div>
-
+      <ng-template #editablePrice>
+        <div class="input-group mb-2 w-50 mx-auto mt-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text" style="font-size: 1.5em">$</div>
+          </div>
+          <input
+            class="text-center form-control font-weight-bold rounded"
+            [formControl]="editablePriceControl"
+            type="number"
+            step="0.01"
+            min="0"
+            style="background-color: transparent; font-size: 1.5em"
+          />
+        </div>
+      </ng-template>
+      <!-- /PRICE -->
       <ng-container *ngIf="needToShowAddToCartBtn">
         <!-- QTY BTNS -->
         <div>
@@ -70,9 +99,22 @@
         <div class="py-2 text-center font-weight-bold" style="font-size: 1.2em">
           DESCRIPTION
         </div>
-        <div class="text-center">
+
+        <div
+          *ngIf="!userHasAdministrativePrivileges; else editableDescription"
+          class="text-center"
+        >
           {{ product.description }}
         </div>
+        <ng-template #editableDescription>
+          <textarea
+            #editableDescription
+            class="text-center w-100 rounded form-control"
+            rows="4"
+            [formControl]="editableDescriptionControl"
+            style="background-color: transparent; font-size: 1.2em"
+          ></textarea>
+        </ng-template>
       </div>
       <!-- /DESCRIPTION -->
       <div><hr /></div>
@@ -83,12 +125,21 @@
           (click)="onDeleteProductBtnClick()"
         >
           <span class="mx-1 my-auto">Delete this product</span
-          ><span class="material-icons" style="font-size: 2.2em">
-            delete_forever
-          </span>
+          ><span class="material-icons mx-2"> delete_forever </span>
         </button>
       </div>
       <!-- /DELETE PRODUCT -->
+      <!-- UPDATE PRODUCT -->
+      <div *ngIf="userHasAdministrativePrivileges" class="px-2">
+        <button
+          class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
+          (click)="onUpdateProductBtnClick()"
+        >
+          <span class="mx-1 my-auto">Update product info</span>
+          <span class="material-icons mx-2"> edit </span>
+        </button>
+      </div>
+      <!-- /UPDATE PRODUCT -->
     </div>
   </div>
 </div>

@@ -6,7 +6,8 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { UserAccountType } from 'src/app/model/user';
@@ -24,6 +25,9 @@ export class ProductItemDetailsComponent implements OnInit {
   @Input() product: Product;
   @Output() addToCartClick: EventEmitter<CartProduct> = new EventEmitter();
   @Output() deleteProductClick: EventEmitter<Product> = new EventEmitter();
+  @Output() updateProductClick: EventEmitter<Product> = new EventEmitter();
+
+  productForm: FormGroup;
 
   modalRef: BsModalRef;
 
@@ -46,14 +50,33 @@ export class ProductItemDetailsComponent implements OnInit {
     );
   }
 
+  get editableDescriptionControl(): FormControl {
+    return this.productForm.get('description') as FormControl;
+  }
+
+  get editableNameControl(): FormControl {
+    return this.productForm.get('name') as FormControl;
+  }
+
+  get editablePriceControl(): FormControl {
+    return this.productForm.get('price') as FormControl;
+  }
+
   chosenProductQty = 1;
 
-  constructor(
-    private userService: UserService,
-    private modalService: BsModalService
-  ) {}
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initEditableProductInfo();
+  }
+
+  private initEditableProductInfo() {
+    this.productForm = new FormBuilder().group({
+      description: [this.product.description],
+      name: [this.product.name],
+      price: [this.product.price],
+    });
+  }
 
   decQtyClick() {
     this.chosenProductQty--;
@@ -72,6 +95,16 @@ export class ProductItemDetailsComponent implements OnInit {
   }
 
   onDeleteProductBtnClick() {
-    this.deleteProductClick.emit(this.product)
+    this.deleteProductClick.emit(this.product);
+  }
+
+  onUpdateProductBtnClick() {
+    let editedProduct=new Product(
+   this.product.id,this.productForm.get('name').value,this.productForm.get('description').value,this.product.imageURI,this.product.size,this.product.color,
+   this.productForm.get('price').value as number,
+   this.product.releaseDate, this.product.starRating,this.product.category,this.product.availableQty   
+    );
+    this.updateProductClick.emit(editedProduct);
+    console.log(editedProduct)
   }
 }
