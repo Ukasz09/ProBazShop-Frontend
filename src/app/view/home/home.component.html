@@ -1,5 +1,6 @@
 <app-navbar
   (suggestionSelect)="showProductDetails($event, details)"
+  (searchBtnClick)="onSearchBtnClick($event)" 
 ></app-navbar>
 <div
   *ngFor="let alert of alerts"
@@ -17,7 +18,7 @@
 <div>
   <div class="container pt-5">
     <div class="d-flex flex-row">
-      <app-categories-panel></app-categories-panel>
+      <app-categories-panel #categories></app-categories-panel>
       <div class="flex-fill">
         <app-products-list
           (productRowClick)="showProductDetails($event, details)"

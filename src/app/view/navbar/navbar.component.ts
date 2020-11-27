@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   AppComponent = AppComponent;
 
   @Output() suggestionSelect: EventEmitter<Product> = new EventEmitter();
+  @Output() searchBtnClick: EventEmitter<string> = new EventEmitter();
 
   isBs3 = isBs3();
   searchedPhrase: string = '';
@@ -60,5 +61,10 @@ export class NavbarComponent implements OnInit {
         'Successful log off'
       )
     );
+  }
+
+  onSearchClick() {
+    this.searchBtnClick.emit(this.searchedPhrase);
+    this.searchedPhrase = '';
   }
 }

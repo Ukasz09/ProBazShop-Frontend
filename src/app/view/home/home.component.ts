@@ -1,4 +1,6 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AlertModel } from 'src/app/model/alert.model';
 import { CartProduct } from 'src/app/model/cart-product';
@@ -7,6 +9,8 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { FilterType } from './categories-panel/applied-filters/filter-model';
+import { CategoriesPanelComponent } from './categories-panel/categories-panel.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +20,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class HomeComponent implements OnInit {
   static readonly SUCCESSFUL_ADD_TO_CART_ALERT_ID = 'successful_add_to_cart';
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
+
+  @ViewChild('categories') categoriesComponent: CategoriesPanelComponent;
+
   deatilsModalOptions: ModalOptions = { class: 'modal-lg' };
   confirmModalOptions: ModalOptions = { class: 'modal-sm' };
   chosenProduct: Product = undefined;
@@ -129,5 +136,15 @@ export class HomeComponent implements OnInit {
     this.modalRef?.hide();
     this.openModal(template, this.confirmModalOptions);
     this.editedProduct = editedProduct;
+  }
+
+  onSearchBtnClick(searchedPhrase: string) {
+    //TODO: send request
+    this.categoriesComponent.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
+    this.categoriesComponent.addFilter(
+      searchedPhrase,
+      FilterType.SEARCH_PHRASE
+    );
+
   }
 }

@@ -69,7 +69,7 @@ export class CategoriesPanelComponent implements OnInit {
     );
   }
 
-  private removeFstFilterWithType(filterType: FilterType) {
+  removeFstFilterWithType(filterType: FilterType) {
     let filter = this.appliedFilters.find(
       (filter: FilterElem) => filter.type == filterType
     );
