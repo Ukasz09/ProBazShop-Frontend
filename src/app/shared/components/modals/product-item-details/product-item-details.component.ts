@@ -44,10 +44,7 @@ export class ProductItemDetailsComponent implements OnInit {
   }
 
   get userHasAdministrativePrivileges(): boolean {
-    return (
-      this.userService.UserIsLogged &&
-      this.userService.LoggedUser.accountType == UserAccountType.EMPLOYEE
-    );
+    return this.userService.UserHasAdministrativePrivileges;
   }
 
   get editableDescriptionControl(): FormControl {

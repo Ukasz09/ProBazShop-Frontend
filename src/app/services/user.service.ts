@@ -12,9 +12,9 @@ export class UserService {
     'Lukasz',
     'Gajerski',
     '234324@sad.com',
-    "213131",
+    '213131',
     [],
-    UserAccountType.EMPLOYEE
+    UserAccountType.CLIENT
   );
 
   get UserIsLogged() {
@@ -23,6 +23,13 @@ export class UserService {
 
   get LoggedUser(): User {
     return this._loggedUser;
+  }
+
+  get UserHasAdministrativePrivileges(): boolean {
+    return (
+      this.UserIsLogged &&
+      this.LoggedUser.accountType == UserAccountType.EMPLOYEE
+    );
   }
 
   constructor(private http: HttpClient) {}

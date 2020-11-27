@@ -37,6 +37,8 @@ import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.componen
 import { EmptyResultsComponent } from './shared/components/empty-results/empty-results.component';
 import { UserInfoComponent } from './view/user-info/user-info.component';
 import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
+import { ErrorResponseComponent } from './shared/components/error-response/error-response.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,8 @@ import { ShipmentPageComponent } from './view/shipment-page/shipment-page.compon
     EmptyResultsComponent,
     UserInfoComponent,
     ShipmentPageComponent,
+    ErrorResponseComponent,
+    NotFoundComponent,
   ],
   imports: [
     HttpClientModule,

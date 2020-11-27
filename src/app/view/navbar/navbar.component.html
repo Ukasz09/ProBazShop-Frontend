@@ -36,7 +36,11 @@
 
   <!-- BUTTON FOR LOGGED USER -->
   <div *ngIf="userIsLogged" class="btn-group">
-    <button class="btn btn-outline-danger pb-0" routerLink="/cart">
+    <button
+      *ngIf="UserHasClientAccountType"
+      class="btn btn-outline-danger pb-0"
+      routerLink="/cart"
+    >
       <i class="material-icons md-30">shopping_cart</i>
     </button>
     <div class="btn-group" dropdown #accountDropdown="bs-dropdown">
@@ -64,7 +68,7 @@
           </a>
         </li>
         <li role="menuitem">
-          <a class="dropdown-item" routerLink="/client/history">
+          <a  *ngIf="UserHasClientAccountType" class="dropdown-item" routerLink="/client/history">
             <i class="material-icons btn-group">history</i
             ><span class="mx-3"> Shopping history </span>
           </a>

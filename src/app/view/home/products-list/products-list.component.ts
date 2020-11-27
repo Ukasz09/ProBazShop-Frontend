@@ -1,11 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
-import { AlertModel } from 'src/app/model/alert.model';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { SortMethod } from 'src/app/model/sort-method';
-import { AlertsService } from 'src/app/services/alerts.service';
-import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -32,6 +30,7 @@ export class ProductsListComponent implements OnInit {
   itemsPerPage = 5;
   products: Product[] = [];
   productsPerPage: Product[] = [];
+  httpError: { statusCode: number; msg: string } = undefined;
 
   constructor(private productService: ProductsService) {}
 
@@ -40,11 +39,18 @@ export class ProductsListComponent implements OnInit {
   }
 
   private fetchAllProducts() {
-    this.productService.getAllProducts().subscribe((data: Product[]) => {
-      this.products = data;
-      this.productsPerPage = this.products.slice(0, this.itemsPerPage);
-      this.productsDataReady = true;
-    });
+    this.productService.getAllProducts().subscribe(
+      (data: Product[]) => {
+        this.products = data;
+        this.productsPerPage = this.products.slice(0, this.itemsPerPage);
+        this.productsDataReady = true;
+      },
+      (e: HttpErrorResponse) =>
+        (this.httpError = {
+          statusCode: e.status,
+          msg: 'Product loading error: ' + e.statusText,
+        })
+    );
   }
 
   pageChanged(event: PageChangedEvent): void {

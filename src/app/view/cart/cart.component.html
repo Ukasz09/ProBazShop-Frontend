@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container my-5">
   <ng-container *ngIf="!cartIsEmpty; else cartEmptyTemplate">
-    <div *ngIf="dataReady; else dataLoadingTemplate" class="d-flex flex-row">
+    <div *ngIf="dataReady; else historyNotFetchedTemplate" class="d-flex flex-row">
       <!-- PRODUCTS -->
       <div style="width: 65%">
         <div class="bg-light text-center border rounded py-2">
@@ -85,4 +85,18 @@
     [text]="'Loading cart\'s data'"
     spinnerSize="3em"
   ></app-data-loading>
+</ng-template>
+
+<ng-template #historyNotFetchedTemplate>
+  <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
+    <div class="w-100 bg-light">
+      <div class="w-50 mx-auto py-3">
+        <app-error-response
+          [errorCode]="httpError.statusCode"
+          [errorText]="httpError.msg"
+        >
+        </app-error-response>
+      </div>
+    </div>
+  </ng-container>
 </ng-template>

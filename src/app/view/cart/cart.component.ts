@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { CartService } from 'src/app/services/cart.service';
@@ -12,6 +13,8 @@ import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 export class CartComponent implements OnInit {
   productsInCart: Map<Product, number> = new Map(); // product, qty
   priceToPay = 0;
+  httpError: { statusCode: number; msg: string } = undefined;
+
   get dataReady() {
     return this.productsInCart.size == this.cartService.productsInCart.size;
   }
@@ -37,10 +40,17 @@ export class CartComponent implements OnInit {
     for (let cartItemProperty of this.cartService.productsInCart.entries()) {
       let productId = cartItemProperty[0];
       let qty = cartItemProperty[1];
-      this.productService.getProduct(productId).subscribe((data: Product) => {
-        this.productsInCart.set(data, qty);
-        this.priceToPay += data.price * qty;
-      });
+      this.productService.getProduct(productId).subscribe(
+        (data: Product) => {
+          this.productsInCart.set(data, qty);
+          this.priceToPay += data.price * qty;
+        },
+        (e: HttpErrorResponse) =>
+          (this.httpError = {
+            statusCode: e.status,
+            msg: 'Cart loading error: ' + e.statusText,
+          })
+      );
     }
   }
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
 import { LoginComponent } from './view/authentication/login/login.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'client/history', component: ShoppingHistoryComponent },
   { path: 'client/info', component: UserInfoComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

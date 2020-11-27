@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container my-5">
-  <ng-container *ngIf="shoppingHistoryFetched; else dataLoadingTemplate">
+  <ng-container *ngIf="shoppingHistoryFetched; else historyNotFetchedTemplate">
     <ng-container *ngIf="shoppingHistory.length > 0; else emptyHistoryTemplate">
       <div class="row">
         <!-- ITEMS LIST -->
@@ -21,7 +21,10 @@
 
         <!-- CONTENT -->
         <div class="col-7">
-          <div class="bg-light rounded product-details" [style.top.px]="navbarHeightPx">
+          <div
+            class="bg-light rounded product-details"
+            [style.top.px]="navbarHeightPx"
+          >
             <app-product-item-details
               [product]="actualDisplayedProduct"
               [withAddToCartBtn]="false"
@@ -36,6 +39,19 @@
 </div>
 
 <!-- TEMPLATES -->
+<ng-template #historyNotFetchedTemplate>
+  <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
+    <div class="mx-auto" style="width: 35%;">
+      <app-error-response
+        [errorCode]="httpError.statusCode"
+        [errorText]="httpError.msg"
+        errorTextFontSize="1.7em"
+      >
+      </app-error-response>
+    </div>
+  </ng-container>
+</ng-template>
+
 <ng-template #dataLoadingTemplate>
   <app-data-loading
     text="Loading user's history"
@@ -46,7 +62,9 @@
 <ng-template #emptyHistoryTemplate>
   <div>
     <div class="w-50 mx-auto">
-      <app-empty-results text="your shopping history is empty"></app-empty-results>
+      <app-empty-results
+        text="your shopping history is empty"
+      ></app-empty-results>
     </div>
   </div>
 </ng-template>

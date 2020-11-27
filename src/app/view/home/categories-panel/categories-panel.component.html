@@ -13,7 +13,7 @@
 
   <!-- CATEGORIES -->
   <label class="text-center category-container-header my-3">Categories:</label>
-  <ng-container *ngIf="categoriesDataReady; else dataLoadingPanel">
+  <ng-container *ngIf="categoriesDataReady; else historyNotFetchedTemplate">
     <div *ngFor="let category of categories">
       <button
         type="button"
@@ -74,6 +74,22 @@
 </div>
 
 <!-- TEMPLATES -->
-<ng-template #dataLoadingPanel>
+<ng-template #historyNotFetchedTemplate>
+  <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
+    <div class="preferences-panel">
+      <div class="w-75 mx-auto">
+        <app-error-response
+          [errorCode]="httpError.statusCode"
+          [errorText]="httpError.msg"
+          errorCodeFontSize="3em"
+          errorTextFontSize="1em"
+        >
+        </app-error-response>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #dataLoadingTemplate>
   <app-data-loading text="Loading categories"></app-data-loading>
 </ng-template>

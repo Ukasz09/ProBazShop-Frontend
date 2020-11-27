@@ -13,7 +13,7 @@
     <hr class="custom-hr" />
   </div>
 
-  <div *ngIf="productsDataReady; else dataLoadingPanel" class="content-wrapper">
+  <div *ngIf="productsDataReady; else historyNotFetchedTemplate" class="content-wrapper">
     <ng-container *ngIf="products.length > 0; else emptyResultsTemplate">
       <ng-container *ngFor="let product of productsPerPage">
         <app-product-item-row
@@ -34,7 +34,7 @@
 </div>
 
 <!-- TEMPLATES -->
-<ng-template #dataLoadingPanel>
+<ng-template #dataLoadingTemplate>
   <div class="bg-light">
     <app-data-loading
       text="Loading products"
@@ -49,4 +49,18 @@
       <app-empty-results></app-empty-results>
     </div>
   </div>
+</ng-template>
+
+<ng-template #historyNotFetchedTemplate>
+  <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
+    <div class="w-100 bg-light">
+      <div class="w-50 mx-auto py-3">
+        <app-error-response
+          [errorCode]="httpError.statusCode"
+          [errorText]="httpError.msg"
+        >
+        </app-error-response>
+      </div>
+    </div>
+  </ng-container>
 </ng-template>

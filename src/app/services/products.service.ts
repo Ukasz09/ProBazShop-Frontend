@@ -3,7 +3,6 @@ import { Product } from '../model/product';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-//TODO: tmp mocked
 @Injectable({
   providedIn: 'root',
 })

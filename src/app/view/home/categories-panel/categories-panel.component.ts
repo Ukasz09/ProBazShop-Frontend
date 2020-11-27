@@ -1,4 +1,5 @@
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
@@ -33,15 +34,27 @@ export class CategoriesPanelComponent implements OnInit {
   ];
   sizes: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
   appliedFilters: FilterElem[] = [];
+  httpError: { statusCode: number; msg: string } = undefined;
 
   constructor(private productService: ProductsService) {}
 
   ngOnInit(): void {
-    this.productService.getProductCategories().subscribe((data: string[]) => {
-      this.categories = data;
-      this.categories.sort();
-      this.categoriesDataReady = true;
-    });
+    this.fetchProductCategories();
+  }
+
+  private fetchProductCategories() {
+    this.productService.getProductCategories().subscribe(
+      (data: string[]) => {
+        this.categories = data;
+        this.categories.sort();
+        this.categoriesDataReady = true;
+      },
+      (e: HttpErrorResponse) =>
+        (this.httpError = {
+          statusCode: e.status,
+          msg: 'Categories loading error: ' + e.statusText,
+        })
+    );
   }
 
   addFilter(value: string, filterType: FilterType) {

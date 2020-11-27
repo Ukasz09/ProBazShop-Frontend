@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderedProduct } from 'src/app/model/ordered-product';
 import { SortMethod } from 'src/app/model/sort-method';
@@ -34,13 +35,13 @@ export class ShoppingHistoryComponent implements OnInit {
   get navbarHeightPx(): number {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
+  httpError: { statusCode: number; msg: string } = undefined;
 
   constructor(private userServices: UserService) {}
 
   ngOnInit(): void {
-    this.userServices
-      .getClientShoppingHistory('')
-      .subscribe((data: OrderedProduct[]) => {
+    this.userServices.getClientShoppingHistory('').subscribe(
+      (data: OrderedProduct[]) => {
         let actualSortMethod = this.availableSortMethods.get(
           this.initSortMethodKey
         );
@@ -48,7 +49,13 @@ export class ShoppingHistoryComponent implements OnInit {
         if (this.shoppingHistory.length > 0)
           this.actualDisplayedProduct = this.shoppingHistory[0];
         this.shoppingHistoryFetched = true;
-      });
+      },
+      (e: HttpErrorResponse) =>
+        (this.httpError = {
+          statusCode: e.status,
+          msg: 'Data fetching error: ' + e.statusText,
+        })
+    );
   }
 
   onRowClick(product: OrderedProduct) {

@@ -60,6 +60,11 @@
       >
         <option *ngFor="let state of states">{{ state }}</option>
       </select>
+      <div class="w-100">
+        <app-control-messages
+          [control]="shipmentForm.get('state')"
+        ></app-control-messages>
+      </div>
     </div>
 
     <div class="form-group col-md-2">

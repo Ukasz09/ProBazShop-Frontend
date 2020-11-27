@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
 import { Product } from 'src/app/model/product';
@@ -30,6 +30,10 @@ export class NavbarComponent implements OnInit {
 
   get userIsLogged(): boolean {
     return this.userService.UserIsLogged;
+  }
+
+  get UserHasClientAccountType(): boolean {
+    return !this.userService.UserHasAdministrativePrivileges;
   }
 
   constructor(
@@ -64,7 +68,9 @@ export class NavbarComponent implements OnInit {
   }
 
   onSearchClick() {
-    this.searchBtnClick.emit(this.searchedPhrase);
-    this.searchedPhrase = '';
+    if (this.searchedPhrase && this.searchedPhrase.trim()) {
+      this.searchBtnClick.emit(this.searchedPhrase);
+      this.searchedPhrase = '';
+    }
   }
 }
