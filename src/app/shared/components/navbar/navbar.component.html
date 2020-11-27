@@ -35,12 +35,18 @@
   </div>
 
   <!-- BUTTON FOR LOGGED USER -->
-  <div *ngIf="userIsLogged" class="btn-group">
-    <button
-      *ngIf="UserHasClientAccountType"
-      class="btn btn-outline-danger pb-0"
-      routerLink="/cart"
-    >
+  <ng-container *ngIf="userIsLogged; else logonBtnTemplate">
+    <ng-container *ngIf="UserHasClientAccountType; else employeePanelTemplate">
+      <ng-container *ngTemplateOutlet="clientPanelTemplate"></ng-container>
+    </ng-container>
+  </ng-container>
+  <!-- /BUTTON FOR LOGGED USER -->
+</nav>
+
+<!-- CLIENT PANEL TEMPLATE -->
+<ng-template #clientPanelTemplate>
+  <div class="btn-group">
+    <button class="btn btn-outline-danger pb-0" routerLink="/cart">
       <i class="material-icons md-30">shopping_cart</i>
     </button>
     <div class="btn-group" dropdown #accountDropdown="bs-dropdown">
@@ -68,7 +74,7 @@
           </a>
         </li>
         <li role="menuitem">
-          <a  *ngIf="UserHasClientAccountType" class="dropdown-item" routerLink="/client/history">
+          <a class="dropdown-item" routerLink="/client/history">
             <i class="material-icons btn-group">history</i
             ><span class="mx-3"> Shopping history </span>
           </a>
@@ -82,22 +88,49 @@
       </ul>
     </div>
   </div>
-  <!-- /BUTTON FOR LOGGED USER -->
-  <!-- LOGIN BTN -->
-  <button
-    *ngIf="!userIsLogged"
-    class="btn btn-dark my-2 my-sm-0 pb-0"
-    routerLink="/authentication-choice"
-  >
-    <div class="btn-group py-0">
-      <i id="login-icon" class="material-icons">login</i>
-      <label class="px-3 py-auto" for="login-icon">Login</label>
-    </div>
-  </button>
-  <!-- /LOGIN BTN -->
-</nav>
+</ng-template>
+<!-- /CLIENT PANEL TEMPLATE -->
 
-<!-- TEMPLATES -->
+<!-- /EMPLOYEE PANEL TEMPLATE -->
+<ng-template #employeePanelTemplate>
+  <div class="btn-group">
+    <div class="btn-group" dropdown #accountDropdown="bs-dropdown">
+      <button
+        id="button-animated"
+        dropdownToggle
+        type="button"
+        class="btn btn-outline-danger btn-group"
+        aria-controls="dropdown-animated"
+      >
+        <i class="material-icons md-30">account_circle</i>
+        <span class="caret dropdown-toggle"></span>
+      </button>
+      <ul
+        id="dropdown-animated"
+        *dropdownMenu
+        class="dropdown-menu dropdown-menu-right"
+        role="menu"
+        aria-labelledby="button-animated"
+      >
+        <li role="menuitem">
+          <a class="dropdown-item" routerLink="/client/info"
+            ><i class="material-icons btn-group">assignment_ind</i
+            ><span class="mx-3"> Account </span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a class="dropdown-item" routerLink="/home" (click)="logoutUser()">
+            <i class="material-icons btn-group">logout</i
+            ><span class="mx-3 logout-txt"> Logout </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>
+<!-- /EMPLOYEE PANEL TEMPLATE -->
+
+<!-- CUSTOM LIST TEMPLATE -->
 <ng-template
   #customListTemplate
   let-matches="matches"
@@ -117,3 +150,18 @@
     </li>
   </ul>
 </ng-template>
+<!-- /CUSTOM LIST TEMPLATE -->
+
+<!-- LOGON BTN TEMPLATE-->
+<ng-template #logonBtnTemplate>
+  <button
+    class="btn btn-dark my-2 my-sm-0 pb-0"
+    routerLink="/authentication-choice"
+  >
+    <div class="btn-group py-0">
+      <i id="login-icon" class="material-icons">login</i>
+      <label class="px-3 py-auto" for="login-icon">Login</label>
+    </div>
+  </button>
+</ng-template>
+<!-- /LOGON BTN TEMPLATE-->

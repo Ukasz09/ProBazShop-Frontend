@@ -98,8 +98,6 @@ export class ShipmentPageComponent implements OnInit {
   private initShipmentForm() {
     this.formDataModel = new ShipmentFormModel();
     this.shipmentForm = FormLogicUtils.makeFormFromModel(this.formDataModel);
-    let stateFormControl = this.shipmentForm.get('state');
-    // stateFormControl.setValue(this.states[1]);
     console.log(this.shipmentForm);
   }
 
