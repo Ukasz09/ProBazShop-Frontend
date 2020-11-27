@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<div *ngIf="usersFetched; else usersNotFetchedTemplate" class="container my-5">
+  <ng-container *ngIf="userList.length > 0; else emptyHistoryTemplate">
+    <div class="row">
+      <!-- USER LIST -->
+      <div class="col-md-6">
+        <div *ngFor="let user of userList">
+          <app-user-row-component
+            [user]="user"
+            (rowClick)="actualChosenUser = user"
+          ></app-user-row-component>
+        </div>
+      </div>
+      <!-- /USER LIST -->
+      <!-- /USER DETAILS -->
+      <div class="col-md-6">
+        <div class="user-details rounded" [style.top.px]="navbarHeightPx">
+          <app-user-info-content
+            [user]="actualChosenUser"
+          ></app-user-info-content>
+        </div>
+      </div>
+      <!-- USER DETAILS -->
+    </div>
+  </ng-container>
+</div>
+
+<!-- TEMPLATES -->
+<ng-template #usersNotFetchedTemplate>
+  <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
+    <div class="mx-auto my-5" style="width: 30%">
+      <app-error-response
+        [errorCode]="httpError.statusCode"
+        [errorText]="httpError.msg"
+        errorTextFontSize="1.4em"
+      >
+      </app-error-response>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #dataLoadingTemplate>
+  <app-data-loading
+    text="Loading users' data"
+    spinnerSize="3.5em"
+  ></app-data-loading>
+</ng-template>
+
+<ng-template #emptyHistoryTemplate>
+  <div>
+    <div class="w-50 mx-auto">
+      <app-empty-results text="Not found any users"></app-empty-results>
+    </div>
+  </div>
+</ng-template>

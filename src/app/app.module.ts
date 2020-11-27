@@ -39,6 +39,10 @@ import { ShipmentPageComponent } from './view/shipment-page/shipment-page.compon
 import { ErrorResponseComponent } from './shared/components/error-response/error-response.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { UsersListComponent } from './view/users-list/users-list.component';
+import { UserRowComponentComponent } from './view/users-list/user-row-component/user-row-component.component';
+import { UserInfoContentComponent } from './view/user-info/user-info-content/user-info-content.component';
+import { DeleteUpdateBtnsComponent } from './shared/components/delete-update-btns/delete-update-btns.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +72,10 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     ShipmentPageComponent,
     ErrorResponseComponent,
     NotFoundComponent,
+    UsersListComponent,
+    UserRowComponentComponent,
+    UserInfoContentComponent,
+    DeleteUpdateBtnsComponent,
   ],
   imports: [
     HttpClientModule,

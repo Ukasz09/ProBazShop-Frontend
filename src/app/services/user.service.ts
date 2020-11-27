@@ -14,7 +14,7 @@ export class UserService {
     '234324@sad.com',
     '213131',
     [],
-    UserAccountType.CLIENT
+    UserAccountType.EMPLOYEE
   );
 
   get UserIsLogged() {
@@ -38,18 +38,25 @@ export class UserService {
     return this.http.get<OrderedProduct[]>(
       '/assets/mock/shopping-history.json'
       // '/assets/mock/empty-arr.json'
-    );
-  }
-
-  logonUser(user: User) {
-    this._loggedUser = user;
-  }
-
-  logoutUser() {
-    this._loggedUser = undefined;
-  }
-
-  postUser(user: User) {
-    //TODO: perform post operation
+      );
+    }
+    
+    logonUser(user: User) {
+      this._loggedUser = user;
+    }
+    
+    logoutUser() {
+      this._loggedUser = undefined;
+    }
+    
+    postUser(user: User) {
+      //TODO: perform post operation
+    }
+    
+    getUsersList(): Observable<User[]> {
+      return this.http.get<User[]>(
+        '/assets/mock/users.json'
+        // '/assets/mock/empty-arr.json'
+      );
   }
 }

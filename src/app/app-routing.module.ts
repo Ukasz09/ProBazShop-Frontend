@@ -9,6 +9,7 @@ import { HomeComponent } from './view/home/home.component';
 import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
 import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
 import { UserInfoComponent } from './view/user-info/user-info.component';
+import { UsersListComponent } from './view/users-list/users-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'client/history', component: ShoppingHistoryComponent },
   { path: 'client/info', component: UserInfoComponent },
+  { path: 'users', component: UsersListComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' },
 ];

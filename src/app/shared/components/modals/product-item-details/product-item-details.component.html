@@ -118,29 +118,16 @@
       </div>
       <!-- /DESCRIPTION -->
       <div><hr /></div>
-      <!-- DELETE PRODUCT -->
-      <div *ngIf="userHasAdministrativePrivileges" class="px-2">
-        <button
-          class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
-          (click)="onDeleteProductBtnClick()"
-        >
-          <span class="mx-1 my-auto">Delete this product</span
-          ><span class="material-icons mx-2"> delete_forever </span>
-        </button>
+      <!-- DELETE UPDATE BTNS -->
+      <div *ngIf="userHasAdministrativePrivileges">
+        <app-delete-update-btns
+          (updateClick)="onUpdateProductBtnClick()"
+          (deleteClick)="onDeleteProductBtnClick()"
+          [btnUpdateText]="'Update product info'"
+          [btnDeleteText]="'Delete this product'"
+          [updateBTnDisabled]="!productDataWasChangedByUser"
+        ></app-delete-update-btns>
       </div>
-      <!-- /DELETE PRODUCT -->
-      <!-- UPDATE PRODUCT -->
-      <div *ngIf="userHasAdministrativePrivileges" class="px-2">
-        <button
-          [disabled]="!productDataWasChangedByUser"
-          class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
-          (click)="onUpdateProductBtnClick()"
-        >
-          <span class="mx-1 my-auto">Update product info</span>
-          <span class="material-icons mx-2"> edit </span>
-        </button>
-      </div>
-      <!-- /UPDATE PRODUCT -->
     </div>
   </div>
 </div>

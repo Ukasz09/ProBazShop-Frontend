@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Łukasz",
+    "surname": "Gajerski",
+    "email": "someEmail@gmail.com",
+    "password": "sadq12313e123d",
+    "history": [],
+    "accountType": "CLIENT"
+  },{
+    "name": "Stan",
+    "surname": "Stanley",
+    "email": "sanley@gmail.com",
+    "password": "sadasdsad",
+    "history": [],
+    "accountType": "CLIENT"
+  },{
+    "name": "Toxer",
+    "surname": "Stifnes",
+    "email": "stifmes@gmail.com",
+    "password": "sadq12313e123d",
+    "history": [],
+    "accountType": "CLIENT"
+  },{
+    "name": "Emily",
+    "surname": "Moqon",
+    "email": "emily@gmail.com",
+    "password": "11111",
+    "history": [],
+    "accountType": "CLIENT"
+  },{
+    "name": "Ala",
+    "surname": "Ola'levida",
+    "email": "vidavida@gmail.com",
+    "password": "asrtyasr",
+    "history": [],
+    "accountType": "CLIENT"
+  },{
+    "name": "Bricki",
+    "surname": "Sticker",
+    "email": "stiki@gmail.com",
+    "password": "11111",
+    "history": [],
+    "accountType": "EMPLOYEE"
+  },{
+    "name": "John",
+    "surname": "Kened",
+    "email": "kenme@gmail.com",
+    "password": "2112",
+    "history": [],
+    "accountType": "EMPLOYEE"
+  },{
+    "name": "Anita",
+    "surname": "Yansheva",
+    "email": "yansheva@student.ru",
+    "password": "1231",
+    "history": [],
+    "accountType": "CLIENT"
+  }
+]

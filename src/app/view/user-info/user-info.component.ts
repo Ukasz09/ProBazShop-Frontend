@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { User, UserAccountType } from 'src/app/model/user';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,12 +8,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent implements OnInit {
-  get user(): User {
-    return this.userService.LoggedUser;
-  }
+  @Input() _user: User;
 
-  get AccountTypeString(): string {
-    return UserAccountType[this.user.accountType];
+  get user(): User {
+    if (this._user == undefined) return this.userService.LoggedUser;
+    return this._user;
   }
 
   constructor(private userService: UserService) {}
