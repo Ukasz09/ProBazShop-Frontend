@@ -8,7 +8,6 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
-import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-login',

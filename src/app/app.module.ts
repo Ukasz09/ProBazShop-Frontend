@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './view/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,6 +38,7 @@ import { UserInfoComponent } from './view/user-info/user-info.component';
 import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
 import { ErrorResponseComponent } from './shared/components/error-response/error-response.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,

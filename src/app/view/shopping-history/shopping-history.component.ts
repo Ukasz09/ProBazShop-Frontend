@@ -3,8 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderedProduct } from 'src/app/model/ordered-product';
 import { SortMethod } from 'src/app/model/sort-method';
 import { UserService } from 'src/app/services/user.service';
+import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 import { SortUtils } from 'src/app/shared/logic/SortUtils';
-import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-shopping-history',

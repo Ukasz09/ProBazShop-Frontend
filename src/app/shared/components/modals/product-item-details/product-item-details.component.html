@@ -132,6 +132,7 @@
       <!-- UPDATE PRODUCT -->
       <div *ngIf="userHasAdministrativePrivileges" class="px-2">
         <button
+          [disabled]="!productDataWasChangedByUser"
           class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
           (click)="onUpdateProductBtnClick()"
         >

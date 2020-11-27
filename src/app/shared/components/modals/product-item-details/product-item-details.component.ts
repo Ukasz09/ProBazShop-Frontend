@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CartProduct } from 'src/app/model/cart-product';
@@ -23,13 +16,22 @@ export class ProductItemDetailsComponent implements OnInit {
   @Input() withAddToCartBtn = true;
   @Input() withStarRating = true;
   @Input() product: Product;
+
   @Output() addToCartClick: EventEmitter<CartProduct> = new EventEmitter();
   @Output() deleteProductClick: EventEmitter<Product> = new EventEmitter();
   @Output() updateProductClick: EventEmitter<Product> = new EventEmitter();
 
   productForm: FormGroup;
-
   modalRef: BsModalRef;
+  chosenProductQty = 1;
+
+  get productDataWasChangedByUser(): boolean {
+    return (
+      this.product.description != this.editableDescriptionControl.value ||
+      this.product.name != this.editableNameControl.value ||
+      this.product.price != this.editablePriceControl.value
+    );
+  }
 
   get maxStars(): number {
     return ProductsListComponent.MAX_STARS_NUMBER;
@@ -58,8 +60,6 @@ export class ProductItemDetailsComponent implements OnInit {
   get editablePriceControl(): FormControl {
     return this.productForm.get('price') as FormControl;
   }
-
-  chosenProductQty = 1;
 
   constructor(private userService: UserService) {}
 
@@ -96,12 +96,24 @@ export class ProductItemDetailsComponent implements OnInit {
   }
 
   onUpdateProductBtnClick() {
-    let editedProduct=new Product(
-   this.product.id,this.productForm.get('name').value,this.productForm.get('description').value,this.product.imageURI,this.product.size,this.product.color,
-   this.productForm.get('price').value as number,
-   this.product.releaseDate, this.product.starRating,this.product.category,this.product.availableQty   
-    );
+    let editedProduct = this.unpatchProductFromForm();
     this.updateProductClick.emit(editedProduct);
-    console.log(editedProduct)
+    console.log(editedProduct);
+  }
+
+  private unpatchProductFromForm(): Product {
+    return new Product(
+      this.product.id,
+      this.productForm.get('name').value,
+      this.productForm.get('description').value,
+      this.product.imageURI,
+      this.product.size,
+      this.product.color,
+      this.productForm.get('price').value as number,
+      this.product.releaseDate,
+      this.product.starRating,
+      this.product.category,
+      this.product.availableQty
+    );
   }
 }

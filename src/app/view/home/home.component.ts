@@ -5,8 +5,8 @@ import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
+import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { FilterType } from './categories-panel/applied-filters/filter-model';
 import { CategoriesPanelComponent } from './categories-panel/categories-panel.component';
 
