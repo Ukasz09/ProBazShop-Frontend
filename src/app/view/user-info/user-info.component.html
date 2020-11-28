@@ -1,4 +1,6 @@
-<app-navbar></app-navbar>
 <div class="w-50 mx-auto px-2">
-  <app-user-info-content [user]="user"></app-user-info-content>
+  <app-user-info-content
+    [user]="user"
+    [withDeleteUpdateBtn]="userHaveAdminPrivilages"
+  ></app-user-info-content>
 </div>

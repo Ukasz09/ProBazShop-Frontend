@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
+import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 
 @Component({
   selector: 'app-cart',

@@ -5,7 +5,7 @@ import { AlertModel } from 'src/app/model/alert.model';
 import { ShipmentFormModel } from 'src/app/model/form/shipment-form-model';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
-import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
+import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 

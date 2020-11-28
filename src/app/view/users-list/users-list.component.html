@@ -1,4 +1,3 @@
-<app-navbar></app-navbar>
 <div *ngIf="usersFetched; else usersNotFetchedTemplate" class="container my-5">
   <ng-container *ngIf="userList.length > 0; else emptyHistoryTemplate">
     <div class="row">
@@ -17,6 +16,7 @@
         <div class="user-details rounded" [style.top.px]="navbarHeightPx">
           <app-user-info-content
             [user]="actualChosenUser"
+            [withDeleteUpdateBtn]="true"
           ></app-user-info-content>
         </div>
       </div>

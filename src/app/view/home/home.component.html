@@ -1,7 +1,3 @@
-<app-navbar
-  (suggestionSelect)="showProductDetails($event, details)"
-  (searchBtnClick)="onSearchBtnClick($event)" 
-></app-navbar>
 <div
   *ngFor="let alert of alerts"
   [style.top.px]="navbarHeightPx"

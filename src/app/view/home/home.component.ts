@@ -1,11 +1,22 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 import { AlertModel } from 'src/app/model/alert.model';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
-import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
+import { NavbarService } from 'src/app/services/navbar.service';
+import { ProductItemDetailsComponent } from 'src/app/shared/components/modals/product-item-details/product-item-details.component';
+import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FilterType } from './categories-panel/applied-filters/filter-model';
 import { CategoriesPanelComponent } from './categories-panel/categories-panel.component';
@@ -15,11 +26,14 @@ import { CategoriesPanelComponent } from './categories-panel/categories-panel.co
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   static readonly SUCCESSFUL_ADD_TO_CART_ALERT_ID = 'successful_add_to_cart';
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
 
   @ViewChild('categories') categoriesComponent: CategoriesPanelComponent;
+  @ViewChild('details') productDetailsTemplate: TemplateRef<any>;
+  phraseSuggestionSubscription: Subscription;
+  selectedProductSubscription: Subscription;
 
   deatilsModalOptions: ModalOptions = { class: 'modal-lg' };
   confirmModalOptions: ModalOptions = { class: 'modal-sm' };
@@ -38,10 +52,64 @@ export class HomeComponent implements OnInit {
   constructor(
     private alertService: AlertsService,
     private modalService: BsModalService,
-    private cartService: CartService
+    private cartService: CartService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.subscribeNavbarSearchBtnClick();
+    this.subscribeNavbarProductSelect();
+  }
+
+  ngOnDestroy(): void {
+    this.phraseSuggestionSubscription?.unsubscribe();
+    this.selectedProductSubscription?.unsubscribe();
+    this.clearNavbarBuffers();
+  }
+
+  //To avoid consuming already consumed data when switch to new page and then back to the home component
+  private clearNavbarBuffers() {
+    this.navbarService.phraseSuggestion$.next('');
+    this.navbarService.selectedProductFromSuggestion$.next(undefined);
+  }
+
+  //TODO: activate after moving filters to service
+  private subscribeNavbarSearchBtnClick() {
+    // this.phraseSuggestionSubscription = this.navbarService.phraseSuggestion$.subscribe(
+    //   {
+    //     next: (data: string) => {
+    //       if (data) this.onSearchBtnClick(data);
+    //     },
+    //   }
+    // );
+  }
+
+  private subscribeNavbarProductSelect() {
+    this.selectedProductSubscription = this.navbarService.selectedProductFromSuggestion$.subscribe(
+      {
+        next: (data: Product) => {
+          if (data) this.showProductDetails(data, this.productDetailsTemplate);
+        },
+      }
+    );
+  }
+
+  private onSearchBtnClick(searchedPhrase: string) {
+    //TODO: send request
+    this.categoriesComponent.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
+    this.categoriesComponent.addFilter(
+      searchedPhrase,
+      FilterType.SEARCH_PHRASE
+    );
+  }
+
+  showProductDetails(selectedProduct: Product, template: TemplateRef<any>) {
+    this.chosenProduct = selectedProduct;
+    this.modalRef?.hide();
+    this.openModal(template, this.deatilsModalOptions);
+  }
 
   removeAlert(id: string) {
     this.alertService.removeAlertWithId(id);
@@ -49,12 +117,6 @@ export class HomeComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, options: ModalOptions) {
     this.modalRef = this.modalService.show(template, options);
-  }
-
-  showProductDetails(selectedProduct: Product, template: TemplateRef<any>) {
-    this.chosenProduct = selectedProduct;
-    this.modalRef?.hide();
-    this.openModal(template, this.deatilsModalOptions);
   }
 
   onAddToCartClick(cartProduct: CartProduct, product: Product) {
@@ -134,15 +196,5 @@ export class HomeComponent implements OnInit {
     this.modalRef?.hide();
     this.openModal(template, this.confirmModalOptions);
     this.editedProduct = editedProduct;
-  }
-
-  onSearchBtnClick(searchedPhrase: string) {
-    //TODO: send request
-    this.categoriesComponent.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
-    this.categoriesComponent.addFilter(
-      searchedPhrase,
-      FilterType.SEARCH_PHRASE
-    );
-
   }
 }

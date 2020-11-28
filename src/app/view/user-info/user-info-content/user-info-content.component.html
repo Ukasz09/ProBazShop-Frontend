@@ -16,4 +16,29 @@
     <label><strong> Account type: </strong></label>
     <div class="form-control w-100">{{ AccountTypeString }}</div>
   </div>
+  <app-delete-update-btns
+    *ngIf="withDeleteUpdateBtn"
+    (updateClick)="onUpdateUserBtnClick(confirmUpdateModalTemplate)"
+    (deleteClick)="onDeleteProductBtnClick(confirmDeleteModalTemplate)"
+    [btnUpdateText]="'Update user info'"
+    [btnDeleteText]="'Delete user'"
+    [updateBTnDisabled]="!userDataWasChanged"
+  ></app-delete-update-btns>
 </div>
+
+<!-- TEMPLATES -->
+<ng-template #confirmDeleteModalTemplate>
+  <app-confirm-modal
+    (declineEmitter)="onDeleteUserDecline()"
+    (confirmEmitter)="onDeleteUserConfirm()"
+    modalTxt="Are you sure that you want to delete this product"
+  ></app-confirm-modal>
+</ng-template>
+
+<ng-template #confirmUpdateModalTemplate>
+  <app-confirm-modal
+    (declineEmitter)="onUpdateUserDecline()"
+    (confirmEmitter)="onUpdateUserConfirm()"
+    modalTxt="Are you sure that you want to update this product"
+  ></app-confirm-modal>
+</ng-template>

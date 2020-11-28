@@ -15,6 +15,10 @@ export class UserInfoComponent implements OnInit {
     return this._user;
   }
 
+  get userHaveAdminPrivilages(): boolean {
+    return this.userService.UserHasAdministrativePrivileges;
+  }
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {}

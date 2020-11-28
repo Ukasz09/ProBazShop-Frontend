@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User, UserAccountType } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
-import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
+import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 
 @Component({
   selector: 'app-users-list',

@@ -5,6 +5,7 @@ import { AlertModel } from 'src/app/model/alert.model';
 import { LoginFormModel } from 'src/app/model/form/login-form.model';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
