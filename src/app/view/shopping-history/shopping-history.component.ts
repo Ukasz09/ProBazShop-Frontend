@@ -32,9 +32,6 @@ export class ShoppingHistoryComponent implements OnInit {
   shoppingHistoryFetched = false;
   shoppingHistory: OrderedProduct[] = [];
   actualDisplayedProduct: OrderedProduct = undefined;
-  get navbarHeightPx(): number {
-    return NavbarComponent.NAVBAR_HEIGHT_PX;
-  }
   httpError: { statusCode: number; msg: string } = undefined;
 
   constructor(private userServices: UserService) {}

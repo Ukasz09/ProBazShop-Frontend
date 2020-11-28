@@ -16,14 +16,30 @@
     <label><strong> Account type: </strong></label>
     <div class="form-control w-100">{{ AccountTypeString }}</div>
   </div>
-  <app-delete-update-btns
-    *ngIf="withDeleteUpdateBtn"
-    (updateClick)="onUpdateUserBtnClick(confirmUpdateModalTemplate)"
-    (deleteClick)="onDeleteProductBtnClick(confirmDeleteModalTemplate)"
-    [btnUpdateText]="'Update user info'"
-    [btnDeleteText]="'Delete user'"
-    [updateBTnDisabled]="!userDataWasChanged"
-  ></app-delete-update-btns>
+  <!-- DELETE BTN -->
+  <div class="px-2">
+    <button
+      *ngIf="withDeleteBtn"
+      class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
+      (click)="openConfirmModal(confirmDeleteModalTemplate)"
+    >
+      <span class="mx-1 my-auto">Delete user</span
+      ><span class="material-icons mx-2"> delete_forever </span>
+    </button>
+  </div>
+  <!-- /DELETE BTN -->
+  <!-- UPDATE BTN -->
+  <div class="px-2">
+    <button
+      [disabled]="withUpdateBtn"
+      class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
+      (click)="openConfirmModal(confirmUpdateModalTemplate)"
+    >
+      <span class="mx-1 my-auto">Update user info</span>
+      <span class="material-icons mx-2"> edit </span>
+    </button>
+  </div>
+  <!-- /UPDATE BTN -->
 </div>
 
 <!-- TEMPLATES -->

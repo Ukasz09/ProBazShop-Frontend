@@ -1,8 +1,5 @@
+@use 'src/app/shared/styles' as shared;
+
 .empty-cart-label {
   font-weight: 600;
-}
-
-.finalize-panel {
-  font-size: 0.9em;
-  position: sticky;
 }

@@ -1,6 +1,9 @@
 <div class="w-50 mx-auto px-2">
   <app-user-info-content
     [user]="user"
-    [withDeleteUpdateBtn]="userHaveAdminPrivilages"
+    [withDeleteBtn]="false"
+    [withUpdateBtn]="userHaveAdminPrivilages"
+    (deleteConfirmed)="onDeleteUserConfirmed()"
+    (updateConfirmed)="onUpdateConfirmed($event)"
   ></app-user-info-content>
 </div>

@@ -14,7 +14,7 @@ export class FormAlerts {
   static readonly PRODUCT_UPDATE_NOT_CONFIRMED_ID = 'delete_confirmed';
   static readonly USER_UPDATE_NOT_CONFIRMED_ID = 'user_update_not_confirmed';
 
-  static getSuccessFormAlert(id: string, msg: string): AlertModel {
+  static getSuccessAlert(id: string, msg: string): AlertModel {
     return new AlertModel(id, 'success', msg, 2000, true);
   }
 

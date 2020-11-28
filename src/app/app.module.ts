@@ -41,7 +41,6 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { UsersListComponent } from './view/users-list/users-list.component';
 import { UserRowComponentComponent } from './view/users-list/user-row-component/user-row-component.component';
 import { UserInfoContentComponent } from './view/user-info/user-info-content/user-info-content.component';
-import { DeleteUpdateBtnsComponent } from './shared/components/delete-update-btns/delete-update-btns.component';
 import { NavbarComponent } from './view/navbar/navbar.component';
 @NgModule({
   declarations: [
@@ -75,7 +74,6 @@ import { NavbarComponent } from './view/navbar/navbar.component';
     UsersListComponent,
     UserRowComponentComponent,
     UserInfoContentComponent,
-    DeleteUpdateBtnsComponent,
   ],
   imports: [
     HttpClientModule,

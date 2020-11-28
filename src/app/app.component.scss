@@ -1,6 +1,7 @@
+@use 'src/app/shared/styles' as shared;
+
 .my-container{
     position: absolute;
     height: fit-content;
     width: 100%;
-
 }

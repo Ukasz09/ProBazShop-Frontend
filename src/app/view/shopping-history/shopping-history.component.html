@@ -20,10 +20,7 @@
 
         <!-- CONTENT -->
         <div class="col-7">
-          <div
-            class="bg-light rounded product-details"
-            [style.top.px]="navbarHeightPx"
-          >
+          <div class="bg-light rounded sticky-to-navbar">
             <app-product-item-details
               [product]="actualDisplayedProduct"
               [withAddToCartBtn]="false"
@@ -40,7 +37,7 @@
 <!-- TEMPLATES -->
 <ng-template #historyNotFetchedTemplate>
   <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
-    <div class="mx-auto" style="width: 35%;">
+    <div class="mx-auto" style="width: 35%">
       <app-error-response
         [errorCode]="httpError.statusCode"
         [errorText]="httpError.msg"

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
@@ -15,17 +15,12 @@ import { FormAlerts } from 'src/app/shared/forms/form-alerts';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  static readonly NAVBAR_HEIGHT_PX = 120;
   AppComponent = AppComponent;
 
   isBs3 = isBs3();
   searchedPhrase: string = '';
   searchKeywords: string[] = [];
   products: Product[] = [];
-
-  get navbarHeightPx(): number {
-    return NavbarComponent.NAVBAR_HEIGHT_PX;
-  }
 
   get userIsLogged(): boolean {
     return this.userService.UserIsLogged;
@@ -66,7 +61,7 @@ export class NavbarComponent implements OnInit {
   logoutUser() {
     this.userService.logoutUser();
     this.alertService.addAlert(
-      FormAlerts.getSuccessFormAlert(
+      FormAlerts.getSuccessAlert(
         FormAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,
         'Successful log off'
       )

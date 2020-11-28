@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User, UserAccountType } from 'src/app/model/user';
+import { AlertsService } from 'src/app/services/alerts.service';
 import { UserService } from 'src/app/services/user.service';
-import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
+import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
 @Component({
   selector: 'app-users-list',
@@ -14,11 +15,15 @@ export class UsersListComponent implements OnInit {
   actualChosenUser: User = undefined;
   httpError: { statusCode: number; msg: string } = undefined;
   usersFetched = false;
-  get navbarHeightPx(): number {
-    return NavbarComponent.NAVBAR_HEIGHT_PX;
+
+  get actualLoggedUser(): User {
+    return this.userService.LoggedUser;
   }
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private alertService: AlertsService
+  ) {}
 
   ngOnInit(): void {
     this.fetchUsers();
@@ -26,21 +31,55 @@ export class UsersListComponent implements OnInit {
 
   fetchUsers() {
     this.userService.getUsersList().subscribe(
-      (data: User[]) => {
-        this.userList = data;
-        this.userList.forEach(
-          (u: User) =>
-            (u.accountType = UserAccountType[u.accountType.toString()])
-        );
-        if (this.userList.length > 0) this.actualChosenUser = this.userList[0];
-        this.usersFetched = true;
-        console.log(this.userList);
-      },
-      (e: HttpErrorResponse) =>
-        (this.httpError = {
-          statusCode: e.status,
-          msg: 'Users data fetching error: ' + e.statusText,
-        })
+      (data: User[]) => this.onOkUserFetchResponse(data),
+      (e: HttpErrorResponse) => this.onErrorUserFetchResponse(e)
     );
+  }
+
+  private onOkUserFetchResponse(data: User[]) {
+    this.userList = data;
+    this.userList.forEach(
+      (u: User) => (u.accountType = UserAccountType[u.accountType.toString()])
+    );
+    this.setActualDisplayedUserToFst();
+    this.usersFetched = true;
+  }
+
+  private onErrorUserFetchResponse(error: HttpErrorResponse) {
+    this.httpError = {
+      statusCode: error.status,
+      msg: 'Users data fetching error: ' + error.statusText,
+    };
+  }
+
+  private setActualDisplayedUserToFst() {
+    if (this.userList.length > 0) this.actualChosenUser = this.userList[0];
+  }
+
+  onUpdateConfirmed(updatedUser: User) {
+    console.log(updatedUser);
+    this.alertService.addAlert(
+      FormAlerts.getSuccessAlert(
+        FormAlerts.USER_UPDATE_CONFIRMED_ID,
+        'User correctly updated'
+      )
+    );
+  }
+
+  onDeleteUserConfirmed(user: User) {
+    console.log('Need to delete user');
+    this.deleteUserFromArr(user);
+    this.setActualDisplayedUserToFst();
+    this.alertService.addAlert(
+      FormAlerts.getSuccessAlert(
+        FormAlerts.USER_REMOVE_CONFIRMED_ID,
+        'User correctly removed'
+      )
+    );
+  }
+
+  private deleteUserFromArr(user: User) {
+    const index = this.userList.indexOf(user, 0);
+    if (index > -1) this.userList.splice(index, 1);
   }
 }

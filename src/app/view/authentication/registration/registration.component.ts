@@ -40,7 +40,7 @@ export class RegistrationComponent implements OnInit {
       this.registrationIsDone = true;
       this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
       this.alertService.addAlert(
-        FormAlerts.getSuccessFormAlert(
+        FormAlerts.getSuccessAlert(
           FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
           'Successful account registration'
         )

@@ -1,10 +1,15 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
-import { NavbarService } from 'src/app/services/navbar.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
 @Component({
@@ -14,7 +19,11 @@ import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 })
 export class UserInfoContentComponent implements OnInit {
   @Input() user: User;
-  @Input() withDeleteUpdateBtn = false;
+  @Input() withDeleteBtn = false;
+  @Input() withUpdateBtn = false;
+
+  @Output() deleteConfirmed = new EventEmitter();
+  @Output() updateConfirmed: EventEmitter<User> = new EventEmitter();
 
   get AccountTypeString(): string {
     return UserAccountType[this.user.accountType];
@@ -34,9 +43,7 @@ export class UserInfoContentComponent implements OnInit {
 
   constructor(
     private alertService: AlertsService,
-    private modalService: BsModalService,
-    private navbarService: NavbarService,
-    private router: Router
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -55,12 +62,7 @@ export class UserInfoContentComponent implements OnInit {
 
   onDeleteUserConfirm() {
     this.modalRef.hide();
-    this.alertService.addAlert(
-      FormAlerts.getSuccessFormAlert(
-        FormAlerts.USER_REMOVE_CONFIRMED_ID,
-        'User remove confirmed'
-      )
-    );
+    this.deleteConfirmed.emit();
   }
 
   onUpdateUserDecline() {
@@ -74,20 +76,12 @@ export class UserInfoContentComponent implements OnInit {
   }
 
   onUpdateUserConfirm() {
+    let upadatedUser = this.unpatchUserFromForm();
     this.modalRef.hide();
-    this.alertService.addAlert(
-      FormAlerts.getSuccessFormAlert(
-        FormAlerts.USER_UPDATE_CONFIRMED_ID,
-        'User update confirmed'
-      )
-    );
+    this.updateConfirmed.emit(upadatedUser);
   }
 
-  onDeleteProductBtnClick(template: TemplateRef<any>) {
-    this.openModal(template, this.confirmModalOptions);
-  }
-
-  onUpdateUserBtnClick(template: TemplateRef<any>) {
+  openConfirmModal(template: TemplateRef<any>) {
     this.openModal(template, this.confirmModalOptions);
   }
 

@@ -38,6 +38,11 @@ export class ProductItemDetailsComponent implements OnInit {
   }
 
   get needToShowAddToCartBtn(): boolean {
+    // console.log(
+    //   this.withAddToCartBtn,
+    //   this.userService.UserIsLogged,
+    //   this.userService.LoggedUser
+    // );
     return (
       this.withAddToCartBtn &&
       this.userService.UserIsLogged &&
@@ -98,7 +103,6 @@ export class ProductItemDetailsComponent implements OnInit {
   onUpdateProductBtnClick() {
     let editedProduct = this.unpatchProductFromForm();
     this.updateProductClick.emit(editedProduct);
-    console.log(editedProduct);
   }
 
   private unpatchProductFromForm(): Product {

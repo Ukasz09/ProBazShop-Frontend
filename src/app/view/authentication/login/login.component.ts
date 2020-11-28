@@ -18,7 +18,7 @@ import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 export class LoginComponent implements OnInit {
   formDataModel: LoginFormModel;
   loginForm: FormGroup;
-  
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.userService.logonUser(this.mockUser);
       this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
       this.alertService.addAlert(
-        FormAlerts.getSuccessFormAlert(
+        FormAlerts.getSuccessAlert(
           FormAlerts.SUCCESSFUL_LOGON_ALERT_ID,
           'Successful logon'
         )

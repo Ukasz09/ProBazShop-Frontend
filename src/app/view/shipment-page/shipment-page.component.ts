@@ -5,7 +5,6 @@ import { AlertModel } from 'src/app/model/alert.model';
 import { ShipmentFormModel } from 'src/app/model/form/shipment-form-model';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
-import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
@@ -15,6 +14,51 @@ import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
   styleUrls: ['./shipment-page.component.scss'],
 })
 export class ShipmentPageComponent implements OnInit {
+  formDataModel: ShipmentFormModel;
+  shipmentForm: FormGroup;
+
+  constructor(
+    private router: Router,
+    private cartService: CartService,
+    private alertService: AlertsService
+  ) {}
+
+  ngOnInit(): void {
+    this.initShipmentForm();
+  }
+
+  private initShipmentForm() {
+    this.formDataModel = new ShipmentFormModel();
+    this.shipmentForm = FormLogicUtils.makeFormFromModel(this.formDataModel);
+    console.log(this.shipmentForm);
+  }
+
+  onBuyBtnClick() {
+    console.log(this.shipmentForm);
+    if (this.shipmentForm.dirty && this.shipmentForm.valid) {
+      this.cartService.clearProductList();
+      this.alertService.addAlert(
+        FormAlerts.getSuccessAlert(
+          FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+          'Successful products purchase'
+        )
+      );
+      this.router.navigateByUrl('/home');
+    } else {
+      this.alertService.addAlert(
+        FormAlerts.getDangerFormAlert(
+          FormAlerts.INVALID_DATA_ALERT_ID,
+          'Invalid data in form'
+        )
+      );
+    }
+  }
+
+  removeAlert(id: string) {
+    this.alertService.removeAlertWithId(id);
+  }
+
+  //MOCKS
   states = [
     null,
     'Alabama',
@@ -77,54 +121,4 @@ export class ShipmentPageComponent implements OnInit {
     'Wisconsin',
     'Wyoming',
   ];
-
-  formDataModel: ShipmentFormModel;
-  shipmentForm: FormGroup;
-
-  constructor(
-    private router: Router,
-    private cartService: CartService,
-    private alertService: AlertsService
-  ) {}
-
-  ngOnInit(): void {
-    this.initShipmentForm();
-  }
-
-  private initShipmentForm() {
-    this.formDataModel = new ShipmentFormModel();
-    this.shipmentForm = FormLogicUtils.makeFormFromModel(this.formDataModel);
-    console.log(this.shipmentForm);
-  }
-
-  onBuyBtnClick() {
-    console.log(this.shipmentForm)
-    if (this.shipmentForm.dirty && this.shipmentForm.valid) {
-      this.cartService.clearProductList();
-      this.alertService.addAlert(
-        FormAlerts.getSuccessFormAlert(
-          FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
-          'Successful products purchase'
-        )
-      );
-      this.router.navigateByUrl('/home');
-    } else {
-      this.alertService.addAlert(
-        FormAlerts.getDangerFormAlert(
-          FormAlerts.INVALID_DATA_ALERT_ID,
-          'Invalid data in form'
-        )
-      );
-    }
-  }
-
-  //TODO: tmp - move navbar to app html and remove redundancy alert component call
-  get alerts(): AlertModel[] {
-    return Array.from(this.alertService.alerts.values());
-  }
-
-  //TODO: remove redundancy
-  removeAlert(id: string) {
-    this.alertService.removeAlertWithId(id);
-  }
 }

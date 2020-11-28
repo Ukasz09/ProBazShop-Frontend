@@ -1,28 +1,34 @@
 <div *ngIf="usersFetched; else usersNotFetchedTemplate" class="container my-5">
-  <ng-container *ngIf="userList.length > 0; else emptyHistoryTemplate">
-    <div class="row">
-      <!-- USER LIST -->
-      <div class="col-md-6">
-        <div *ngFor="let user of userList">
-          <app-user-row-component
-            [user]="user"
-            (rowClick)="actualChosenUser = user"
-          ></app-user-row-component>
-        </div>
+  <div
+    *ngIf="userList.length > 0; else emptyHistoryTemplate"
+    class="d-flex flex-row w-100"
+  >
+    <!-- USER ROW -->
+    <div class="w-50">
+      <div *ngFor="let user of userList" class="d-flex flex-column">
+        <app-user-row-component
+          [user]="user"
+          (rowClick)="actualChosenUser = user"
+        ></app-user-row-component>
       </div>
-      <!-- /USER LIST -->
-      <!-- /USER DETAILS -->
-      <div class="col-md-6">
-        <div class="user-details rounded" [style.top.px]="navbarHeightPx">
+    </div>
+    <!-- /USER ROW -->
+    <!-- /USER DETAILS -->
+    <div class="w-50 sticky-to-navbar rounded" style="height: min-content">
+      <div *ngFor="let user of userList" class="d-flex flex-column">
+        <div *ngIf="actualChosenUser == user">
           <app-user-info-content
             [user]="actualChosenUser"
-            [withDeleteUpdateBtn]="true"
+            [withUpdateBtn]="true"
+            [withDeleteBtn]="user != actualLoggedUser"
+            (deleteConfirmed)="onDeleteUserConfirmed(user)"
+            (updateConfirmed)="onUpdateConfirmed($event)"
           ></app-user-info-content>
         </div>
       </div>
-      <!-- USER DETAILS -->
     </div>
-  </ng-container>
+    <!-- USER DETAILS -->
+  </div>
 </div>
 
 <!-- TEMPLATES -->

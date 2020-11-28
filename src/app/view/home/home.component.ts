@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   Component,
   OnDestroy,
@@ -9,14 +8,11 @@ import {
 } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
-import { AlertModel } from 'src/app/model/alert.model';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { ProductItemDetailsComponent } from 'src/app/shared/components/modals/product-item-details/product-item-details.component';
-import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FilterType } from './categories-panel/applied-filters/filter-model';
 import { CategoriesPanelComponent } from './categories-panel/categories-panel.component';
@@ -40,10 +36,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   chosenProduct: Product = undefined;
   editedProduct: Product;
   modalRef: BsModalRef;
-
-  get navbarHeightPx(): number {
-    return NavbarComponent.NAVBAR_HEIGHT_PX;
-  }
 
   constructor(
     private alertService: AlertsService,
@@ -123,7 +115,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private showSuccessfulAddToCartAlert() {
-    let alertModel = FormAlerts.getSuccessFormAlert(
+    let alertModel = FormAlerts.getSuccessAlert(
       HomeComponent.SUCCESSFUL_ADD_TO_CART_ALERT_ID,
       'Successful add to cart'
     );
@@ -151,7 +143,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onDeleteProductConfirm() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getSuccessFormAlert(
+      FormAlerts.getSuccessAlert(
         FormAlerts.PRODUCT_REMOVE_CONFIRMED_ID,
         'Product remove confirmed'
       )
@@ -171,11 +163,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onUpdateProductConfirm() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getSuccessFormAlert(
+      FormAlerts.getSuccessAlert(
         FormAlerts.PRODUCT_UPDATE_CONFIRMED_ID,
         'Product update confirmed'
       )
     );
+
     console.log(this.editedProduct);
   }
 

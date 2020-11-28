@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 
 @Component({
   selector: 'app-cart',
@@ -17,10 +16,6 @@ export class CartComponent implements OnInit {
 
   get dataReady() {
     return this.productsInCart.size == this.cartService.productsInCart.size;
-  }
-
-  get navbarHeightPx(): number {
-    return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
 
   get cartIsEmpty(): boolean {

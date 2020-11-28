@@ -1,6 +1,9 @@
 <div class="container my-5">
   <ng-container *ngIf="!cartIsEmpty; else cartEmptyTemplate">
-    <div *ngIf="dataReady; else historyNotFetchedTemplate" class="d-flex flex-row">
+    <div
+      *ngIf="dataReady; else historyNotFetchedTemplate"
+      class="d-flex flex-row"
+    >
       <!-- PRODUCTS -->
       <div style="width: 65%">
         <div class="bg-light text-center border rounded py-2">
@@ -30,8 +33,7 @@
       <!-- FINALIZE PANEL -->
       <div class="px-1" style="width: 35%">
         <div
-          class="d-flex flex-column bg-light border rounded px-4 py-3 finalize-panel"
-          [style.top.px]="navbarHeightPx"
+          class="d-flex flex-column bg-light border rounded px-4 py-3 sticky-to-navbar"
         >
           <!-- PRICE TO PAY INFO -->
           <div class="mb-2">

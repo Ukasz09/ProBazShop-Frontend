@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertModel } from './model/alert.model';
-import { User } from './model/user';
 import { AlertsService } from './services/alerts.service';
 import { NavbarService } from './services/navbar.service';
-import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
