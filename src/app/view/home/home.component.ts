@@ -12,6 +12,7 @@ import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
+import { FilterService } from 'src/app/services/filter.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FilterType } from './categories-panel/applied-filters/filter-model';
@@ -26,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   static readonly SUCCESSFUL_ADD_TO_CART_ALERT_ID = 'successful_add_to_cart';
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
 
-  @ViewChild('categories') categoriesComponent: CategoriesPanelComponent;
   @ViewChild('details') productDetailsTemplate: TemplateRef<any>;
   phraseSuggestionSubscription: Subscription;
   selectedProductSubscription: Subscription;
@@ -41,7 +41,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private alertService: AlertsService,
     private modalService: BsModalService,
     private cartService: CartService,
-    private navbarService: NavbarService
+    private navbarService: NavbarService,
+    private filterService: FilterService
   ) {}
 
   ngOnInit(): void {}
@@ -65,13 +66,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //TODO: activate after moving filters to service
   private subscribeNavbarSearchBtnClick() {
-    // this.phraseSuggestionSubscription = this.navbarService.phraseSuggestion$.subscribe(
-    //   {
-    //     next: (data: string) => {
-    //       if (data) this.onSearchBtnClick(data);
-    //     },
-    //   }
-    // );
+    this.phraseSuggestionSubscription = this.navbarService.phraseSuggestion$.subscribe(
+      {
+        next: (data: string) => {
+          if (data) this.onSearchBtnClick(data);
+        },
+      }
+    );
   }
 
   private subscribeNavbarProductSelect() {
@@ -86,11 +87,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private onSearchBtnClick(searchedPhrase: string) {
     //TODO: send request
-    this.categoriesComponent.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
-    this.categoriesComponent.addFilter(
-      searchedPhrase,
-      FilterType.SEARCH_PHRASE
-    );
+    this.filterService.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
+    this.filterService.addFilter(searchedPhrase, FilterType.SEARCH_PHRASE);
   }
 
   showProductDetails(selectedProduct: Product, template: TemplateRef<any>) {

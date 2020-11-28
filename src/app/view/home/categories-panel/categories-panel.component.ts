@@ -1,7 +1,8 @@
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { FilterService } from 'src/app/services/filter.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { FilterElem, FilterType } from './applied-filters/filter-model';
 
@@ -33,10 +34,16 @@ export class CategoriesPanelComponent implements OnInit {
     '#9E9E9E',
   ];
   sizes: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-  appliedFilters: FilterElem[] = [];
   httpError: { statusCode: number; msg: string } = undefined;
 
-  constructor(private productService: ProductsService) {}
+  get appliedFilters(): FilterElem[] {
+    return this.filterService.appliedFilters;
+  }
+
+  constructor(
+    private productService: ProductsService,
+    private filterService: FilterService
+  ) {}
 
   ngOnInit(): void {
     this.fetchProductCategories();
@@ -57,40 +64,22 @@ export class CategoriesPanelComponent implements OnInit {
     );
   }
 
-  addFilter(value: string, filterType: FilterType) {
-    let theSameFilter = this.appliedFilters.find(
-      (filter: FilterElem) => filter.value == value && filter.type == filterType
-    );
-    let foundInFilters = theSameFilter != undefined;
-    if (!foundInFilters) {
-      let filter = new FilterElem(value, filterType);
-      this.appliedFilters.push(filter);
-    }
-  }
-
   private addLowPriceFilter() {
-    this.addFilter(
+    this.filterService.addFilter(
       '>' + ' $' + this.priceSliderControl.value[0],
       FilterType.PRICE_LOW
     );
   }
 
   private addHighPriceFilter() {
-    this.addFilter(
+    this.filterService.addFilter(
       '<' + ' $' + this.priceSliderControl.value[1],
       FilterType.PRICE_HIGH
     );
   }
 
-  removeFstFilterWithType(filterType: FilterType) {
-    let filter = this.appliedFilters.find(
-      (filter: FilterElem) => filter.type == filterType
-    );
-    if (filter !== undefined) this.deleteElemFromFilters(filter);
-  }
-
   onDeleteFilterClick(filter: FilterElem) {
-    this.deleteElemFromFilters(filter);
+    this.filterService.deleteElemFromFilters(filter);
     if (filter.type == FilterType.PRICE_LOW) {
       let actualHighPriceValue: number = this.priceSliderControl.value[1];
       this.priceSliderControl.reset([
@@ -106,19 +95,18 @@ export class CategoriesPanelComponent implements OnInit {
     }
   }
 
-  private deleteElemFromFilters(filter: FilterElem) {
-    const index = this.appliedFilters.indexOf(filter, 0);
-    if (index > -1) this.appliedFilters.splice(index, 1);
-  }
-
   updatePriceFilter(sliderChangeValue: ChangeContext) {
-    this.removeFstFilterWithType(FilterType.PRICE_HIGH);
+    this.filterService.removeFstFilterWithType(FilterType.PRICE_HIGH);
     if (sliderChangeValue.highValue < this.priceSliderOptions.ceil) {
       this.addHighPriceFilter();
     }
-    this.removeFstFilterWithType(FilterType.PRICE_LOW);
+    this.filterService.removeFstFilterWithType(FilterType.PRICE_LOW);
     if (sliderChangeValue.value > this.priceSliderOptions.floor) {
       this.addLowPriceFilter();
     }
+  }
+
+  addFilter(value: string, filterType: FilterType) {
+    this.filterService.addFilter(value, filterType);
   }
 }

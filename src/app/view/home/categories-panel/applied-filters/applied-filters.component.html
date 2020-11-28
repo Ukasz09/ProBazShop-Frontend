@@ -1,4 +1,4 @@
-<ng-container *ngIf="filters.length > 0">
+<ng-container>
   <div class="pb-3">Applied filters:</div>
   <div *ngFor="let filter of filters" class="mb-2">
     <div class="btn-group w-75">
@@ -42,9 +42,7 @@
       <div
         class="bg-light border border-secondary justify-content-center btn d-flex py-0 custom-btn"
       >
-        <span>
-         Searched: {{ filter.value }}
-        </span>
+        <span> Searched: {{ filter.value }} </span>
       </div>
     </ng-template>
   </div>
