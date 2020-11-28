@@ -45,10 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return NavbarComponent.NAVBAR_HEIGHT_PX;
   }
 
-  get alerts(): AlertModel[] {
-    return Array.from(this.alertService.alerts.values());
-  }
-
   constructor(
     private alertService: AlertsService,
     private modalService: BsModalService,
@@ -109,10 +105,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.chosenProduct = selectedProduct;
     this.modalRef?.hide();
     this.openModal(template, this.deatilsModalOptions);
-  }
-
-  removeAlert(id: string) {
-    this.alertService.removeAlertWithId(id);
   }
 
   openModal(template: TemplateRef<any>, options: ModalOptions) {

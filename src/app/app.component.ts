@@ -10,12 +10,19 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ProBazShop';
   static LOGO_IMG_PATH = 'assets/logo2.png';
 
-  constructor() {}
+  get alerts(): AlertModel[] {
+    return Array.from(this.alertService.alerts.values());
+  }
+
+  constructor(private alertService: AlertsService) {}
 
   static getLogoImgPath(): string {
     return this.LOGO_IMG_PATH;
+  }
+
+  removeAlert(id: string) {
+    this.alertService.removeAlertWithId(id);
   }
 }

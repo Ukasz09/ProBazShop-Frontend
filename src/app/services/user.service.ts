@@ -14,7 +14,7 @@ export class UserService {
     '234324@sad.com',
     '213131',
     [],
-    UserAccountType.EMPLOYEE
+    UserAccountType.CLIENT
   );
 
   get UserIsLogged() {

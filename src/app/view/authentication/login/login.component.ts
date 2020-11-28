@@ -18,11 +18,7 @@ import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 export class LoginComponent implements OnInit {
   formDataModel: LoginFormModel;
   loginForm: FormGroup;
-
-  get alerts(): AlertModel[] {
-    return Array.from(this.alertService.alerts.values());
-  }
-
+  
   constructor(
     private router: Router,
     private userService: UserService,

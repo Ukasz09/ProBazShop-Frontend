@@ -1,17 +1,3 @@
-<div
-  *ngFor="let alert of alerts"
-  [style.top.px]="navbarHeightPx"
-  class="sticky-alert"
->
-  <alert
-    [type]="alert.type"
-    [dismissOnTimeout]="alert.timeout"
-    [dismissible]="true"
-    (onClosed)="removeAlert(alert.id)"
-    >{{ alert.msg }}</alert
-  >
-</div>
-
 <div class="bg-light w-50 mx-auto px-5">
   <div class="py-4 h4 text-center">Shipment details</div>
   <div class="form-row my-4">

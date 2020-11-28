@@ -1,3 +1,4 @@
+$navbar-height: 120px;
 $primary-color: #e7475c;
 $border-color: #ff4461;
 
@@ -28,7 +29,7 @@ $dark-txt-color: #212121;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px $primary-color;
 }
 
-.sticky-alert {
+.sticky-to-navbar {
   position: sticky;
-  z-index: 4;
+  top: $navbar-height;
 }

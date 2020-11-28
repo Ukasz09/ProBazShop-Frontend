@@ -5,8 +5,8 @@ img {
   max-height: 100%;
 }
 
-.navbar-fixed-height{
-  height: 120px;
+.navbar-fixed-height {
+  height: shared.$navbar-height;
 }
 
 .custom-list-group {

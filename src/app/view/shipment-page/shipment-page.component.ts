@@ -81,10 +81,6 @@ export class ShipmentPageComponent implements OnInit {
   formDataModel: ShipmentFormModel;
   shipmentForm: FormGroup;
 
-  //TODO: remove redundancy
-  get navbarHeightPx(): number {
-    return NavbarComponent.NAVBAR_HEIGHT_PX;
-  }
   constructor(
     private router: Router,
     private cartService: CartService,

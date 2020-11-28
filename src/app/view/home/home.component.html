@@ -1,26 +1,11 @@
-<div
-  *ngFor="let alert of alerts"
-  [style.top.px]="navbarHeightPx"
-  class="sticky-alert"
->
-  <alert
-    [type]="alert.type"
-    [dismissOnTimeout]="alert.timeout"
-    [dismissible]="alert.dismissible"
-    (onClosed)="removeAlert(alert.id)"
-    >{{ alert.msg }}</alert
-  >
-</div>
-<div>
-  <div class="container pt-5">
-    <div class="d-flex flex-row">
-      <app-categories-panel #categories></app-categories-panel>
-      <div class="flex-fill">
-        <app-products-list
-          (productRowClick)="showProductDetails($event, details)"
-          (addToCartClick)="onAddToCartClick($event[0], $event[1])"
-        ></app-products-list>
-      </div>
+<div class="container pt-5">
+  <div class="d-flex flex-row">
+    <app-categories-panel #categories></app-categories-panel>
+    <div class="flex-fill">
+      <app-products-list
+        (productRowClick)="showProductDetails($event, details)"
+        (addToCartClick)="onAddToCartClick($event[0], $event[1])"
+      ></app-products-list>
     </div>
   </div>
 </div>
@@ -31,7 +16,9 @@
     [product]="chosenProduct"
     (addToCartClick)="onAddToCartClick($event, chosenProduct)"
     (deleteProductClick)="onDeleteProductBtnClick(confirmDeleteModalTemplate)"
-    (updateProductClick)="onUpdateProductBtnClick($event, confirmUpdateModalTemplate)"
+    (updateProductClick)="
+      onUpdateProductBtnClick($event, confirmUpdateModalTemplate)
+    "
   ></app-product-item-details>
 </ng-template>
 
@@ -42,7 +29,6 @@
     modalTxt="Are you sure that you want to delete this product"
   ></app-confirm-modal>
 </ng-template>
-
 
 <ng-template #confirmUpdateModalTemplate>
   <app-confirm-modal

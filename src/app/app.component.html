@@ -1,5 +1,14 @@
 <div class="my-container">
   <app-navbar></app-navbar>
+  <div *ngFor="let alert of alerts" class="sticky-to-navbar" style="z-index: 4">
+    <alert
+      [type]="alert.type"
+      [dismissOnTimeout]="alert.timeout"
+      [dismissible]="alert.dismissible"
+      (onClosed)="removeAlert(alert.id)"
+      >{{ alert.msg }}</alert
+    >
+  </div>
   <div>
     <router-outlet></router-outlet>
   </div>
