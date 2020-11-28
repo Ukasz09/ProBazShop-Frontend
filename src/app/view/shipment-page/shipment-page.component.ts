@@ -30,7 +30,6 @@ export class ShipmentPageComponent implements OnInit {
   private initShipmentForm() {
     this.formDataModel = new ShipmentFormModel();
     this.shipmentForm = FormLogicUtils.makeFormFromModel(this.formDataModel);
-    console.log(this.shipmentForm);
   }
 
   onBuyBtnClick() {

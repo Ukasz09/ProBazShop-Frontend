@@ -6,10 +6,16 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { ValidationService } from 'src/app/services/validation.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
 @Component({
@@ -91,9 +97,27 @@ export class UserInfoContentComponent implements OnInit {
 
   private initUserForm() {
     this.userForm = new FormBuilder().group({
-      name: [this.user.name],
-      surname: [this.user.surname],
-      email: [this.user.email],
+      name: [
+        {
+          value: this.user.name,
+          disabled: !this.withUpdateBtn,
+        },
+        [Validators.required, ValidationService.nameValidator],
+      ],
+      surname: [
+        {
+          value: this.user.surname,
+          disabled: !this.withUpdateBtn,
+        },
+        [Validators.required, ValidationService.surnameValidator],
+      ],
+      email: [
+        {
+          value: this.user.email,
+          disabled: !this.withUpdateBtn,
+        },
+        [Validators.required, ValidationService.emailValidator],
+      ],
     });
   }
 

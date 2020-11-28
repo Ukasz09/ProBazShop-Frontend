@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertModel } from 'src/app/model/alert.model';
 import { LoginFormModel } from 'src/app/model/form/login-form.model';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
-import { NavbarService } from 'src/app/services/navbar.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
+    private authService: AuthService,
     private alertService: AlertsService
   ) {}
 
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
   //TODO: tmp mocked
   onLoginBtnClick() {
     if (this.loginForm.dirty && this.loginForm.valid) {
-      this.userService.logonUser(this.mockUser);
+      this.authService.logonUser(this.mockUser);
       this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
       this.alertService.addAlert(
         FormAlerts.getSuccessAlert(

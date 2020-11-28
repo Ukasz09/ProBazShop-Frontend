@@ -42,6 +42,7 @@ import { UsersListComponent } from './view/users-list/users-list.component';
 import { UserRowComponentComponent } from './view/users-list/user-row-component/user-row-component.component';
 import { UserInfoContentComponent } from './view/user-info/user-info-content/user-info-content.component';
 import { NavbarComponent } from './view/navbar/navbar.component';
+import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +75,7 @@ import { NavbarComponent } from './view/navbar/navbar.component';
     UsersListComponent,
     UserRowComponentComponent,
     UserInfoContentComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     HttpClientModule,

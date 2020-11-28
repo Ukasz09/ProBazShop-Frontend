@@ -1,4 +1,5 @@
 import { Validators } from '@angular/forms';
+import { ValidationService } from 'src/app/services/validation.service';
 import { FormModel, FormProperty } from './form-model';
 
 export class ShipmentFormModel extends FormModel {
@@ -12,17 +13,17 @@ export class ShipmentFormModel extends FormModel {
     public city: FormProperty = {
       name: 'City',
       type: 'text',
-      validators: [Validators.required, Validators.minLength(3)],
+      validators: [Validators.required, ValidationService.cityValidator],
       defaultValue: '',
     },
     public state: FormProperty = {
       name: 'State',
-      validators: [Validators.required, Validators.minLength(3)],
+      validators: [Validators.required],
     },
     public zip: FormProperty = {
       name: 'Zip code',
       type: 'text',
-      validators: [Validators.required, Validators.minLength(3)],
+      validators: [Validators.required, ValidationService.zipcodeValidator],
       defaultValue: '',
     }
   ) {

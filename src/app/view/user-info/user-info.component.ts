@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { AlertsService as AlertService } from 'src/app/services/alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
@@ -13,16 +14,16 @@ export class UserInfoComponent implements OnInit {
   @Input() _user: User;
 
   get user(): User {
-    if (this._user == undefined) return this.userService.LoggedUser;
+    if (this._user == undefined) return this.authService.LoggedUser;
     return this._user;
   }
 
   get userHaveAdminPrivilages(): boolean {
-    return this.userService.UserHasAdministrativePrivileges;
+    return this.authService.UserHasAdministrativePrivileges;
   }
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private alertService: AlertService
   ) {}
 

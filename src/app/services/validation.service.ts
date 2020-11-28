@@ -7,6 +7,16 @@ import { FormControl } from '@angular/forms';
 export class ValidationService {
   constructor() {}
 
+  static cityValidator(control: FormControl) {
+    if (control.value.match(/\b([a-zA-ZÀ-ÿ][-,a-z. ']+[ ]*)+/)) return null;
+    else return { invalidCity: true };
+  }
+
+  static zipcodeValidator(control: FormControl) {
+    if (control.value.match(/(^\d{5}$)|(^\d{5}-\d{4}$)/)) return null;
+    else return { invalidZipcode: true };
+  }
+
   static emailValidator(control: FormControl) {
     // RFC 2822 compliant regex
     if (
@@ -55,6 +65,8 @@ export class ValidationService {
       invalidName: 'Name is not valid',
       invalidSurname: 'Surname is not valid',
       minlength: `Minimum length ${validatorValue.requiredLength}`,
+      invalidZipcode: `Invalid zipcode`,
+      invalidCity: `Invalid city name`,
     };
     return validationMsg[validatorName];
   }

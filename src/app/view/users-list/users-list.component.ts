@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
@@ -17,11 +18,12 @@ export class UsersListComponent implements OnInit {
   usersFetched = false;
 
   get actualLoggedUser(): User {
-    return this.userService.LoggedUser;
+    return this.authService.LoggedUser;
   }
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private alertService: AlertsService
   ) {}
 

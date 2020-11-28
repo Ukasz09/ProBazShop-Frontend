@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
 import { LoginComponent } from './view/authentication/login/login.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'client/info', component: UserInfoComponent },
   { path: 'users', component: UsersListComponent },
   { path: '404', component: NotFoundComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '**', redirectTo: '/404' },
 ];
 @NgModule({

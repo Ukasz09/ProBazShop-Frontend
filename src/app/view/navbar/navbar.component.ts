@@ -4,6 +4,7 @@ import { isBs3 } from 'ngx-bootstrap/utils';
 import { AppComponent } from 'src/app/app.component';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
@@ -23,11 +24,11 @@ export class NavbarComponent implements OnInit {
   products: Product[] = [];
 
   get userIsLogged(): boolean {
-    return this.userService.UserIsLogged;
+    return this.authService.UserIsLogged;
   }
 
   get UserHasClientAccountType(): boolean {
-    return !this.userService.UserHasAdministrativePrivileges;
+    return !this.authService.UserHasAdministrativePrivileges;
   }
 
   get IsVisible(): boolean {
@@ -36,7 +37,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private userService: UserService,
+    private authService: AuthService,
     private alertService: AlertsService,
     private navbarService: NavbarService,
     private router: Router
@@ -59,7 +60,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logoutUser() {
-    this.userService.logoutUser();
+    this.authService.logoutUser();
     this.alertService.addAlert(
       FormAlerts.getSuccessAlert(
         FormAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,

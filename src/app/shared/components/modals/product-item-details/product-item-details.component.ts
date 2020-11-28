@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { UserAccountType } from 'src/app/model/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProductsListComponent } from 'src/app/view/home/products-list/products-list.component';
 
@@ -38,20 +39,15 @@ export class ProductItemDetailsComponent implements OnInit {
   }
 
   get needToShowAddToCartBtn(): boolean {
-    // console.log(
-    //   this.withAddToCartBtn,
-    //   this.userService.UserIsLogged,
-    //   this.userService.LoggedUser
-    // );
     return (
       this.withAddToCartBtn &&
-      this.userService.UserIsLogged &&
-      this.userService.LoggedUser.accountType == UserAccountType.CLIENT
+      this.authService.UserIsLogged &&
+      this.authService.LoggedUser.accountType == UserAccountType.CLIENT
     );
   }
 
   get userHasAdministrativePrivileges(): boolean {
-    return this.userService.UserHasAdministrativePrivileges;
+    return this.authService.UserHasAdministrativePrivileges;
   }
 
   get editableDescriptionControl(): FormControl {
@@ -66,7 +62,7 @@ export class ProductItemDetailsComponent implements OnInit {
     return this.productForm.get('price') as FormControl;
   }
 
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.initEditableProductInfo();
