@@ -5,7 +5,6 @@ import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { UserAccountType } from 'src/app/model/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
 import { ProductsListComponent } from 'src/app/view/home/products-list/products-list.component';
 
 @Component({
@@ -106,14 +105,14 @@ export class ProductItemDetailsComponent implements OnInit {
       this.product.id,
       this.productForm.get('name').value,
       this.productForm.get('description').value,
-      this.product.imageURI,
+      this.product.imageURL,
       this.product.size,
       this.product.color,
       this.productForm.get('price').value as number,
-      this.product.releaseDate,
+      this.product.createdAt,
       this.product.starRating,
-      this.product.category,
-      this.product.availableQty
+      this.product.availableQty,
+      this.product.category
     );
   }
 }

@@ -1,8 +1,11 @@
 <div class="container pt-5">
   <div class="d-flex flex-row">
-    <app-categories-panel></app-categories-panel>
+    <app-categories-panel
+      (deleteFilterCick)="productList.fetchProductsWithFilters()"
+    ></app-categories-panel>
     <div class="flex-fill">
       <app-products-list
+        #productList
         (productRowClick)="showProductDetails($event, details)"
         (addToCartClick)="onAddToCartClick($event[0], $event[1])"
       ></app-products-list>

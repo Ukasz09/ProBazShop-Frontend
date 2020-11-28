@@ -1,6 +1,12 @@
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FilterService } from 'src/app/services/filter.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -13,6 +19,8 @@ import { FilterElem, FilterType } from './applied-filters/filter-model';
 })
 export class CategoriesPanelComponent implements OnInit {
   FilterType = FilterType;
+
+  @Output() deleteFilterCick = new EventEmitter();
   priceSliderControl = new FormControl([0, 500]);
   priceSliderOptions: Options = {
     floor: 0,
@@ -93,6 +101,7 @@ export class CategoriesPanelComponent implements OnInit {
         this.priceSliderOptions.ceil,
       ]);
     }
+    this.deleteFilterCick.emit();
   }
 
   updatePriceFilter(sliderChangeValue: ChangeContext) {

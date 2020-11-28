@@ -14,9 +14,9 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FilterType } from './categories-panel/applied-filters/filter-model';
-import { CategoriesPanelComponent } from './categories-panel/categories-panel.component';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
 
   @ViewChild('details') productDetailsTemplate: TemplateRef<any>;
-  phraseSuggestionSubscription: Subscription;
   selectedProductSubscription: Subscription;
 
   deatilsModalOptions: ModalOptions = { class: 'modal-lg' };
@@ -41,19 +40,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private alertService: AlertsService,
     private modalService: BsModalService,
     private cartService: CartService,
-    private navbarService: NavbarService,
-    private filterService: FilterService
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.subscribeNavbarSearchBtnClick();
     this.subscribeNavbarProductSelect();
   }
 
   ngOnDestroy(): void {
-    this.phraseSuggestionSubscription?.unsubscribe();
     this.selectedProductSubscription?.unsubscribe();
     this.clearNavbarBuffers();
   }
@@ -64,17 +60,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.navbarService.selectedProductFromSuggestion$.next(undefined);
   }
 
-  //TODO: activate after moving filters to service
-  private subscribeNavbarSearchBtnClick() {
-    this.phraseSuggestionSubscription = this.navbarService.phraseSuggestion$.subscribe(
-      {
-        next: (data: string) => {
-          if (data) this.onSearchBtnClick(data);
-        },
-      }
-    );
-  }
-
   private subscribeNavbarProductSelect() {
     this.selectedProductSubscription = this.navbarService.selectedProductFromSuggestion$.subscribe(
       {
@@ -83,12 +68,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         },
       }
     );
-  }
-
-  private onSearchBtnClick(searchedPhrase: string) {
-    //TODO: send request
-    this.filterService.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
-    this.filterService.addFilter(searchedPhrase, FilterType.SEARCH_PHRASE);
   }
 
   showProductDetails(selectedProduct: Product, template: TemplateRef<any>) {

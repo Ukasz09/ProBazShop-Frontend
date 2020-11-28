@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertModel } from 'src/app/model/alert.model';
 import { ShipmentFormModel } from 'src/app/model/form/shipment-form-model';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
@@ -20,7 +21,8 @@ export class ShipmentPageComponent implements OnInit {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {

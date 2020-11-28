@@ -13,7 +13,10 @@
     <hr class="custom-hr" />
   </div>
 
-  <div *ngIf="productsDataReady; else historyNotFetchedTemplate" class="content-wrapper">
+  <div
+    *ngIf="productsDataReady; else historyNotFetchedTemplate"
+    class="content-wrapper"
+  >
     <ng-container *ngIf="products.length > 0; else emptyResultsTemplate">
       <ng-container *ngFor="let product of productsPerPage">
         <app-product-item-row
@@ -29,6 +32,9 @@
     [totalItems]="products.length"
     [itemsPerPage]="itemsPerPage"
     (pageChanged)="pageChanged($event)"
+    [maxSize]="maxPaginationItems"
+    [boundaryLinks]="true"
+    [rotate]="true"
   >
   </pagination>
 </div>

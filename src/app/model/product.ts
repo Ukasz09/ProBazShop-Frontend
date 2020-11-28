@@ -3,14 +3,13 @@ export class Product {
     public id: string,
     public name: string,
     public description: string,
-    public imageURI: string,
+    public imageURL: string,
     public size: string,
     public color: string,
     public price: number,
-    public releaseDate: Date,
+    public createdAt: Date,
     public starRating: number,
-
-    public category: string = 'unknown',
-    public availableQty: number
+    public availableQty: number,
+    public category: string
   ) {}
 }

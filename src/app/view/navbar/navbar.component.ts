@@ -7,7 +7,6 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 
 @Component({

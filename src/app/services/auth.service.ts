@@ -5,7 +5,6 @@ import { User, UserAccountType } from '../model/user';
   providedIn: 'root',
 })
 export class AuthService {
-  static test = false;
   constructor() {}
 
   //TODO: tmp mocked
@@ -37,7 +36,6 @@ export class AuthService {
 
   logonUser(user: User) {
     this._loggedUser = user;
-    AuthService.test = true;
   }
 
   logoutUser() {
