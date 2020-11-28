@@ -1,12 +1,11 @@
-<div class="bg-light">
-  <div class="container d-flex align-items-center" style="height: 100vh">
-    <div class="w-50 mx-auto">
-      <div class="mx-auto mb-4 text-center">
-        <a routerLink="/home">
-          <img src="{{ AppComponent.getLogoImgPath() }}" />
-        </a>
-      </div>
-      <ng-content></ng-content>
+<div class="nav-placeholder"></div>
+<div class="container d-flex align-items-center">
+  <div class="w-50 mx-auto">
+    <div class="mx-auto mb-4 text-center">
+      <a routerLink="/home">
+        <img src="{{ AppComponent.getLogoImgPath() }}" />
+      </a>
     </div>
+    <ng-content></ng-content>
   </div>
 </div>

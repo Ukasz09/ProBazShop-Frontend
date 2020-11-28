@@ -1,6 +1,6 @@
 <div class="my-container">
   <app-navbar></app-navbar>
-  <div *ngFor="let alert of alerts" class="sticky-to-navbar" style="z-index: 4">
+  <div *ngFor="let alert of alerts" [ngClass]="alertClass" style="z-index: 4">
     <alert
       [type]="alert.type"
       [dismissOnTimeout]="alert.timeout"

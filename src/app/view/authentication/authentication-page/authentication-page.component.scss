@@ -1,0 +1,5 @@
+@use 'src/app/shared/styles' as shared;
+
+.nav-placeholder{
+    height: shared.$navbar-height;
+}
