@@ -41,7 +41,7 @@ export class ProductItemDetailsComponent implements OnInit {
     return (
       this.withAddToCartBtn &&
       this.authService.UserIsLogged &&
-      this.authService.LoggedUser.accountType == UserAccountType.CLIENT
+      this.authService.LoggedUser.type == UserAccountType.CLIENT
     );
   }
 

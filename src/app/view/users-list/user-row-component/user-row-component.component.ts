@@ -15,7 +15,7 @@ export class UserRowComponentComponent implements OnInit {
   ngOnInit(): void {}
 
   get accountTypeString(): string {
-    return UserAccountType[this.user.accountType];
+    return UserAccountType[this.user.type];
   }
   
 }

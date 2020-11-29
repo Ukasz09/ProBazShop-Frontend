@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
 import { LoginFormModel } from 'src/app/model/form/login-form.model';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
@@ -36,15 +38,9 @@ export class LoginComponent implements OnInit {
   //TODO: tmp mocked
   onLoginBtnClick() {
     if (this.loginForm.dirty && this.loginForm.valid) {
-      this.authService.logonUser(this.mockUser);
-      this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
-      this.alertService.addAlert(
-        FormAlerts.getSuccessAlert(
-          FormAlerts.SUCCESSFUL_LOGON_ALERT_ID,
-          'Successful logon'
-        )
-      );
-      this.router.navigateByUrl('/home');
+      let emailFromForm = this.loginForm.get('email').value;
+      let passwordFromForm = this.loginForm.get('password').value;
+      this.logonUser(emailFromForm, passwordFromForm);
     } else {
       this.alertService.addAlert(
         FormAlerts.getDangerFormAlert(
@@ -55,17 +51,44 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  private logonUser(emailFromForm: string, passwordFromForm: string) {
+    this.authService.logonUser(emailFromForm, passwordFromForm).subscribe(
+      (userData: User) => {
+        let user = new User(
+          userData.name,
+          userData.surname,
+          userData.email,
+          userData.password,
+          userData.history,
+          UserAccountType[userData.type.toString()]
+        );
+        this.authService.setLoggedUser(user);
+        this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
+        this.alertService.addAlert(
+          FormAlerts.getSuccessAlert(
+            FormAlerts.SUCCESSFUL_LOGON_ALERT_ID,
+            'Successful logon'
+          )
+        );
+        this.router.navigateByUrl('/home');
+      },
+      (err: HttpErrorResponse) => {
+        this.onIncorrectLogonDataResponse(err);
+      }
+    );
+  }
+
+  private onIncorrectLogonDataResponse(error: HttpErrorResponse) {
+    console.log(error);
+    this.alertService.addAlert(
+      FormAlerts.getDangerFormAlert(
+        FormAlerts.INVALID_DATA_ALERT_ID,
+        error.status + ': ' + error.statusText + ' - ' + error.error.message
+      )
+    );
+  }
+
   onBackBtnClick() {
     this.router.navigateByUrl('/authentication-choice');
   }
-
-  //TODO: mocked
-  mockUser = new User(
-    'Łukasz',
-    'Gajerski',
-    'gajerski.lukasz@gmail.com',
-    'password1234',
-    [],
-    UserAccountType.CLIENT
-  );
 }

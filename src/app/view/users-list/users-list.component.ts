@@ -41,7 +41,7 @@ export class UsersListComponent implements OnInit {
   private onOkUserFetchResponse(data: User[]) {
     this.userList = data;
     this.userList.forEach(
-      (u: User) => (u.accountType = UserAccountType[u.accountType.toString()])
+      (u: User) => (u.type = UserAccountType[u.type.toString()])
     );
     this.setActualDisplayedUserToFst();
     this.usersFetched = true;

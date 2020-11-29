@@ -32,7 +32,7 @@ export class UserInfoContentComponent implements OnInit {
   @Output() updateConfirmed: EventEmitter<User> = new EventEmitter();
 
   get AccountTypeString(): string {
-    return UserAccountType[this.user.accountType];
+    return UserAccountType[this.user.type];
   }
 
   get userDataWasChanged(): boolean {
@@ -140,7 +140,7 @@ export class UserInfoContentComponent implements OnInit {
       this.getEmailControl().value,
       this.user.password,
       this.user.history,
-      this.user.accountType
+      this.user.type
     );
   }
 }

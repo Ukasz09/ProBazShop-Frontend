@@ -7,7 +7,7 @@ export class User {
     public email: String,
     public password: String,
     public history: OrderedProduct[],
-    public accountType: UserAccountType
+    public type: UserAccountType
   ) {}
 }
 
