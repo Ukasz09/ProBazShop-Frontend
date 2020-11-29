@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { stringify } from 'querystring';
 import { User } from 'src/app/model/user';
 import { AlertsService as AlertService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -24,17 +26,32 @@ export class UserInfoComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {}
 
   onUpdateConfirmed(updatedUser: User) {
-    console.log(updatedUser);
+    this.userService.updateUser(updatedUser).subscribe(
+      (response: any) =>
+        this.onCorrectUserUpdateResponse(response.message, updatedUser),
+      (err: HttpErrorResponse) => this.onErrorUserUpdateResponse(err)
+    );
+  }
+
+  private onCorrectUserUpdateResponse(msg: string, updatedUser: User) {
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.USER_UPDATE_CONFIRMED_ID,
-        'User correctly updated'
+      FormAlerts.getSuccessAlert(FormAlerts.USER_UPDATE_SUCCESSFUL, msg)
+    );
+    this.authService.setLoggedUser(updatedUser);
+  }
+
+  private onErrorUserUpdateResponse(error: HttpErrorResponse) {
+    this.alertService.addAlert(
+      FormAlerts.getDangerFormAlert(
+        FormAlerts.USER_UPDATE_ERROR,
+        error.status + ': ' + error.statusText + ' - ' + error.error?.message
       )
     );
   }

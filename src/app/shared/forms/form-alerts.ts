@@ -8,7 +8,8 @@ export class FormAlerts {
   static readonly PRODUCT_REMOVE_NOT_CONFIRMED_ID = 'user_delete_not_confirmed';
   static readonly PRODUCT_REMOVE_CONFIRMED_ID = 'product_delete_confirmed';
   static readonly PRODUCT_UPDATE_CONFIRMED_ID = 'product_update_confirmed';
-  static readonly USER_UPDATE_CONFIRMED_ID = 'user_update_confirmed';
+  static readonly USER_UPDATE_SUCCESSFUL = 'user_update_successful';
+  static readonly USER_UPDATE_ERROR = 'user_update_error';
   static readonly USER_REMOVE_NOT_CONFIRMED_ID = 'delete_user_not_confirmed';
   static readonly USER_REMOVE_CONFIRMED_ID = 'delete_user_confirmed';
   static readonly PRODUCT_UPDATE_NOT_CONFIRMED_ID = 'delete_confirmed';

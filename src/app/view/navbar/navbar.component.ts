@@ -5,6 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
@@ -39,6 +40,7 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertsService,
     private navbarService: NavbarService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -60,6 +62,7 @@ export class NavbarComponent implements OnInit {
 
   logoutUser() {
     this.authService.logoutUser();
+    this.cartService.clearProductList();
     this.alertService.addAlert(
       FormAlerts.getSuccessAlert(
         FormAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,

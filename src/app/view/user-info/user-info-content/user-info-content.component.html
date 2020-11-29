@@ -24,6 +24,19 @@
         [value]="AccountType"
       />
     </div>
+     <!-- UPDATE BTN -->
+     <div class="px-2">
+      <button
+        type="submit"
+        *ngIf="withUpdateBtn"
+        [disabled]="!userDataWasChanged || !userForm.valid"
+        class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
+      >
+        <span class="mx-1 my-auto">Update user info</span>
+        <span class="material-icons mx-2"> edit </span>
+      </button>
+    </div>
+    <!-- /UPDATE BTN -->
     <!-- DELETE BTN -->
     <div class="px-2">
       <button
@@ -36,19 +49,6 @@
       </button>
     </div>
     <!-- /DELETE BTN -->
-    <!-- UPDATE BTN -->
-    <div class="px-2">
-      <button
-        type="submit"
-        *ngIf="withUpdateBtn"
-        [disabled]="!userDataWasChanged || !userForm.valid"
-        class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
-      >
-        <span class="mx-1 my-auto">Update user info</span>
-        <span class="material-icons mx-2"> edit </span>
-      </button>
-    </div>
-    <!-- /UPDATE BTN -->
   </form>
 </div>
 

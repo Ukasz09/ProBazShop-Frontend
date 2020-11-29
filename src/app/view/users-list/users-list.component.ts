@@ -32,6 +32,7 @@ export class UsersListComponent implements OnInit {
   }
 
   fetchUsers() {
+    this.usersFetched = false;
     this.userService.getUsersList().subscribe(
       (data: User[]) => this.onOkUserFetchResponse(data),
       (e: HttpErrorResponse) => this.onErrorUserFetchResponse(e)
@@ -40,9 +41,6 @@ export class UsersListComponent implements OnInit {
 
   private onOkUserFetchResponse(data: User[]) {
     this.userList = data;
-    this.userList.forEach(
-      (u: User) => (u.type = UserAccountType[u.type.toString()])
-    );
     this.setActualDisplayedUserToFst();
     this.usersFetched = true;
   }
@@ -59,11 +57,25 @@ export class UsersListComponent implements OnInit {
   }
 
   onUpdateConfirmed(updatedUser: User) {
-    console.log(updatedUser);
+    this.userService.updateUser(updatedUser).subscribe(
+      (response: any) =>
+        this.onCorrectUserUpdateResponse(response.message, updatedUser),
+      (err: HttpErrorResponse) => this.onErrorUserUpdateResponse(err)
+    );
+  }
+
+  private onCorrectUserUpdateResponse(msg: string, updatedUser: User) {
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.USER_UPDATE_CONFIRMED_ID,
-        'User correctly updated'
+      FormAlerts.getSuccessAlert(FormAlerts.USER_UPDATE_SUCCESSFUL, msg)
+    );
+    this.fetchUsers();
+  }
+
+  private onErrorUserUpdateResponse(error: HttpErrorResponse) {
+    this.alertService.addAlert(
+      FormAlerts.getDangerFormAlert(
+        FormAlerts.USER_UPDATE_ERROR,
+        error.status + ': ' + error.statusText + ' - ' + error.error?.message
       )
     );
   }
@@ -83,5 +95,9 @@ export class UsersListComponent implements OnInit {
   private deleteUserFromArr(user: User) {
     const index = this.userList.indexOf(user, 0);
     if (index > -1) this.userList.splice(index, 1);
+  }
+
+  showDeleteBtn(user: User): boolean {
+    return user.id != this.actualLoggedUser.id;
   }
 }

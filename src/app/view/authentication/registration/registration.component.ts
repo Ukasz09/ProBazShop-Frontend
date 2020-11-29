@@ -65,21 +65,21 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerUser() {
-    let newUserData=this.unpatchUserFromForm();
+    let newUserData = this.unpatchUserFromForm();
     this.userService.postUser(newUserData).subscribe(
-      (response) => {
-        console.log(response);
-        this.registrationIsDone = true;
-        this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
-        this.alertService.addAlert(
-          FormAlerts.getSuccessAlert(
-            FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
-            'Successful account registration'
-          )
-        );
-      },
+      (_) => this.onCorrectRegisterUserResponse(),
       (err: HttpErrorResponse) => console.log(err)
     );
+  }
+
+  private onCorrectRegisterUserResponse() {
+    this.registrationIsDone = true;
+    this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
+    let alertModel = FormAlerts.getSuccessAlert(
+      FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+      'Successful account registration'
+    );
+    this.alertService.addAlert(alertModel);
   }
 
   onBackBtnClick(template: TemplateRef<any>) {
@@ -124,7 +124,6 @@ export class RegistrationComponent implements OnInit {
       history,
       type
     );
-    console.log('USER TO SEND:', user);
     return user;
   }
 

@@ -20,7 +20,7 @@
           <app-user-info-content
             [user]="actualChosenUser"
             [withUpdateBtn]="true"
-            [withDeleteBtn]="user != actualLoggedUser"
+            [withDeleteBtn]="showDeleteBtn(user)"
             (deleteConfirmed)="onDeleteUserConfirmed(user)"
             (updateConfirmed)="onUpdateConfirmed($event)"
           ></app-user-info-content>

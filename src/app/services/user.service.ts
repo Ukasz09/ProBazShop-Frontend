@@ -5,10 +5,7 @@ import { OrderedProduct } from '../model/ordered-product';
 import { User } from '../model/user';
 import { environment } from 'src/environments/environment';
 import { UserEndpoints } from 'src/app/data/UserEndpoints';
-
-import { catchError, map, tap } from 'rxjs/operators';
-import { Product } from '../model/product';
-import { ProductsService } from './products.service';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,7 +28,7 @@ export class UserService {
     // '/assets/mock/empty-arr.json'
   }
 
-  postUser(user: User):Observable<User> {
+  postUser(user: User): Observable<User> {
     let endpoint = environment.API_URL + UserEndpoints.USERS_URI;
     return this.http.post<User>(endpoint, user);
   }
@@ -39,7 +36,7 @@ export class UserService {
   updateUser(user: User) {
     let endpoint =
       environment.API_URL + UserEndpoints.USERS_URI + '/' + user.id;
-    return this.http.put<User>(endpoint, user);
+    return this.http.put(endpoint, user);
   }
 
   orderProducts(user: User, cartProducts: OrderedProduct[]) {
@@ -50,9 +47,10 @@ export class UserService {
   }
 
   getUsersList(): Observable<User[]> {
-    return this.http.get<User[]>(
-      '/assets/mock/users.json'
-      // '/assets/mock/empty-arr.json'
-    );
+    let endpoint = environment.API_URL + UserEndpoints.USERS_URI;
+    return this.http.get<User[]>(endpoint);
+
+    // '/assets/mock/users.json'
+    // '/assets/mock/empty-arr.json'
   }
 }
