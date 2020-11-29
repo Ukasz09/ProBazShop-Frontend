@@ -37,12 +37,12 @@ import { EmptyResultsComponent } from './shared/components/empty-results/empty-r
 import { UserInfoComponent } from './view/user-info/user-info.component';
 import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
 import { ErrorResponseComponent } from './shared/components/error-response/error-response.component';
-import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { UsersListComponent } from './view/users-list/users-list.component';
 import { UserRowComponentComponent } from './view/users-list/user-row-component/user-row-component.component';
 import { UserInfoContentComponent } from './view/user-info/user-info-content/user-info-content.component';
 import { NavbarComponent } from './view/navbar/navbar.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
+import { Page404Component } from './view/page404/page404.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,11 +71,11 @@ import { UnauthorizedComponent } from './shared/components/unauthorized/unauthor
     UserInfoComponent,
     ShipmentPageComponent,
     ErrorResponseComponent,
-    NotFoundComponent,
     UsersListComponent,
     UserRowComponentComponent,
     UserInfoContentComponent,
     UnauthorizedComponent,
+    Page404Component,
   ],
   imports: [
     HttpClientModule,

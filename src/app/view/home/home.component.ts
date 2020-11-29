@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -8,12 +9,16 @@ import {
 } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { AppAlerts } from 'src/app/shared/app-alerts';
+import { ProductItemDetailsComponent } from 'src/app/shared/components/modals/product-item-details/product-item-details.component';
+import { ProductsListComponent } from './products-list/products-list.component';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +30,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
 
   @ViewChild('details') productDetailsTemplate: TemplateRef<any>;
+  @ViewChild('productList') productListComponent: ProductsListComponent;
+
   selectedProductSubscription: Subscription;
 
+  lastUpdatedProductFormData: Product = undefined;
+  markedToDeleteProductId: string = undefined;
   deatilsModalOptions: ModalOptions = { class: 'modal-lg' };
   confirmModalOptions: ModalOptions = { class: 'modal-sm' };
   chosenProduct: Product = undefined;
@@ -37,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private alertService: AlertsService,
     private modalService: BsModalService,
     private cartService: CartService,
+    private productService: ProductsService,
     private navbarService: NavbarService
   ) {}
 
@@ -116,12 +126,20 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onDeleteProductConfirm() {
     this.modalRef.hide();
-    this.alertService.addAlert(
-      AppAlerts.getSuccessAlert(
-        AppAlerts.PRODUCT_REMOVE_CONFIRMED_ID,
-        'Product remove confirmed'
-      )
+    this.productService.deleteProduct(this.markedToDeleteProductId).subscribe(
+      (response) => {
+        this.onCorrectResponse(
+          AppAlerts.PRODUCT_DELETE_SUCCESSFUL,
+          response?.message
+        );
+      },
+      (err: HttpErrorResponse) => {
+        let alertMsg =
+          err.status + ': ' + err.statusText + ' - ' + err.error.message;
+        this.onErrorResponse(AppAlerts.PRODUCT_DELETE_ERROR, alertMsg);
+      }
     );
+    this.markedToDeleteProductId = undefined;
   }
 
   onUpdateProductDecline() {
@@ -136,24 +154,45 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onUpdateProductConfirm() {
     this.modalRef.hide();
-    this.alertService.addAlert(
-      AppAlerts.getSuccessAlert(
-        AppAlerts.PRODUCT_UPDATE_CONFIRMED_ID,
-        'Product update confirmed'
-      )
-    );
+    this.productService
+      .updateProduct(this.lastUpdatedProductFormData)
+      .subscribe(
+        (response) => {
+          console.log('correct-up');
+          this.onCorrectResponse(
+            AppAlerts.PRODUCT_UPDATE_SUCCESSFUL,
+            response.message
+          );
+        },
+        (err: HttpErrorResponse) => {
+          let alertMsg =
+            err.status + ': ' + err.statusText + ' - ' + err.error.message;
+          this.onErrorResponse(AppAlerts.PRODUCT_UPDATE_ERROR, alertMsg);
+        }
+      );
 
-    console.log(this.editedProduct);
+    this.lastUpdatedProductFormData = undefined;
   }
 
-  onDeleteProductBtnClick(template: TemplateRef<any>) {
-    this.modalRef?.hide();
-    this.openModal(template, this.confirmModalOptions);
+  private onCorrectResponse(alertId: string, alertMsg: string) {
+    this.alertService.addAlert(AppAlerts.getSuccessAlert(alertId, alertMsg));
+    let filters = this.productListComponent.getFiltersMap();
+    this.productListComponent.fetchProductsWithFilters(filters);
   }
 
-  onUpdateProductBtnClick(editedProduct: Product, template: TemplateRef<any>) {
+  private onErrorResponse(alertId: string, alertMsg: string) {
+    this.alertService.addAlert(AppAlerts.getDangerFormAlert(alertId, alertMsg));
+  }
+
+  onDeleteProductBtnClick(product: Product, template: TemplateRef<any>) {
     this.modalRef?.hide();
     this.openModal(template, this.confirmModalOptions);
-    this.editedProduct = editedProduct;
+    this.markedToDeleteProductId = product.id;
+  }
+
+  onUpdateProductBtnClick(updatedProduct: Product, template: TemplateRef<any>) {
+    this.modalRef?.hide();
+    this.lastUpdatedProductFormData = updatedProduct;
+    this.openModal(template, this.confirmModalOptions);
   }
 }

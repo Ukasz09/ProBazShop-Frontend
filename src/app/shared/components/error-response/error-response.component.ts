@@ -12,13 +12,5 @@ export class ErrorResponseComponent  {
   @Input() errorTextFontSize: string = '1.4em';
   @Input() errorCodeFontSize: string = '5em';
 
-  constructor(private navbarService: NavbarService) {}
-
-  // ngOnInit(): void {
-  //   this.navbarService.navbarIsVisible = false;
-  // }
-
-  // ngOnDestroy(): void {
-  //   this.navbarService.navbarIsVisible = true;
-  // }
+  constructor() {}
 }

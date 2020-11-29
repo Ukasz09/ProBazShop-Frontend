@@ -85,4 +85,19 @@ export class ProductsService {
     return this.http.get<Product>(endpoint);
     // '/assets/mock/product:' + id + '.json'
   }
+
+  updateProduct(updatedProduct: Product): Observable<any> {
+    let endpoint =
+      environment.API_URL +
+      ProductsEndpoints.PRODUCTS_URI +
+      '/' +
+      updatedProduct.id;
+    return this.http.put<Product>(endpoint, updatedProduct);
+  }
+
+  deleteProduct(productId: string): Observable<any> {
+    let endpoint =
+      environment.API_URL + ProductsEndpoints.PRODUCTS_URI + '/' + productId;
+    return this.http.delete(endpoint);
+  }
 }

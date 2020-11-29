@@ -25,7 +25,9 @@
   <app-product-item-details
     [product]="chosenProduct"
     (addToCartClick)="onAddToCartClick($event, chosenProduct)"
-    (deleteProductClick)="onDeleteProductBtnClick(confirmDeleteModalTemplate)"
+    (deleteProductClick)="
+      onDeleteProductBtnClick($event, confirmDeleteModalTemplate)
+    "
     (updateProductClick)="
       onUpdateProductBtnClick($event, confirmUpdateModalTemplate)
     "

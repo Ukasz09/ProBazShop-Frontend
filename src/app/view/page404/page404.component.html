@@ -1,11 +1,15 @@
 <div class="mx-auto d-flex align-items-center content-container">
   <div class="flex-column w-100">
     <app-error-response
-      [errorCode]="404"
-      errorText="Page not found"
+      [errorCode]="errorCode"
+      [errorText]="errorText"
     ></app-error-response>
     <div class="w-50 mx-auto">
-      <button class="btn btn-dark text-uppercase pb-0 w-100" aria-placeholder="rtes" routerLink="/home">
+      <button
+        class="btn btn-dark text-uppercase pb-0 w-100"
+        aria-placeholder="rtes"
+        routerLink="/home"
+      >
         <span class="material-icons h-100" style="font-size: 2.5em">
           home
         </span>
