@@ -1,7 +1,14 @@
 <div class="container pt-5">
   <div class="d-flex flex-row">
     <app-categories-panel
-      (deleteFilterCick)="productList.fetchProductsWithFilters()"
+      (deleteFilterCick)="
+        productList.fetchProductsWithFilters(productList.getFiltersMap())
+      "
+      (addFilterCick)="
+        productList.fetchProductsWithFilters(productList.getFiltersMap())
+      "
+      [productsDataReady]="productList.productsDataReady"
+      [priceSliderOptions]="productList.priceSliderOptions"
     ></app-categories-panel>
     <div class="flex-fill">
       <app-products-list

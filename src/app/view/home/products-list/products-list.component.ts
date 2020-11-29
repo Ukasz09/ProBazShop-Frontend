@@ -1,3 +1,4 @@
+import { Options } from '@angular-slider/ngx-slider';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -15,10 +16,7 @@ import { SortMethod } from 'src/app/model/sort-method';
 import { FilterService } from 'src/app/services/filter.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
-import {
-  FilterElem,
-  FilterType,
-} from '../categories-panel/applied-filters/filter-model';
+import { FilterType } from '../categories-panel/applied-filters/filter-model';
 
 @Component({
   selector: 'app-products-list',
@@ -47,7 +45,7 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   productsPerPage: Product[] = [];
   httpError: { statusCode: number; msg: string } = undefined;
   phraseSuggestionSubscription: Subscription;
-
+  priceSliderOptions: Options = this.getSliderOptions(300);
   constructor(
     private productService: ProductsService,
     private navbarService: NavbarService,
@@ -72,10 +70,21 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.navbarService.phraseSuggestion$.next('');
   }
 
+  private getSliderOptions(maxProductPrice: number): Options {
+    return {
+      floor: 0,
+      ceil: maxProductPrice,
+      translate: (value: number): string => {
+        return '$' + value;
+      },
+    };
+  }
+
   private fetchAllProducts() {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
         this.initProductsFromData(data);
+        this.priceSliderOptions = this.getSliderOptions(this.getMaxProductPrice());
         this.productsDataReady = true;
       },
       (e: HttpErrorResponse) => this.onDataFetchErrorResponse(e)
@@ -85,6 +94,13 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   private initProductsFromData(data: Product[]) {
     this.products = data;
     this.productsPerPage = this.products.slice(0, this.itemsPerPage);
+  }
+
+  private getMaxProductPrice() {
+    let maxPrice = 0;
+    for (let product of this.products)
+      if (product.price > maxPrice) maxPrice = product.price;
+    return maxPrice;
   }
 
   private onDataFetchErrorResponse(error: HttpErrorResponse) {
@@ -105,28 +121,56 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private onSearchBtnClick(searchedPhrase: string) {
-    this.fetchProductsWithNameFilter(searchedPhrase);
     this.filterService.removeFstFilterWithType(FilterType.SEARCH_PHRASE);
     this.filterService.addFilter(searchedPhrase, FilterType.SEARCH_PHRASE);
+    this.fetchProductsWithFilters(this.getFiltersMap());
   }
 
-  fetchProductsWithFilters() {
-    //TODO: tmp
+  getFiltersMap(): Map<FilterType, string[]> {
     let filters = this.filterService.appliedFilters;
-    this.productsDataReady = false;
-    this.fetchAllProducts();
+    console.log(filters);
+    let filtersMap: Map<FilterType, string[]> = new Map([
+      [FilterType.CATEGORY, []],
+      [FilterType.COLOR, []],
+      [FilterType.SIZE, []],
+      [FilterType.SEARCH_PHRASE, []],
+      [FilterType.PRICE_LOW, []],
+      [FilterType.PRICE_HIGH, []],
+    ]);
+    for (let filter of filters) filtersMap.get(filter.type).push(filter.value);
+    console.log(filtersMap);
+    return filtersMap;
   }
 
-  private fetchProductsWithNameFilter(name: string) {
+  fetchProductsWithFilters(filtersMap: Map<FilterType, string[]>) {
     //TODO: change to get other filters
     this.productsDataReady = false;
-    this.productService.getAllProductsFilterName(name).subscribe(
-      (data: Product[]) => {
-        this.initProductsFromData(data);
-        this.productsDataReady = true;
-      },
-      (e: HttpErrorResponse) => this.onDataFetchErrorResponse(e)
-    );
+    let nameArr = filtersMap.get(FilterType.SEARCH_PHRASE);
+    let name = nameArr.length > 0 ? nameArr[0] : undefined;
+    let category = filtersMap.get(FilterType.CATEGORY);
+    let color = filtersMap.get(FilterType.COLOR);
+    let priceLTEArr = filtersMap.get(FilterType.PRICE_HIGH);
+    let priceLTE = priceLTEArr.length > 0 ? priceLTEArr[0] : undefined;
+    let priceGTEArr = filtersMap.get(FilterType.PRICE_LOW);
+    let priceGTE = priceGTEArr.length > 0 ? priceGTEArr[0] : undefined;
+    let sizes = filtersMap.get(FilterType.SIZE);
+
+    this.productService
+      .getAllProductsWithFilters(
+        name,
+        category,
+        color,
+        priceLTE,
+        priceGTE,
+        sizes
+      )
+      .subscribe(
+        (data: Product[]) => {
+          this.initProductsFromData(data);
+          this.productsDataReady = true;
+        },
+        (e: HttpErrorResponse) => this.onDataFetchErrorResponse(e)
+      );
   }
 
   pageChanged(event: PageChangedEvent): void {

@@ -1,3 +1,4 @@
 export class ProductsEndpoints {
-  static readonly ALL_PRODUCTS_URI = '/api/items';
+  static readonly PRODUCTS_URI = '/api/items';
+  static readonly CATEGORIES_URI = '/api/categories';
 }

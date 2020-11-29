@@ -1,6 +1,7 @@
 export enum FilterType {
-  TEXT,
-  BUTTON,
+  CATEGORY,
+  SIZE,
+  COLOR,
   PRICE_LOW,
   PRICE_HIGH,
   SEARCH_PHRASE

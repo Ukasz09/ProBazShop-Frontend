@@ -3,15 +3,21 @@
   <div *ngFor="let filter of filters" class="mb-2">
     <div class="btn-group w-75">
       <ng-container [ngSwitch]="filter.type">
-        <div *ngSwitchCase="FilterTypes.BUTTON" class="d-flex flex-fill">
+        <div *ngSwitchCase="FilterTypes.COLOR" class="d-flex flex-fill">
           <button
             class="border border-secondary rounded w-100 custom-btn"
-            [ngStyle]="{ 'background-color': filter.value }"
+            [ngStyle]="{ 'background-color': '#' + filter.value }"
             disabled
           ></button>
         </div>
         <ng-container *ngSwitchCase="FilterTypes.SEARCH_PHRASE">
           <ng-container *ngTemplateOutlet="searchPhraseTemplate"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="FilterTypes.PRICE_LOW">
+          <ng-container *ngTemplateOutlet="priceLowTemplate"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="FilterTypes.PRICE_HIGH">
+          <ng-container *ngTemplateOutlet="priceHighTemplate"></ng-container>
         </ng-container>
         <ng-container *ngSwitchDefault>
           <ng-container *ngTemplateOutlet="normalTextTemplate"></ng-container>
@@ -36,6 +42,20 @@
         <span>
           {{ filter.value }}
         </span>
+      </div>
+    </ng-template>
+    <ng-template #priceLowTemplate>
+      <div
+        class="bg-light border border-secondary justify-content-center btn d-flex py-0 custom-btn"
+      >
+        <span> > ${{ filter.value }} </span>
+      </div>
+    </ng-template>
+    <ng-template #priceHighTemplate>
+      <div
+        class="bg-light border border-secondary justify-content-center btn d-flex py-0 custom-btn"
+      >
+        <span> < ${{ filter.value }} </span>
       </div>
     </ng-template>
     <ng-template #searchPhraseTemplate>

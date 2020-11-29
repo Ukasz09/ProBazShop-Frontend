@@ -4,6 +4,7 @@ import {
   AfterViewChecked,
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -20,33 +21,45 @@ import { FilterElem, FilterType } from './applied-filters/filter-model';
 export class CategoriesPanelComponent implements OnInit {
   FilterType = FilterType;
 
+  @Input() productsDataReady = false;
+  @Input() priceSliderOptions: Options;
+  // @Input() maxProductPrice: number;
+  
   @Output() deleteFilterCick = new EventEmitter();
+  @Output() addFilterCick = new EventEmitter();
+
   priceSliderControl = new FormControl([0, 500]);
-  priceSliderOptions: Options = {
-    floor: 0,
-    ceil: 500,
-    translate: (value: number): string => {
-      return '$' + value;
-    },
-  };
+  // priceSliderOptions: Options = {
+  //   floor: 0,
+  //   ceil:500,
+  //   translate: (value: number): string => {
+  //     return '$' + value;
+  //   },
+  // };
   categoriesDataReady = false;
   categories: string[] = [];
   colors: string[] = [
-    '#FFFFFF',
-    '#F44336',
-    '#4CAF50',
-    '#2196F3',
-    '#FFC107',
-    '#212121',
-    '#795548',
-    '#9E9E9E',
+    'FFFFFF',
+    'F44336',
+    '4CAF50',
+    '2196F3',
+    'FFC107',
+    '212121',
+    '795548',
+    '9E9E9E',
+    'FF4081',
   ];
+
   sizes: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
   httpError: { statusCode: number; msg: string } = undefined;
 
   get appliedFilters(): FilterElem[] {
     return this.filterService.appliedFilters;
   }
+
+  // get dataReady(): boolean {
+  //   return this.categoriesDataReady && this.productsDataReady;
+  // }
 
   constructor(
     private productService: ProductsService,
@@ -74,16 +87,18 @@ export class CategoriesPanelComponent implements OnInit {
 
   private addLowPriceFilter() {
     this.filterService.addFilter(
-      '>' + ' $' + this.priceSliderControl.value[0],
+      this.priceSliderControl.value[0],
       FilterType.PRICE_LOW
     );
+    this.addFilterCick.emit();
   }
 
   private addHighPriceFilter() {
     this.filterService.addFilter(
-      '<' + ' $' + this.priceSliderControl.value[1],
+      this.priceSliderControl.value[1],
       FilterType.PRICE_HIGH
     );
+    this.addFilterCick.emit();
   }
 
   onDeleteFilterClick(filter: FilterElem) {
@@ -117,5 +132,6 @@ export class CategoriesPanelComponent implements OnInit {
 
   addFilter(value: string, filterType: FilterType) {
     this.filterService.addFilter(value, filterType);
+    this.addFilterCick.emit();
   }
 }

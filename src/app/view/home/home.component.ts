@@ -12,11 +12,8 @@ import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
-import { FilterService } from 'src/app/services/filter.service';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { ProductsService } from 'src/app/services/products.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
-import { FilterType } from './categories-panel/applied-filters/filter-model';
 
 @Component({
   selector: 'app-home',

@@ -2,79 +2,83 @@
   <label class="text-center category-container-header mt-3">FILTERS</label>
   <hr class="custom-hr" />
 
-  <!-- ACTUAL FILTERS -->
-  <div class="w-100 h-100 text-center category-container-header">
-    <app-applied-filters
-      [filters]="appliedFilters"
-      (deleteElementClick)="onDeleteFilterClick($event)"
-    ></app-applied-filters>
-  </div>
-  <!-- /ACTUAL FILTERS -->
+  <ng-container *ngIf="productsDataReady; else dataNotFetchedTemplate">
+    <!-- ACTUAL FILTERS -->
+    <div class="w-100 h-100 text-center category-container-header">
+      <app-applied-filters *ngIf="appliedFilters.length>0"
+        [filters]="appliedFilters"
+        (deleteElementClick)="onDeleteFilterClick($event)"
+      ></app-applied-filters>
+    </div>
+    <!-- /ACTUAL FILTERS -->
 
-  <!-- CATEGORIES -->
-  <label class="text-center category-container-header my-3">Categories:</label>
-  <ng-container *ngIf="categoriesDataReady; else historyNotFetchedTemplate">
-    <div *ngFor="let category of categories">
-      <button
-        type="button"
-        class="btn btn-outline-danger border-0 btn-category w-100"
-        (click)="addFilter(category, FilterType.TEXT)"
+    <!-- CATEGORIES -->
+    <label class="text-center category-container-header my-3"
+      >Categories:</label
+    >
+    <ng-container *ngIf="categoriesDataReady; else dataNotFetchedTemplate">
+      <div *ngFor="let category of categories">
+        <button
+          type="button"
+          class="btn btn-outline-danger border-0 btn-category w-100"
+          (click)="addFilter(category, FilterType.CATEGORY)"
+        >
+          {{ category | titlecase }}
+        </button>
+      </div>
+    </ng-container>
+    <!-- /CATEGORIES -->
+    <!-- COLORS BAR -->
+    <div><hr /></div>
+    <label class="text-center category-container-header">Color:</label>
+    <div class="justify-content-center row mx-0 px-3">
+      <div
+        *ngFor="let color of colors"
+        class="col-sm-3 px-0 my-1 d-flex justify-content-center"
       >
-        {{ category | titlecase }}
-      </button>
+        <button
+          class="border border-secondary btn btn-outline-danger"
+          style="height: 20px; width: 20px"
+          [ngStyle]="{ 'background-color': '#' + color }"
+          (click)="addFilter(color, FilterType.COLOR)"
+        ></button>
+      </div>
     </div>
+    <!-- /COLORS BAR -->
+    <!-- SIZES BAR -->
+    <div><hr /></div>
+    <label class="text-center category-container-header">Size:</label>
+    <div class="justify-content-center row mx-0 preferences-panel px-3">
+      <div
+        *ngFor="let size of sizes"
+        class="col-sm-3 px-0 my-1 d-flex justify-content-center"
+      >
+        <button
+          style="font-size: small"
+          class="border-dark btn btn-outline-dark w-100 mx-1"
+          (click)="addFilter(size, FilterType.SIZE)"
+        >
+          {{ size }}
+        </button>
+      </div>
+    </div>
+    <!-- /SIZES BAR -->
+    <!-- PRICE SLIDER -->
+    <div><hr /></div>
+    <label class="text-center category-container-header pb-2"> Price: </label>
+    <div class="custom-slider mx-auto pb-4" style="width: 80%">
+      <ngx-slider
+        [formControl]="priceSliderControl"
+        [options]="priceSliderOptions"
+        (userChangeEnd)="updatePriceFilter($event)"
+      ></ngx-slider>
+    </div>
+    <!-- /PRICE SLIDER -->
   </ng-container>
-  <!-- /CATEGORIES -->
-  <!-- COLORS BAR -->
-  <div><hr /></div>
-  <label class="text-center category-container-header">Color:</label>
-  <div class="justify-content-center row mx-0 px-3">
-    <div
-      *ngFor="let color of colors"
-      class="col-sm-3 px-0 my-1 d-flex justify-content-center"
-    >
-      <button
-        class="border border-secondary btn btn-outline-danger"
-        style="height: 20px; width: 20px"
-        [ngStyle]="{ 'background-color': color }"
-        (click)="addFilter(color, FilterType.BUTTON)"
-      ></button>
-    </div>
-  </div>
-  <!-- /COLORS BAR -->
-  <!-- SIZES BAR -->
-  <div><hr /></div>
-  <label class="text-center category-container-header">Size:</label>
-  <div class="justify-content-center row mx-0 preferences-panel px-3">
-    <div
-      *ngFor="let size of sizes"
-      class="col-sm-3 px-0 my-1 d-flex justify-content-center"
-    >
-      <button
-        style="font-size: small"
-        class="border-dark btn btn-outline-dark w-100 mx-1"
-        (click)="addFilter(size, FilterType.TEXT)"
-      >
-        {{ size }}
-      </button>
-    </div>
-  </div>
-  <!-- /SIZES BAR -->
-  <!-- PRICE SLIDER -->
-  <div><hr /></div>
-  <label class="text-center category-container-header pb-2"> Price: </label>
-  <div class="custom-slider mx-auto pb-4" style="width: 80%">
-    <ngx-slider
-      [formControl]="priceSliderControl"
-      [options]="priceSliderOptions"
-      (userChangeEnd)="updatePriceFilter($event)"
-    ></ngx-slider>
-  </div>
-  <!-- /PRICE SLIDER -->
 </div>
 
 <!-- TEMPLATES -->
-<ng-template #historyNotFetchedTemplate>
+<ng-template #dataNotFetchedTemplate>
   <ng-container *ngIf="httpError !== undefined; else dataLoadingTemplate">
     <div class="preferences-panel">
       <div class="w-75 mx-auto">
@@ -91,5 +95,5 @@
 </ng-template>
 
 <ng-template #dataLoadingTemplate>
-  <app-data-loading text="Loading categories"></app-data-loading>
+  <app-data-loading text="Loading data"></app-data-loading>
 </ng-template>
