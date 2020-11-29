@@ -9,9 +9,7 @@ import { SortMethod } from 'src/app/model/sort-method';
 export class SortBtnComponent implements OnInit {
   @Input() sortingMethods: Map<string, SortMethod<any>> = new Map();
   @Input() initSortMethod: SortMethod<any>;
-  @Output() sortMethodChange: EventEmitter<
-    SortMethod<any>
-  > = new EventEmitter();
+  @Output() sortMethodChange: EventEmitter<string> = new EventEmitter();
   actualSortingMethod: SortMethod<any> = undefined;
 
   get sortingMethodsKeys(): string[] {
@@ -36,7 +34,7 @@ export class SortBtnComponent implements OnInit {
 
   changeSortingMethod(methodKey: string) {
     this.actualSortingMethod = this.getSortingMethod(methodKey);
-    this.sortMethodChange.emit(this.actualSortingMethod);
+    this.sortMethodChange.emit(methodKey);
   }
 
   getSortingMethodLabelTxt(methodKey: string): string {

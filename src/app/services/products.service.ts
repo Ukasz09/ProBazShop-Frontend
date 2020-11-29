@@ -32,7 +32,8 @@ export class ProductsService {
     color: string[],
     priceLTE: string,
     priceGTE: string,
-    size: string[]
+    size: string[],
+    sort: string
   ): Observable<Product[]> {
     console.log(name, category, color, priceLTE, priceGTE, size);
     let endpoint = environment.API_URL + ProductsEndpoints.PRODUCTS_URI;
@@ -70,11 +71,18 @@ export class ProductsService {
       endpoint += endpoint.charAt(endpoint.length - 1) == '?' ? '' : '&';
       endpoint += priceLTEQuery;
     }
+    if (sort !== undefined) {
+      endpoint += endpoint.charAt(endpoint.length - 1) == '?' ? '' : '&';
+      endpoint += 'sort=' + sort;
+    }
     console.log(endpoint);
     return this.http.get<Product[]>(endpoint);
   }
 
   getProduct(id: string): Observable<Product> {
-    return this.http.get<Product>('/assets/mock/product:' + id + '.json');
+    let endpoint =
+      environment.API_URL + ProductsEndpoints.PRODUCTS_URI + '/' + id;
+    return this.http.get<Product>(endpoint);
+    // '/assets/mock/product:' + id + '.json'
   }
 }

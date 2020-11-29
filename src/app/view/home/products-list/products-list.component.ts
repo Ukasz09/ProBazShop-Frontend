@@ -29,7 +29,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     ['newest', new SortMethod<Product>('From newest')],
     ['low', new SortMethod<Product>('Price: low to high')],
     ['high', new SortMethod<Product>('Price: high to low')],
-    ['oldest', new SortMethod<Product>('From oldest')],
   ]);
 
   @Output() addToCartClick: EventEmitter<
@@ -37,7 +36,7 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   > = new EventEmitter();
   @Output() productRowClick: EventEmitter<Product> = new EventEmitter();
 
-  initSortMethodKey = 'newest';
+  actualSortMethodKey = 'newest';
   productsDataReady = false;
   itemsPerPage = 5;
   maxPaginationItems = 12;
@@ -84,7 +83,9 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
         this.initProductsFromData(data);
-        this.priceSliderOptions = this.getSliderOptions(this.getMaxProductPrice());
+        this.priceSliderOptions = this.getSliderOptions(
+          this.getMaxProductPrice()
+        );
         this.productsDataReady = true;
       },
       (e: HttpErrorResponse) => this.onDataFetchErrorResponse(e)
@@ -155,6 +156,11 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     let priceGTE = priceGTEArr.length > 0 ? priceGTEArr[0] : undefined;
     let sizes = filtersMap.get(FilterType.SIZE);
 
+    let sort: string = undefined;
+    if (this.actualSortMethodKey == 'low') sort = 'asc';
+    else if (this.actualSortMethodKey == 'high') sort = 'desc';
+    console.log(sort)
+
     this.productService
       .getAllProductsWithFilters(
         name,
@@ -162,7 +168,8 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
         color,
         priceLTE,
         priceGTE,
-        sizes
+        sizes,
+        sort
       )
       .subscribe(
         (data: Product[]) => {
@@ -190,8 +197,9 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 16);
   }
 
-  changeSortingMethod(sortMethod: SortMethod<Product>) {
-    console.log('Need to apply sort for: ', sortMethod.labelText);
+  changeSortingMethod(sortMethodKey: string) {
+    this.actualSortMethodKey = sortMethodKey;
+    this.fetchProductsWithFilters(this.getFiltersMap());
   }
 
   onAddToCartClick(cartProduct: CartProduct, product: Product) {

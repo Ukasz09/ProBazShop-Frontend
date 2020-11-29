@@ -59,7 +59,8 @@ export class ShoppingHistoryComponent implements OnInit {
     this.actualDisplayedProduct = product;
   }
 
-  changeSortingMethod(sortMethod: SortMethod<OrderedProduct>) {
+  changeSortingMethod(sortMethodKey:string) {
+    let sortMethod: SortMethod<OrderedProduct> = this.availableSortMethods.get(sortMethodKey)
     this.sortShopingHistoryInPlace(sortMethod);
   }
 
