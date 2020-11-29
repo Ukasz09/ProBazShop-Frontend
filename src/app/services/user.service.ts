@@ -31,8 +31,9 @@ export class UserService {
     // '/assets/mock/empty-arr.json'
   }
 
-  postUser(user: User) {
-    //TODO: perform post operation
+  postUser(user: User):Observable<User> {
+    let endpoint = environment.API_URL + UserEndpoints.USERS_URI;
+    return this.http.post<User>(endpoint, user);
   }
 
   updateUser(user: User) {

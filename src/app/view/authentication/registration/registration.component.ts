@@ -1,8 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RegistrationFormModel } from 'src/app/model/form/registration-form.model';
+import { OrderedProduct } from 'src/app/model/ordered-product';
+import { User } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
@@ -36,15 +39,15 @@ export class RegistrationComponent implements OnInit {
 
   onRegisterBtnClick() {
     if (this.registrationForm.dirty && this.registrationForm.valid) {
-      this.userService.postUser(undefined);
-      this.registrationIsDone = true;
-      this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
-      this.alertService.addAlert(
-        FormAlerts.getSuccessAlert(
-          FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
-          'Successful account registration'
-        )
-      );
+      if (this.passwordAreEquals()) this.registerUser();
+      else {
+        this.alertService.addAlert(
+          FormAlerts.getDangerFormAlert(
+            FormAlerts.INVALID_DATA_ALERT_ID,
+            'Passwords are not the same'
+          )
+        );
+      }
     } else {
       this.alertService.addAlert(
         FormAlerts.getDangerFormAlert(
@@ -53,6 +56,30 @@ export class RegistrationComponent implements OnInit {
         )
       );
     }
+  }
+
+  private passwordAreEquals(): boolean {
+    let password1 = this.passwordFormControl.value;
+    let password2 = this.confirmPasswordFormControl.value;
+    return password1 == password2;
+  }
+
+  registerUser() {
+    let newUserData=this.unpatchUserFromForm();
+    this.userService.postUser(newUserData).subscribe(
+      (response) => {
+        console.log(response);
+        this.registrationIsDone = true;
+        this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
+        this.alertService.addAlert(
+          FormAlerts.getSuccessAlert(
+            FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+            'Successful account registration'
+          )
+        );
+      },
+      (err: HttpErrorResponse) => console.log(err)
+    );
   }
 
   onBackBtnClick(template: TemplateRef<any>) {
@@ -79,5 +106,46 @@ export class RegistrationComponent implements OnInit {
 
   removeAlert(id: string) {
     this.alertService.removeAlertWithId(id);
+  }
+
+  private unpatchUserFromForm(): User {
+    let name = this.nameFormControl.value;
+    let surname = this.surnameFormControl.value;
+    let email = this.emailFormControl.value;
+    let password = this.passwordFormControl.value;
+    let history: OrderedProduct[] = [];
+    let type = 'CLIENT';
+    let user = new User(
+      undefined,
+      name,
+      surname,
+      email,
+      password,
+      history,
+      type
+    );
+    console.log('USER TO SEND:', user);
+    return user;
+  }
+
+  /* --------------------------------------------------------------------------------------------------- */
+  get nameFormControl(): FormControl {
+    return this.registrationForm.get('name') as FormControl;
+  }
+
+  get surnameFormControl(): FormControl {
+    return this.registrationForm.get('surname') as FormControl;
+  }
+
+  get emailFormControl(): FormControl {
+    return this.registrationForm.get('email') as FormControl;
+  }
+
+  get passwordFormControl(): FormControl {
+    return this.registrationForm.get('password') as FormControl;
+  }
+
+  get confirmPasswordFormControl(): FormControl {
+    return this.registrationForm.get('confirmPassword') as FormControl;
   }
 }
