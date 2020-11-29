@@ -5,7 +5,7 @@ import { User } from 'src/app/model/user';
 import { AlertsService as AlertService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 
 @Component({
   selector: 'app-user-info',
@@ -42,15 +42,15 @@ export class UserInfoComponent implements OnInit {
 
   private onCorrectUserUpdateResponse(msg: string, updatedUser: User) {
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(FormAlerts.USER_UPDATE_SUCCESSFUL, msg)
+      AppAlerts.getSuccessAlert(AppAlerts.USER_UPDATE_SUCCESSFUL, msg)
     );
     this.authService.setLoggedUser(updatedUser);
   }
 
   private onErrorUserUpdateResponse(error: HttpErrorResponse) {
     this.alertService.addAlert(
-      FormAlerts.getDangerFormAlert(
-        FormAlerts.USER_UPDATE_ERROR,
+      AppAlerts.getDangerFormAlert(
+        AppAlerts.USER_UPDATE_ERROR,
         error.status + ': ' + error.statusText + ' - ' + error.error?.message
       )
     );
@@ -59,8 +59,8 @@ export class UserInfoComponent implements OnInit {
   onDeleteUserConfirmed() {
     console.log('Need to delete user');
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.USER_REMOVE_CONFIRMED_ID,
+      AppAlerts.getSuccessAlert(
+        AppAlerts.USER_DELETE_SUCCESSFUL,
         'User correctly removed'
       )
     );

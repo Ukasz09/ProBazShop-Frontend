@@ -8,7 +8,7 @@ import { OrderedProduct } from 'src/app/model/ordered-product';
 import { User } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { UserService } from 'src/app/services/user.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({
@@ -42,16 +42,16 @@ export class RegistrationComponent implements OnInit {
       if (this.passwordAreEquals()) this.registerUser();
       else {
         this.alertService.addAlert(
-          FormAlerts.getDangerFormAlert(
-            FormAlerts.INVALID_DATA_ALERT_ID,
+          AppAlerts.getDangerFormAlert(
+            AppAlerts.INVALID_DATA_ALERT_ID,
             'Passwords are not the same'
           )
         );
       }
     } else {
       this.alertService.addAlert(
-        FormAlerts.getDangerFormAlert(
-          FormAlerts.INVALID_DATA_ALERT_ID,
+        AppAlerts.getDangerFormAlert(
+          AppAlerts.INVALID_DATA_ALERT_ID,
           'Invalid data in form'
         )
       );
@@ -74,9 +74,9 @@ export class RegistrationComponent implements OnInit {
 
   private onCorrectRegisterUserResponse() {
     this.registrationIsDone = true;
-    this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
-    let alertModel = FormAlerts.getSuccessAlert(
-      FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+    this.alertService.removeAlertWithId(AppAlerts.INVALID_DATA_ALERT_ID);
+    let alertModel = AppAlerts.getSuccessAlert(
+      AppAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
       'Successful account registration'
     );
     this.alertService.addAlert(alertModel);

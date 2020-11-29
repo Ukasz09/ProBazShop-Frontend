@@ -33,7 +33,7 @@ export class UserService {
     return this.http.post<User>(endpoint, user);
   }
 
-  updateUser(user: User) {
+  updateUser(user: User): Observable<any> {
     let endpoint =
       environment.API_URL + UserEndpoints.USERS_URI + '/' + user.id;
     return this.http.put(endpoint, user);
@@ -52,5 +52,10 @@ export class UserService {
 
     // '/assets/mock/users.json'
     // '/assets/mock/empty-arr.json'
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    let endpoint = environment.API_URL + UserEndpoints.USERS_URI + '/' + userId;
+    return this.http.delete(endpoint);
   }
 }

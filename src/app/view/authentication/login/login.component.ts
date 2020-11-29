@@ -6,7 +6,7 @@ import { LoginFormModel } from 'src/app/model/form/login-form.model';
 import { User } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({
@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
       this.logonUser(emailFromForm, passwordFromForm);
     } else {
       this.alertService.addAlert(
-        FormAlerts.getDangerFormAlert(
-          FormAlerts.INVALID_DATA_ALERT_ID,
+        AppAlerts.getDangerFormAlert(
+          AppAlerts.INVALID_DATA_ALERT_ID,
           'Fullfill login data'
         )
       );
@@ -62,10 +62,10 @@ export class LoginComponent implements OnInit {
           userData.type
         );
         this.authService.setLoggedUser(user);
-        this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);
+        this.alertService.removeAlertWithId(AppAlerts.INVALID_DATA_ALERT_ID);
         this.alertService.addAlert(
-          FormAlerts.getSuccessAlert(
-            FormAlerts.SUCCESSFUL_LOGON_ALERT_ID,
+          AppAlerts.getSuccessAlert(
+            AppAlerts.SUCCESSFUL_LOGON_ALERT_ID,
             'Successful logon'
           )
         );
@@ -80,8 +80,8 @@ export class LoginComponent implements OnInit {
   private onIncorrectLogonDataResponse(error: HttpErrorResponse) {
     console.log(error);
     this.alertService.addAlert(
-      FormAlerts.getDangerFormAlert(
-        FormAlerts.INVALID_DATA_ALERT_ID,
+      AppAlerts.getDangerFormAlert(
+        AppAlerts.INVALID_DATA_ALERT_ID,
         error.status + ': ' + error.statusText + ' - ' + error.error.message
       )
     );

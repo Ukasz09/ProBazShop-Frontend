@@ -1,55 +1,51 @@
 <div class="bg-light w-100 py-2">
   <div class="h4 py-3 text-center">Account info</div>
-  <form (submit)="openConfirmModal(confirmUpdateModalTemplate)">
-    <div class="my-5 mx-5">
-      <label class="font-weight-bold w-100"> Name:</label>
-      <input class="form-control w-100" [formControl]="getNameControl()" />
-      <app-control-messages [control]="getNameControl()"></app-control-messages>
-    </div>
-    <div class="my-5 mx-5">
-      <label><strong> Surname: </strong></label>
-      <input class="form-control w-100" [formControl]="getSurnameControl()" />
-      <app-control-messages [control]="getSurnameControl()"></app-control-messages>
-    </div>
-    <div class="my-5 mx-5">
-      <label><strong> Email: </strong></label>
-      <input class="form-control w-100" [formControl]="getEmailControl()" />
-      <app-control-messages [control]="getEmailControl()"></app-control-messages>
-    </div>
-    <div class="my-5 mx-5">
-      <label><strong> Account type: </strong></label>
-      <input
-        [disabled]="true"
-        class="form-control w-100"
-        [value]="AccountType"
-      />
-    </div>
-     <!-- UPDATE BTN -->
-     <div class="px-2">
-      <button
-        type="submit"
-        *ngIf="withUpdateBtn"
-        [disabled]="!userDataWasChanged || !userForm.valid"
-        class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
-      >
-        <span class="mx-1 my-auto">Update user info</span>
-        <span class="material-icons mx-2"> edit </span>
-      </button>
-    </div>
-    <!-- /UPDATE BTN -->
-    <!-- DELETE BTN -->
-    <div class="px-2">
-      <button
-        *ngIf="withDeleteBtn"
-        class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
-        (click)="openConfirmModal(confirmDeleteModalTemplate)"
-      >
-        <span class="mx-1 my-auto">Delete user</span
-        ><span class="material-icons mx-2"> delete_forever </span>
-      </button>
-    </div>
-    <!-- /DELETE BTN -->
-  </form>
+  <div class="my-5 mx-5">
+    <label class="font-weight-bold w-100"> Name:</label>
+    <input class="form-control w-100" [formControl]="getNameControl()" />
+    <app-control-messages [control]="getNameControl()"></app-control-messages>
+  </div>
+  <div class="my-5 mx-5">
+    <label><strong> Surname: </strong></label>
+    <input class="form-control w-100" [formControl]="getSurnameControl()" />
+    <app-control-messages
+      [control]="getSurnameControl()"
+    ></app-control-messages>
+  </div>
+  <div class="my-5 mx-5">
+    <label><strong> Email: </strong></label>
+    <input class="form-control w-100" [formControl]="getEmailControl()" />
+    <app-control-messages [control]="getEmailControl()"></app-control-messages>
+  </div>
+  <div class="my-5 mx-5">
+    <label><strong> Account type: </strong></label>
+    <input [disabled]="true" class="form-control w-100" [value]="AccountType" />
+  </div>
+  <!-- UPDATE BTN -->
+  <div class="px-2">
+    <button
+      (click)="openConfirmModal(confirmUpdateModalTemplate)"
+      *ngIf="withUpdateBtn"
+      [disabled]="!userDataWasChanged || !userForm.valid"
+      class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
+    >
+      <span class="mx-1 my-auto">Update user info</span>
+      <span class="material-icons mx-2"> edit </span>
+    </button>
+  </div>
+  <!-- /UPDATE BTN -->
+  <!-- DELETE BTN -->
+  <div class="px-2">
+    <button
+      *ngIf="withDeleteBtn"
+      class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
+      (click)="openConfirmModal(confirmDeleteModalTemplate)"
+    >
+      <span class="mx-1 my-auto">Delete user</span
+      ><span class="material-icons mx-2"> delete_forever </span>
+    </button>
+  </div>
+  <!-- /DELETE BTN -->
 </div>
 
 <!-- TEMPLATES -->

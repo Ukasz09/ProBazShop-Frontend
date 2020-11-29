@@ -4,7 +4,7 @@ import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 
 @Component({
   selector: 'app-users-list',
@@ -59,43 +59,47 @@ export class UsersListComponent implements OnInit {
   onUpdateConfirmed(updatedUser: User) {
     this.userService.updateUser(updatedUser).subscribe(
       (response: any) =>
-        this.onCorrectUserUpdateResponse(response.message, updatedUser),
-      (err: HttpErrorResponse) => this.onErrorUserUpdateResponse(err)
+        this.onCorrectResponse(
+          AppAlerts.USER_UPDATE_SUCCESSFUL,
+          response.message
+        ),
+      (err: HttpErrorResponse) =>
+        this.onErrorResponse(AppAlerts.USER_UPDATE_ERROR, err)
     );
   }
 
-  private onCorrectUserUpdateResponse(msg: string, updatedUser: User) {
-    this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(FormAlerts.USER_UPDATE_SUCCESSFUL, msg)
-    );
+  private onCorrectResponse(alertId: string, msg: string) {
+    this.alertService.addAlert(AppAlerts.getSuccessAlert(alertId, msg));
     this.fetchUsers();
   }
 
-  private onErrorUserUpdateResponse(error: HttpErrorResponse) {
+  private onErrorResponse(alertId: string, error: HttpErrorResponse) {
     this.alertService.addAlert(
-      FormAlerts.getDangerFormAlert(
-        FormAlerts.USER_UPDATE_ERROR,
+      AppAlerts.getDangerFormAlert(
+        alertId,
         error.status + ': ' + error.statusText + ' - ' + error.error?.message
       )
     );
   }
 
   onDeleteUserConfirmed(user: User) {
-    console.log('Need to delete user');
-    this.deleteUserFromArr(user);
-    this.setActualDisplayedUserToFst();
-    this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.USER_REMOVE_CONFIRMED_ID,
-        'User correctly removed'
-      )
+    this.userService.deleteUser(user.id).subscribe(
+      (response) => {
+        this.onCorrectResponse(
+          AppAlerts.USER_DELETE_SUCCESSFUL,
+          response.message
+        );
+        this.setActualDisplayedUserToFst();
+      },
+      (error: HttpErrorResponse) =>
+        this.onErrorResponse(AppAlerts.USER_DELETE_ERROR, error.error.message)
     );
   }
 
-  private deleteUserFromArr(user: User) {
-    const index = this.userList.indexOf(user, 0);
-    if (index > -1) this.userList.splice(index, 1);
-  }
+  // private deleteUserFromArr(user: User) {
+  //   const index = this.userList.indexOf(user, 0);
+  //   if (index > -1) this.userList.splice(index, 1);
+  // }
 
   showDeleteBtn(user: User): boolean {
     return user.id != this.actualLoggedUser.id;

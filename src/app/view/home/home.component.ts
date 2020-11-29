@@ -13,7 +13,7 @@ import { Product } from 'src/app/model/product';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 
 @Component({
   selector: 'app-home',
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private showSuccessfulAddToCartAlert() {
-    let alertModel = FormAlerts.getSuccessAlert(
+    let alertModel = AppAlerts.getSuccessAlert(
       HomeComponent.SUCCESSFUL_ADD_TO_CART_ALERT_ID,
       'Successful add to cart'
     );
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private showUnsuccessfulAddToCartAlert() {
-    let alertModel = FormAlerts.getDangerFormAlert(
+    let alertModel = AppAlerts.getDangerFormAlert(
       HomeComponent.UNSUCCESSFUL_ADD_TO_CART_ALERT_ID,
       "Don't add - in cart already maximum quantity of this product"
     );
@@ -107,8 +107,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onDeleteProductDecline() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getWarningFormAlert(
-        FormAlerts.PRODUCT_REMOVE_NOT_CONFIRMED_ID,
+      AppAlerts.getWarningFormAlert(
+        AppAlerts.PRODUCT_REMOVE_NOT_CONFIRMED_ID,
         'Product remove NOT confirmed'
       )
     );
@@ -117,8 +117,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onDeleteProductConfirm() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.PRODUCT_REMOVE_CONFIRMED_ID,
+      AppAlerts.getSuccessAlert(
+        AppAlerts.PRODUCT_REMOVE_CONFIRMED_ID,
         'Product remove confirmed'
       )
     );
@@ -127,8 +127,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onUpdateProductDecline() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getWarningFormAlert(
-        FormAlerts.PRODUCT_UPDATE_NOT_CONFIRMED_ID,
+      AppAlerts.getWarningFormAlert(
+        AppAlerts.PRODUCT_UPDATE_NOT_CONFIRMED_ID,
         'Product update NOT procedeed'
       )
     );
@@ -137,8 +137,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onUpdateProductConfirm() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.PRODUCT_UPDATE_CONFIRMED_ID,
+      AppAlerts.getSuccessAlert(
+        AppAlerts.PRODUCT_UPDATE_CONFIRMED_ID,
         'Product update confirmed'
       )
     );

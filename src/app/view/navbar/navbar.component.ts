@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 
 @Component({
   selector: 'app-navbar',
@@ -64,8 +64,8 @@ export class NavbarComponent implements OnInit {
     this.authService.logoutUser();
     this.cartService.clearProductList();
     this.alertService.addAlert(
-      FormAlerts.getSuccessAlert(
-        FormAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,
+      AppAlerts.getSuccessAlert(
+        AppAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,
         'Successful log off'
       )
     );

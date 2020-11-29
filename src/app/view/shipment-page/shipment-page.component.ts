@@ -7,7 +7,7 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({
@@ -43,8 +43,8 @@ export class ShipmentPageComponent implements OnInit {
       this.router.navigateByUrl('/home');
     } else {
       this.alertService.addAlert(
-        FormAlerts.getDangerFormAlert(
-          FormAlerts.INVALID_DATA_ALERT_ID,
+        AppAlerts.getDangerFormAlert(
+          AppAlerts.INVALID_DATA_ALERT_ID,
           'Invalid data in form'
         )
       );
@@ -62,16 +62,16 @@ export class ShipmentPageComponent implements OnInit {
           console.log('RESP:', response);
           this.cartService.clearProductList();
           this.alertService.addAlert(
-            FormAlerts.getSuccessAlert(
-              FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+            AppAlerts.getSuccessAlert(
+              AppAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
               'Successful products purchase'
             )
           );
         },
         (err: HttpErrorResponse) => {
           this.alertService.addAlert(
-            FormAlerts.getDangerFormAlert(
-              FormAlerts.INVALID_DATA_ALERT_ID,
+            AppAlerts.getDangerFormAlert(
+              AppAlerts.INVALID_DATA_ALERT_ID,
               err.status + ': ' + err.statusText + ' - ' + err.error.message
             )
           );

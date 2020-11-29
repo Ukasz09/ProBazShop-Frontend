@@ -16,7 +16,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { User, UserAccountType } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { ValidationService } from 'src/app/services/validation.service';
-import { FormAlerts } from 'src/app/shared/forms/form-alerts';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 
 @Component({
   selector: 'app-user-info-content',
@@ -59,8 +59,8 @@ export class UserInfoContentComponent implements OnInit {
   onDeleteUserDecline() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getWarningFormAlert(
-        FormAlerts.USER_REMOVE_NOT_CONFIRMED_ID,
+      AppAlerts.getWarningFormAlert(
+        AppAlerts.USER_REMOVE_NOT_CONFIRMED_ID,
         'User remove NOT confirmed'
       )
     );
@@ -74,8 +74,8 @@ export class UserInfoContentComponent implements OnInit {
   onUpdateUserDecline() {
     this.modalRef.hide();
     this.alertService.addAlert(
-      FormAlerts.getWarningFormAlert(
-        FormAlerts.USER_UPDATE_NOT_CONFIRMED_ID,
+      AppAlerts.getWarningFormAlert(
+        AppAlerts.USER_UPDATE_NOT_CONFIRMED_ID,
         'User update NOT procedeed'
       )
     );

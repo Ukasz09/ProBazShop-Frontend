@@ -95,8 +95,8 @@
       <div><hr /></div>
 
       <!-- DESCRIPTION -->
-      <div class="mx-3" >
-        <div class="py-2 text-center font-weight-bold" style="font-size: 1.2em;">
+      <div class="mx-3">
+        <div class="py-2 text-center font-weight-bold" style="font-size: 1.2em">
           DESCRIPTION
         </div>
 
@@ -120,17 +120,6 @@
       <div><hr /></div>
       <!-- DELETE UPDATE BTNS -->
       <div *ngIf="userHasAdministrativePrivileges">
-        <!-- DELETE BTN -->
-        <div class="px-2">
-          <button
-            class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
-            (click)="onUpdateProductBtnClick()"
-          >
-            <span class="mx-1 my-auto">Delete user</span
-            ><span class="material-icons mx-2"> delete_forever </span>
-          </button>
-        </div>
-        <!-- /DELETE BTN -->
         <!-- UPDATE BTN -->
         <div class="px-2">
           <button
@@ -138,11 +127,22 @@
             class="btn btn-dark btn-block text-uppercase d-flex justify-content-center"
             (click)="onUpdateProductBtnClick()"
           >
-            <span class="mx-1 my-auto">Update user info</span>
+            <span class="mx-1 my-auto">Update product</span>
             <span class="material-icons mx-2"> edit </span>
           </button>
         </div>
         <!-- /UPDATE BTN -->
+        <!-- DELETE BTN -->
+        <div class="px-2">
+          <button
+            class="btn btn-danger btn-block text-uppercase d-flex justify-content-center"
+            (click)="onUpdateProductBtnClick()"
+          >
+            <span class="mx-1 my-auto">Delete product</span
+            ><span class="material-icons mx-2"> delete_forever </span>
+          </button>
+        </div>
+        <!-- /DELETE BTN -->
       </div>
     </div>
   </div>
