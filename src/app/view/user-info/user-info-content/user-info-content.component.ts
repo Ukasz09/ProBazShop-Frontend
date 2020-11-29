@@ -31,8 +31,8 @@ export class UserInfoContentComponent implements OnInit {
   @Output() deleteConfirmed = new EventEmitter();
   @Output() updateConfirmed: EventEmitter<User> = new EventEmitter();
 
-  get AccountTypeString(): string {
-    return UserAccountType[this.user.type];
+  get AccountType(): string {
+    return this.user.type;
   }
 
   get userDataWasChanged(): boolean {
@@ -135,6 +135,7 @@ export class UserInfoContentComponent implements OnInit {
 
   private unpatchUserFromForm(): User {
     return new User(
+      this.user.id,
       this.getNameControl().value,
       this.getSurnameControl().value,
       this.getEmailControl().value,

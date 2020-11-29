@@ -3,7 +3,7 @@ export class OrderedProduct {
     public id: string,
     public name: string,
     public description: string,
-    public imageURI: string,
+    public imageURL: string,
     public size: string,
     public color: string,
     public pricePerItem: number,

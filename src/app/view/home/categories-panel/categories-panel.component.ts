@@ -5,6 +5,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -18,24 +19,17 @@ import { FilterElem, FilterType } from './applied-filters/filter-model';
   templateUrl: './categories-panel.component.html',
   styleUrls: ['./categories-panel.component.scss'],
 })
-export class CategoriesPanelComponent implements OnInit {
+export class CategoriesPanelComponent implements OnInit, OnDestroy {
   FilterType = FilterType;
 
   @Input() productsDataReady = false;
   @Input() priceSliderOptions: Options;
   // @Input() maxProductPrice: number;
-  
+
   @Output() deleteFilterCick = new EventEmitter();
   @Output() addFilterCick = new EventEmitter();
 
   priceSliderControl = new FormControl([0, 500]);
-  // priceSliderOptions: Options = {
-  //   floor: 0,
-  //   ceil:500,
-  //   translate: (value: number): string => {
-  //     return '$' + value;
-  //   },
-  // };
   categoriesDataReady = false;
   categories: string[] = [];
   colors: string[] = [
@@ -57,14 +51,14 @@ export class CategoriesPanelComponent implements OnInit {
     return this.filterService.appliedFilters;
   }
 
-  // get dataReady(): boolean {
-  //   return this.categoriesDataReady && this.productsDataReady;
-  // }
-
   constructor(
     private productService: ProductsService,
     private filterService: FilterService
   ) {}
+
+  ngOnDestroy(): void {
+    this.filterService.clearFilters();
+  }
 
   ngOnInit(): void {
     this.fetchProductCategories();

@@ -6,7 +6,7 @@
   <img
     id="image"
     alt="image not loaded"
-    [src]="orderedProduct.imageURI"
+    [src]="orderedProduct.imageURL"
     class="mx-2 rounded"
     height="90%"
   />
@@ -27,14 +27,14 @@
     <!-- /PRICE -->
     <!-- QTY -->
     <div class="mt-2">
-      <span class="font-weight-bold">Ordered qunatity:</span
+      <span class="font-weight-bold">Ordered quantity:</span
       ><span class="mx-1">{{ orderedProduct.orderedQty }}</span>
     </div>
     <!-- /QTY -->
     <!-- PURCHASE DATE -->
     <div class="mt-2">
       <span class="font-weight-bold"> Purchase date:</span>
-      <span class="mx-1">{{ orderedProduct.orderDate }}</span>
+      <span class="mx-1">{{ formattedOrderDate }}</span>
     </div>
     <!-- /PURCHASE DATE -->
     <!-- TOTAL PRICE -->

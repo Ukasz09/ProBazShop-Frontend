@@ -87,7 +87,7 @@ export class ProductItemDetailsComponent implements OnInit {
   }
 
   onAddToCartClick() {
-    let cartProduct = new CartProduct(this.product.id, this.chosenProductQty);
+    let cartProduct = new CartProduct(this.product, this.chosenProductQty);
     this.addToCartClick.emit(cartProduct);
   }
 

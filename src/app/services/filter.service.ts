@@ -34,4 +34,8 @@ export class FilterService {
     const index = this.appliedFilters.indexOf(filter, 0);
     if (index > -1) this.appliedFilters.splice(index, 1);
   }
+
+  clearFilters() {
+    this.appliedFilters = [];
+  }
 }

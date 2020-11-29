@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,7 +23,8 @@ export class ShipmentPageComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private alertService: AlertsService,
-    private authService:AuthService
+    private userService: UserService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -37,13 +39,7 @@ export class ShipmentPageComponent implements OnInit {
   onBuyBtnClick() {
     console.log(this.shipmentForm);
     if (this.shipmentForm.dirty && this.shipmentForm.valid) {
-      this.cartService.clearProductList();
-      this.alertService.addAlert(
-        FormAlerts.getSuccessAlert(
-          FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
-          'Successful products purchase'
-        )
-      );
+      this.updateUserData();
       this.router.navigateByUrl('/home');
     } else {
       this.alertService.addAlert(
@@ -53,6 +49,34 @@ export class ShipmentPageComponent implements OnInit {
         )
       );
     }
+  }
+
+  private updateUserData() {
+    this.userService
+      .orderProducts(
+        this.authService.LoggedUser,
+        this.cartService.orderedProductList
+      )
+      .subscribe(
+        (response) => {
+          console.log('RESP:', response);
+          this.cartService.clearProductList();
+          this.alertService.addAlert(
+            FormAlerts.getSuccessAlert(
+              FormAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+              'Successful products purchase'
+            )
+          );
+        },
+        (err: HttpErrorResponse) => {
+          this.alertService.addAlert(
+            FormAlerts.getDangerFormAlert(
+              FormAlerts.INVALID_DATA_ALERT_ID,
+              err.status + ': ' + err.statusText + ' - ' + err.error.message
+            )
+          );
+        }
+      );
   }
 
   removeAlert(id: string) {

@@ -10,6 +10,17 @@ export class OrderedProductRowComponent implements OnInit {
   @Input() orderedProduct: OrderedProduct;
   @Output() rowClick = new EventEmitter();
 
+  get formattedOrderDate(): string {
+    let date = this.orderedProduct.orderDate;
+    let mm = date.getMonth() + 1;
+    let dd = date.getDate();
+    return [
+      (dd > 9 ? '' : '0') + dd,
+      (mm > 9 ? '' : '0') + mm,
+      date.getFullYear(),
+    ].join('-');
+  }
+
   get PayedPrice() {
     return this.orderedProduct.orderedQty * this.orderedProduct.pricePerItem;
   }

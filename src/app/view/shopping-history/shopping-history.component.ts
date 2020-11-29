@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderedProduct } from 'src/app/model/ordered-product';
 import { SortMethod } from 'src/app/model/sort-method';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { NavbarComponent } from 'src/app/view/navbar/navbar.component';
 import { SortUtils } from 'src/app/shared/logic/SortUtils';
 
 @Component({
@@ -34,10 +34,10 @@ export class ShoppingHistoryComponent implements OnInit {
   actualDisplayedProduct: OrderedProduct = undefined;
   httpError: { statusCode: number; msg: string } = undefined;
 
-  constructor(private userServices: UserService) {}
+  constructor(private userServices: UserService, private authService:AuthService) {}
 
   ngOnInit(): void {
-    this.userServices.getClientShoppingHistory('').subscribe(
+    this.userServices.getClientShoppingHistory(this.authService.LoggedUser.id).subscribe(
       (data: OrderedProduct[]) => {
         let actualSortMethod = this.availableSortMethods.get(
           this.initSortMethodKey
@@ -59,8 +59,10 @@ export class ShoppingHistoryComponent implements OnInit {
     this.actualDisplayedProduct = product;
   }
 
-  changeSortingMethod(sortMethodKey:string) {
-    let sortMethod: SortMethod<OrderedProduct> = this.availableSortMethods.get(sortMethodKey)
+  changeSortingMethod(sortMethodKey: string) {
+    let sortMethod: SortMethod<OrderedProduct> = this.availableSortMethods.get(
+      sortMethodKey
+    );
     this.sortShopingHistoryInPlace(sortMethod);
   }
 

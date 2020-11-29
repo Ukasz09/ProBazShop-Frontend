@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   onAddToCartClick(cartProduct: CartProduct, product: Product) {
     this.modalRef?.hide();
     let succeed = this.cartService.addProductWithQtyValidation(
-      cartProduct.id,
+      cartProduct.product,
       cartProduct.qty,
       product.availableQty
     );

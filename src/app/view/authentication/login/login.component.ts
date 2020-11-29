@@ -2,12 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { error } from 'protractor';
 import { LoginFormModel } from 'src/app/model/form/login-form.model';
-import { User, UserAccountType } from 'src/app/model/user';
+import { User } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
 import { FormAlerts } from 'src/app/shared/forms/form-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
@@ -55,12 +53,13 @@ export class LoginComponent implements OnInit {
     this.authService.logonUser(emailFromForm, passwordFromForm).subscribe(
       (userData: User) => {
         let user = new User(
+          userData.id,
           userData.name,
           userData.surname,
           userData.email,
           userData.password,
           userData.history,
-          UserAccountType[userData.type.toString()]
+          userData.type
         );
         this.authService.setLoggedUser(user);
         this.alertService.removeAlertWithId(FormAlerts.INVALID_DATA_ALERT_ID);

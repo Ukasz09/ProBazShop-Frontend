@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   }
 
   get cartIsEmpty(): boolean {
+    console.log(this.cartService.productsInCart)
     return this.cartService.productsInCart.size == 0;
   }
 
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit {
 
   private fetchProductsFromCart() {
     for (let cartItemProperty of this.cartService.productsInCart.entries()) {
-      let productId = cartItemProperty[0];
+      let productId = cartItemProperty[0].id;
       let qty = cartItemProperty[1];
       this.productService.getProduct(productId).subscribe(
         (data: Product) => {
@@ -57,7 +58,7 @@ export class CartComponent implements OnInit {
     else this.priceToPay += product.price;
 
     this.productsInCart.set(product, chosenProductQty);
-    this.cartService.updateProductsQty(product.id, chosenProductQty);
+    this.cartService.updateProductsQty(product, chosenProductQty);
   }
 
   onDecProductQtyClick(product: Product) {
@@ -66,13 +67,13 @@ export class CartComponent implements OnInit {
     if (chosenProductQty < 1) chosenProductQty = 1;
     else this.priceToPay -= product.price;
     this.productsInCart.set(product, chosenProductQty);
-    this.cartService.updateProductsQty(product.id, chosenProductQty);
+    this.cartService.updateProductsQty(product, chosenProductQty);
   }
 
   onRemoveProductFromCartClick(product: Product) {
     let qtyOfRemovedProduct = this.productsInCart.get(product);
     this.priceToPay -= product.price * qtyOfRemovedProduct;
-    this.cartService.removeProductFromCart(product.id);
+    this.cartService.removeProductFromCart(product);
     this.productsInCart.delete(product);
   }
 }
