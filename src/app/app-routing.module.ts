@@ -25,7 +25,10 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'client/history', component: ShoppingHistoryComponent },
   { path: 'client/info', component: UserInfoComponent },
-  { path: 'users', component: UsersListComponent },
+  {
+    path: 'users',
+    component: UsersListComponent,
+  },
   { path: '404', component: Page404Component },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '**', redirectTo: '/404' },
