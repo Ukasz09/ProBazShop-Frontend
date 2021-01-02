@@ -1,10 +1,10 @@
 <div class="container pt-5">
   <div class="d-flex flex-row">
     <app-categories-panel
-      (deleteFilterCick)="
+      (deleteFilterClick)="
         productList.fetchProductsWithFilters(productList.getFiltersMap())
       "
-      (addFilterCick)="
+      (addFilterClick)="
         productList.fetchProductsWithFilters(productList.getFiltersMap())
       "
       [productsDataReady]="productList.productsDataReady"

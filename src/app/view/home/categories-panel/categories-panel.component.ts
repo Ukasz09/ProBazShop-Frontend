@@ -26,8 +26,8 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
   @Input() priceSliderOptions: Options;
   // @Input() maxProductPrice: number;
 
-  @Output() deleteFilterCick = new EventEmitter();
-  @Output() addFilterCick = new EventEmitter();
+  @Output() deleteFilterClick = new EventEmitter();
+  @Output() addFilterClick = new EventEmitter();
 
   priceSliderControl = new FormControl([0, 500]);
   categoriesDataReady = false;
@@ -84,7 +84,6 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
       this.priceSliderControl.value[0],
       FilterType.PRICE_LOW
     );
-    this.addFilterCick.emit();
   }
 
   private addHighPriceFilter() {
@@ -92,7 +91,6 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
       this.priceSliderControl.value[1],
       FilterType.PRICE_HIGH
     );
-    this.addFilterCick.emit();
   }
 
   onDeleteFilterClick(filter: FilterElem) {
@@ -110,7 +108,7 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
         this.priceSliderOptions.ceil,
       ]);
     }
-    this.deleteFilterCick.emit();
+    this.deleteFilterClick.emit();
   }
 
   updatePriceFilter(sliderChangeValue: ChangeContext) {
@@ -122,10 +120,11 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
     if (sliderChangeValue.value > this.priceSliderOptions.floor) {
       this.addLowPriceFilter();
     }
+    this.addFilterClick.emit();
   }
 
   addFilter(value: string, filterType: FilterType) {
     this.filterService.addFilter(value, filterType);
-    this.addFilterCick.emit();
+    this.addFilterClick.emit();
   }
 }

@@ -19,7 +19,6 @@ export class CartComponent implements OnInit {
   }
 
   get cartIsEmpty(): boolean {
-    console.log(this.cartService.productsInCart)
     return this.cartService.productsInCart.size == 0;
   }
 

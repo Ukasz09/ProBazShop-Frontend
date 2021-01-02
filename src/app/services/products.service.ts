@@ -35,7 +35,6 @@ export class ProductsService {
     size: string[],
     sort: string
   ): Observable<Product[]> {
-    console.log(name, category, color, priceLTE, priceGTE, size);
     let endpoint = environment.API_URL + ProductsEndpoints.PRODUCTS_URI;
     let nameQuery = name !== undefined ? 'name=' + name : undefined;
     let categoryQuery =
