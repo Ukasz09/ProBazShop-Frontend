@@ -28,6 +28,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   static readonly SUCCESSFUL_ADD_TO_CART_ALERT_ID = 'successful_add_to_cart';
   static readonly UNSUCCESSFUL_ADD_TO_CART_ALERT_ID = 'dont_add_to_cart';
+  static readonly PLACEHOLDER_IMG_PATH = 'assets/not-found.jpg';
 
   @ViewChild('details') productDetailsTemplate: TemplateRef<any>;
   @ViewChild('productList') productListComponent: ProductsListComponent;
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedProductSubscription: Subscription;
 
   lastUpdatedProductFormData: Product = undefined;
-  markedToDeleteProductId: string = undefined;
+  markedToDeleteProductId: string | number = undefined;
   deatilsModalOptions: ModalOptions = { class: 'modal-lg' };
   confirmModalOptions: ModalOptions = { class: 'modal-sm' };
   chosenProduct: Product = undefined;
@@ -158,10 +159,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       .updateProduct(this.lastUpdatedProductFormData)
       .subscribe(
         (response) => {
-          console.log('correct-up');
           this.onCorrectResponse(
             AppAlerts.PRODUCT_UPDATE_SUCCESSFUL,
-            response.message
+            'Correct product update'
           );
         },
         (err: HttpErrorResponse) => {

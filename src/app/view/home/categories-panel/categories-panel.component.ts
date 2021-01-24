@@ -12,6 +12,7 @@ import {
 import { FormControl } from '@angular/forms';
 import { FilterService } from 'src/app/services/filter.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ModelParsingUtils } from 'src/app/shared/logic/ModelParsingUtils';
 import { FilterElem, FilterType } from './applied-filters/filter-model';
 
 @Component({
@@ -44,7 +45,7 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
     'FF4081',
   ];
 
-  sizes: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
   httpError: { statusCode: number; msg: string } = undefined;
 
   get appliedFilters(): FilterElem[] {
@@ -126,5 +127,9 @@ export class CategoriesPanelComponent implements OnInit, OnDestroy {
   addFilter(value: string, filterType: FilterType) {
     this.filterService.addFilter(value, filterType);
     this.addFilterClick.emit();
+  }
+
+  getFixedHexColor(color: string): string {
+    return ModelParsingUtils.getFixedHexColor(color);
   }
 }

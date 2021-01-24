@@ -6,7 +6,8 @@
   <img
     id="image"
     alt="image not loaded"
-    [src]="imageUrl"
+    [src]="product.imageUrl"
+    (error)="product.imageUrl = placeholderImgPath"
     class="mx-2 rounded"
     height="90%"
   />

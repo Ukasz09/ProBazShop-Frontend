@@ -37,7 +37,6 @@ export class ShipmentPageComponent implements OnInit {
   }
 
   onBuyBtnClick() {
-    console.log(this.shipmentForm);
     if (this.shipmentForm.dirty && this.shipmentForm.valid) {
       this.updateUserData();
       this.router.navigateByUrl('/home');
@@ -59,7 +58,6 @@ export class ShipmentPageComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log('RESP:', response);
           this.cartService.clearProductList();
           this.alertService.addAlert(
             AppAlerts.getSuccessAlert(

@@ -5,7 +5,8 @@
   <ng-container *ngIf="productsDataReady; else dataNotFetchedTemplate">
     <!-- ACTUAL FILTERS -->
     <div class="w-100 h-100 text-center category-container-header">
-      <app-applied-filters *ngIf="appliedFilters.length>0"
+      <app-applied-filters
+        *ngIf="appliedFilters.length > 0"
         [filters]="appliedFilters"
         (deleteElementClick)="onDeleteFilterClick($event)"
       ></app-applied-filters>
@@ -39,7 +40,7 @@
         <button
           class="border border-secondary btn btn-outline-danger"
           style="height: 20px; width: 20px"
-          [ngStyle]="{ 'background-color': '#' + color }"
+          [ngStyle]="{ 'background-color': getFixedHexColor(color) }"
           (click)="addFilter(color, FilterType.COLOR)"
         ></button>
       </div>

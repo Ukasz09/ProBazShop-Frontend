@@ -6,7 +6,7 @@
         <div *ngSwitchCase="FilterTypes.COLOR" class="d-flex flex-fill">
           <button
             class="border border-secondary rounded w-100 custom-btn"
-            [ngStyle]="{ 'background-color': '#' + filter.value }"
+            [ngStyle]="{ 'background-color': getFixedHexColor(filter.value) }"
             disabled
           ></button>
         </div>

@@ -1,10 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModelParsingUtils } from 'src/app/shared/logic/ModelParsingUtils';
 import { FilterElem, FilterType } from './filter-model';
 
 @Component({
@@ -23,5 +18,9 @@ export class AppliedFiltersComponent implements OnInit {
 
   onCloseClick(filter: FilterElem) {
     this.deleteElementClick.emit(filter);
+  }
+
+  getFixedHexColor(color: string): string {
+    return ModelParsingUtils.getFixedHexColor(color);
   }
 }

@@ -16,7 +16,7 @@ export class CartService {
         product.id,
         product.name,
         product.description,
-        product.imageURL,
+        product.imageUrl,
         product.size,
         product.color,
         product.price,

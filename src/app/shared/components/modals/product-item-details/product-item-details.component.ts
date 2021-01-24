@@ -5,6 +5,7 @@ import { CartProduct } from 'src/app/model/cart-product';
 import { Product } from 'src/app/model/product';
 import { UserAccountType } from 'src/app/model/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { HomeComponent } from 'src/app/view/home/home.component';
 import { ProductsListComponent } from 'src/app/view/home/products-list/products-list.component';
 
 @Component({
@@ -24,6 +25,10 @@ export class ProductItemDetailsComponent implements OnInit {
   productForm: FormGroup;
   modalRef: BsModalRef;
   chosenProductQty = 1;
+
+  get placeholderImgPath(): string {
+    return HomeComponent.PLACEHOLDER_IMG_PATH;
+  }
 
   get productDataWasChangedByUser(): boolean {
     return (
@@ -105,7 +110,7 @@ export class ProductItemDetailsComponent implements OnInit {
       this.product.id,
       this.productForm.get('name').value,
       this.productForm.get('description').value,
-      this.product.imageURL,
+      this.product.imageUrl,
       this.product.size,
       this.product.color,
       this.productForm.get('price').value as number,

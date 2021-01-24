@@ -1,9 +1,9 @@
 export class OrderedProduct {
   constructor(
-    public id: string,
+    public id: string | number,
     public name: string,
     public description: string,
-    public imageURL: string,
+    public imageUrl: string,
     public size: string,
     public color: string,
     public pricePerItem: number,

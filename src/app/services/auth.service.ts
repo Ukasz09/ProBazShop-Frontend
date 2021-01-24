@@ -3,7 +3,7 @@ import { User, UserAccountType } from '../model/user';
 import { environment } from 'src/environments/environment';
 import { UserEndpoints } from 'src/app/data/UserEndpoints';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   setLoggedUser(user: User) {
-    this._loggedUser= user;
+    this._loggedUser = user;
   }
 
   get LoggedUser(): User {
@@ -24,22 +24,23 @@ export class AuthService {
 
   get UserHasAdministrativePrivileges(): boolean {
     return (
-      this.UserIsLogged &&
-      this.LoggedUser.type == UserAccountType.EMPLOYEE
+      this.UserIsLogged && this.LoggedUser.type == UserAccountType.EMPLOYEE
     );
   }
 
   constructor(private http: HttpClient) {}
 
   logonUser(email: string, password: string): Observable<User> {
-    let endpoint =
-      environment.API_URL +
-      UserEndpoints.LOGIN_URI +
-      '?email=' +
-      email +
-      '&password=' +
-      password;
-    return this.http.get<User>(endpoint);
+    //TODO: tmp
+    // let endpoint =
+    //   environment.API_URL +
+    //   UserEndpoints.LOGIN_URI +
+    //   '?email=' +
+    //   email +
+    //   '&password=' +
+    //   password;
+    // return this.http.get<User>(endpoint);
+    return this.http.get<User>('/assets/mock/user.json');
   }
 
   logoutUser() {

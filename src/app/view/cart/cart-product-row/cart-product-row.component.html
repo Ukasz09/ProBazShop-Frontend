@@ -6,14 +6,17 @@
     <img
       id="productImage"
       alt="image not loaded"
-      [src]="product.imageURL"
+      [src]="product.imageUrl"
+      (error)="product.imageUrl = placeholderImgPath"
       class="mx-2 rounded"
       height="90%"
       (click)="openModal(details)"
     />
     <div class="d-flex h-100 align-items-center" style="width: 35%">
       <div class="d-flex flex-column mx-4">
-        <label for="productImage" (click)="openModal(details)"
+        <label
+          for="productImage"
+          (click)="openModal(details)"
           class="pointer-cursor"
           ><strong>{{ product.name }}</strong></label
         >

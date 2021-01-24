@@ -129,7 +129,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getFiltersMap(): Map<FilterType, string[]> {
     let filters = this.filterService.appliedFilters;
-    console.log(filters);
     let filtersMap: Map<FilterType, string[]> = new Map([
       [FilterType.CATEGORY, []],
       [FilterType.COLOR, []],
@@ -139,7 +138,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
       [FilterType.PRICE_HIGH, []],
     ]);
     for (let filter of filters) filtersMap.get(filter.type).push(filter.value);
-    console.log(filtersMap);
     return filtersMap;
   }
 
@@ -159,7 +157,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     let sort: string = undefined;
     if (this.actualSortMethodKey == 'low') sort = 'asc';
     else if (this.actualSortMethodKey == 'high') sort = 'desc';
-    console.log(sort)
 
     this.productService
       .getAllProductsWithFilters(

@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Faux Shearling Jacket",
     "description": "Jacket in soft faux shearling with faux leather details. Collar, zipper at front, and diagonal front pockets with zipper. Unlined.",
-    "imageURL": "assets/productsImages/hmgoepprod.jpeg",
+    "imageUrl": "assets/productsImages/hmgoepprod.jpeg",
     "size": "XL",
     "color": "white",
     "price": 79.99,

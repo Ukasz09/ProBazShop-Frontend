@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductsEndpoints } from '../data/ProductEndpoints';
-
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +21,7 @@ export class ProductsService {
 
   getAllProducts(): Observable<Product[]> {
     let endpoint = environment.API_URL + ProductsEndpoints.PRODUCTS_URI;
-    return this.http.get<Product[]>(endpoint);
+    return this.http.get<Product[]>(endpoint); //.pipe(tap((e) => console.log(e)));
     // '/assets/mock/products.json'
     // '/assets/mock/empty-arr.json'
   }
@@ -74,11 +74,10 @@ export class ProductsService {
       endpoint += endpoint.charAt(endpoint.length - 1) == '?' ? '' : '&';
       endpoint += 'sort=' + sort;
     }
-    console.log(endpoint);
     return this.http.get<Product[]>(endpoint);
   }
 
-  getProduct(id: string): Observable<Product> {
+  getProduct(id: string | number): Observable<Product> {
     let endpoint =
       environment.API_URL + ProductsEndpoints.PRODUCTS_URI + '/' + id;
     return this.http.get<Product>(endpoint);
@@ -94,7 +93,7 @@ export class ProductsService {
     return this.http.put<Product>(endpoint, updatedProduct);
   }
 
-  deleteProduct(productId: string): Observable<any> {
+  deleteProduct(productId: string | number): Observable<any> {
     let endpoint =
       environment.API_URL + ProductsEndpoints.PRODUCTS_URI + '/' + productId;
     return this.http.delete(endpoint);

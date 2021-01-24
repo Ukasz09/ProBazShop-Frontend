@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Product } from 'src/app/model/product';
+import { HomeComponent } from '../../home/home.component';
 
 @Component({
   selector: 'app-cart-product-row',
@@ -22,6 +23,10 @@ export class CartProductRowComponent implements OnInit {
   @Output() removeFromCartClick: EventEmitter<Product> = new EventEmitter();
 
   modalRef: BsModalRef;
+
+  get placeholderImgPath(): string {
+    return HomeComponent.PLACEHOLDER_IMG_PATH;
+  }
 
   constructor(private modalService: BsModalService) {}
 

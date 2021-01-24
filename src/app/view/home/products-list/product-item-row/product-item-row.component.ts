@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/model/product';
+import { HomeComponent } from '../../home.component';
 import { ProductsListComponent } from '../products-list.component';
 
 @Component({
@@ -10,10 +11,9 @@ import { ProductsListComponent } from '../products-list.component';
 export class ProductItemRowComponent implements OnInit {
   @Input() product: Product;
   @Output() productRowClick = new EventEmitter();
-  private notFoundImageUrl = 'assets/not-found.jpg';
 
-  get imageUrl(): string {
-    return this.product.imageURL ?? this.notFoundImageUrl;
+  get placeholderImgPath(): string {
+    return HomeComponent.PLACEHOLDER_IMG_PATH;
   }
 
   constructor() {}

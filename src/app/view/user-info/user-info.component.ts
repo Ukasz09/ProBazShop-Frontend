@@ -57,7 +57,6 @@ export class UserInfoComponent implements OnInit {
   }
 
   onDeleteUserConfirmed() {
-    console.log('Need to delete user');
     this.alertService.addAlert(
       AppAlerts.getSuccessAlert(
         AppAlerts.USER_DELETE_SUCCESSFUL,

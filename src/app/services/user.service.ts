@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { OrderedProduct } from '../model/ordered-product';
 import { User } from '../model/user';
 import { environment } from 'src/environments/environment';
@@ -25,7 +25,6 @@ export class UserService {
       })
     );
     // '/assets/mock/shopping-history.json'
-    // '/assets/mock/empty-arr.json'
   }
 
   postUser(user: User): Observable<User> {
