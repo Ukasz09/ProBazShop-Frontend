@@ -39,10 +39,11 @@ export class UserService {
   }
 
   orderProducts(user: User, cartProducts: OrderedProduct[]) {
-    let updatedHistory = user.history.concat(cartProducts);
-    let updatedUser = { ...user };
-    updatedUser.history = updatedHistory;
-    return this.updateUser(updatedUser);
+    //let updatedHistory = user.history.concat(cartProducts);
+    //let updatedUser = { ...user };
+    //updatedUser.history = updatedHistory;
+    let endpoint = environment.API_URL + '/api/order?userId='+user.id;
+    return this.http.post(endpoint,cartProducts);
   }
 
   getUsersList(): Observable<User[]> {

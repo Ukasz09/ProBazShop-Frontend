@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { UserEndpoints } from 'src/app/data/UserEndpoints';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,16 +32,15 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   logonUser(email: string, password: string): Observable<User> {
-    //TODO: tmp
-    // let endpoint =
-    //   environment.API_URL +
-    //   UserEndpoints.LOGIN_URI +
-    //   '?email=' +
-    //   email +
-    //   '&password=' +
-    //   password;
-    // return this.http.get<User>(endpoint);
-    return this.http.get<User>('/assets/mock/user.json');
+    let endpoint =
+      environment.API_URL +
+      UserEndpoints.LOGIN_URI +
+      '?email=' +
+      email +
+      '&password=' +
+      password;
+    return this.http.get<User>(endpoint).pipe(tap((data) => console.log(data)));
+    // return this.http.get<User>('/assets/mock/user.json');
   }
 
   logoutUser() {
