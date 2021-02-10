@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private navbarService: NavbarService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {  }
 
   ngAfterViewInit(): void {
     this.subscribeNavbarProductSelect();

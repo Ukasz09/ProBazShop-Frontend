@@ -3,7 +3,7 @@ export class Product {
     public id: string | number,
     public name: string,
     public description: string,
-    public imageUrl: string, //TODO: changed from imageUrl
+    public imageUrl: string,
     public size: string,
     public color: string,
     public price: number,
