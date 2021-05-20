@@ -6,7 +6,7 @@ import { LoginFormModel } from 'src/app/model/form/login-form.model';
 import { User } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { AppAlerts } from 'src/app/shared/app-alerts';
+import { AppAlerts } from 'src/app/shared/models/app-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({

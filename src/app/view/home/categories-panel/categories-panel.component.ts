@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
 import { FilterService } from 'src/app/services/filter.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ModelParsingUtils } from 'src/app/shared/logic/ModelParsingUtils';
-import { FilterElem, FilterType } from './applied-filters/filter-model';
+import { FilterElem, FilterType } from '../../../shared/models/filter-model';
 
 @Component({
   selector: 'app-categories-panel',

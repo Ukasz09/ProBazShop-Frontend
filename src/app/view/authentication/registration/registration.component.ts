@@ -8,7 +8,7 @@ import { OrderedProduct } from 'src/app/model/ordered-product';
 import { User } from 'src/app/model/user';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { UserService } from 'src/app/services/user.service';
-import { AppAlerts } from 'src/app/shared/app-alerts';
+import { AppAlerts } from 'src/app/shared/models/app-alerts';
 import { FormLogicUtils } from 'src/app/shared/forms/form-logic-utils';
 
 @Component({

@@ -16,7 +16,7 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { AppAlerts } from 'src/app/shared/app-alerts';
+import { AppAlerts } from 'src/app/shared/models/app-alerts';
 import { ProductItemDetailsComponent } from 'src/app/shared/components/modals/product-item-details/product-item-details.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private navbarService: NavbarService
   ) {}
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.subscribeNavbarProductSelect();

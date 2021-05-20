@@ -5,7 +5,7 @@ import { User } from 'src/app/model/user';
 import { AlertsService as AlertService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { AppAlerts } from 'src/app/shared/app-alerts';
+import { AppAlerts } from 'src/app/shared/models/app-alerts';
 
 @Component({
   selector: 'app-user-info',

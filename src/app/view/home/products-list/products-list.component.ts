@@ -16,7 +16,7 @@ import { SortMethod } from 'src/app/model/sort-method';
 import { FilterService } from 'src/app/services/filter.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { FilterType } from '../categories-panel/applied-filters/filter-model';
+import { FilterType } from '../../../shared/models/filter-model';
 
 @Component({
   selector: 'app-products-list',

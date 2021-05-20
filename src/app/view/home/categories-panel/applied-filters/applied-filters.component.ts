@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModelParsingUtils } from 'src/app/shared/logic/ModelParsingUtils';
-import { FilterElem, FilterType } from './filter-model';
+import { FilterElem, FilterType } from '../../../../shared/models/filter-model';
 
 @Component({
   selector: 'app-applied-filters',

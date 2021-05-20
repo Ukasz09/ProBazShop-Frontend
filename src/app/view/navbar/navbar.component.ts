@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { AppAlerts } from 'src/app/shared/app-alerts';
+import { AppAlerts } from 'src/app/shared/models/app-alerts';
 
 @Component({
   selector: 'app-navbar',

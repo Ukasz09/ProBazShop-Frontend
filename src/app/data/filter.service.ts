@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  FilterElem,
-  FilterType,
-} from '../view/home/categories-panel/applied-filters/filter-model';
+import { FilterElem, FilterType } from '../shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -12,30 +9,29 @@ export class FilterService {
 
   constructor() {}
 
-  addFilter(value: string, filterType: FilterType) {
-    let theSameFilter = this.appliedFilters.find(
-      (filter: FilterElem) => filter.value == value && filter.type == filterType
-    );
-    let foundInFilters = theSameFilter != undefined;
-    if (!foundInFilters) {
-      let filter = new FilterElem(value, filterType);
+  public addFilter(value: string, filterType: FilterType): void {
+    const filterExist =
+      this.appliedFilters.find(
+        (filter: FilterElem) =>
+          filter.value === value && filter.type === filterType
+      ) !== undefined;
+    if (!filterExist) {
+      const filter = new FilterElem(value, filterType);
       this.appliedFilters.push(filter);
     }
   }
 
-  removeFstFilterWithType(filterType: FilterType) {
-    let filter = this.appliedFilters.find(
-      (filter: FilterElem) => filter.type == filterType
+  public removeFilter(value: string, filterType: FilterType): void {
+    this.appliedFilters.filter(
+      (f: FilterElem) => f.type !== filterType && f.value !== value
     );
-    if (filter !== undefined) this.deleteElemFromFilters(filter);
   }
 
-  deleteElemFromFilters(filter: FilterElem) {
-    const index = this.appliedFilters.indexOf(filter, 0);
-    if (index > -1) this.appliedFilters.splice(index, 1);
+  public removeAllFiltersWithType(filterType: FilterType): void {
+    this.appliedFilters.filter((f: FilterElem) => f.type !== filterType);
   }
 
-  clearFilters() {
+  public clearFilters(): void {
     this.appliedFilters = [];
   }
 }
