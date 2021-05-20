@@ -1,26 +1,30 @@
 import { Injectable } from '@angular/core';
 import { User, UserAccountType } from '../model/user';
 import { environment } from 'src/environments/environment';
-import { UserEndpoints } from 'src/app/data/UserEndpoints';
+import { UserSlugs } from 'src/app/data/slugs/UserSlugs';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+// -----------------------------------------------------------------------------
+// TODO: SSO / JWT - tmp mocked authentication and authorization has been mocked
+// -----------------------------------------------------------------------------
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private _loggedUser = undefined;
+  private loggedUser = undefined;
 
   get UserIsLogged() {
     return this.LoggedUser !== undefined;
   }
 
   setLoggedUser(user: User) {
-    this._loggedUser = user;
+    this.loggedUser = user;
   }
 
   get LoggedUser(): User {
-    return this._loggedUser;
+    return this.loggedUser;
   }
 
   get UserHasAdministrativePrivileges(): boolean {
@@ -34,7 +38,7 @@ export class AuthService {
   logonUser(email: string, password: string): Observable<User> {
     let endpoint =
       environment.API_URL +
-      UserEndpoints.LOGIN_URI +
+      UserSlugs.LOGIN +
       '?email=' +
       email +
       '&password=' +
@@ -44,6 +48,6 @@ export class AuthService {
   }
 
   logoutUser() {
-    this._loggedUser = undefined;
+    this.loggedUser = undefined;
   }
 }
