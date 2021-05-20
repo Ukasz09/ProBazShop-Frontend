@@ -14,7 +14,7 @@ export class UserService {
 
   getClientShoppingHistory(clientId: string): Observable<OrderedProduct[]> {
     let endpoint =
-      environment.API_URL + UserSlugs.USER_HISTORY + '/' + clientId;
+      environment.authorizationApi + UserSlugs.USER_HISTORY + '/' + clientId;
     return this.http.get<OrderedProduct[]>(endpoint).pipe(
       map((products) => {
         products.forEach(
@@ -28,12 +28,13 @@ export class UserService {
   }
 
   postUser(user: User): Observable<User> {
-    let endpoint = environment.API_URL + UserSlugs.USERS;
+    let endpoint = environment.authorizationApi + UserSlugs.USERS;
     return this.http.post<User>(endpoint, user);
   }
 
   updateUser(user: User): Observable<any> {
-    let endpoint = environment.API_URL + UserSlugs.USERS + '/' + user.id;
+    let endpoint =
+      environment.authorizationApi + UserSlugs.USERS + '/' + user.id;
     return this.http.put(endpoint, user);
   }
 
@@ -41,12 +42,13 @@ export class UserService {
     //let updatedHistory = user.history.concat(cartProducts);
     //let updatedUser = { ...user };
     //updatedUser.history = updatedHistory;
-    let endpoint = environment.API_URL + '/api/order?userId=' + user.id;
+    let endpoint =
+      environment.authorizationApi + '/api/order?userId=' + user.id;
     return this.http.post(endpoint, cartProducts);
   }
 
   getUsersList(): Observable<User[]> {
-    let endpoint = environment.API_URL + UserSlugs.USERS;
+    let endpoint = environment.authorizationApi + UserSlugs.USERS;
     return this.http.get<User[]>(endpoint);
 
     // '/assets/mock/users.json'
@@ -54,7 +56,8 @@ export class UserService {
   }
 
   deleteUser(userId: string): Observable<any> {
-    let endpoint = environment.API_URL + UserSlugs.USERS + '/' + userId;
+    let endpoint =
+      environment.authorizationApi + UserSlugs.USERS + '/' + userId;
     return this.http.delete(endpoint);
   }
 }

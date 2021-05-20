@@ -12,7 +12,8 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getProductCategories(): Observable<string[]> {
-    let endpoint = environment.API_URL + ProductsEndpoints.CATEGORIES_URI;
+    let endpoint =
+      environment.authorizationApi + ProductsEndpoints.CATEGORIES_URI;
     return this.http.get<string[]>(
       endpoint
       // '/assets/mock/categories.json'
@@ -20,7 +21,8 @@ export class ProductsService {
   }
 
   getAllProducts(): Observable<Product[]> {
-    let endpoint = environment.API_URL + ProductsEndpoints.PRODUCTS_URI;
+    let endpoint =
+      environment.authorizationApi + ProductsEndpoints.PRODUCTS_URI;
     return this.http.get<Product[]>(endpoint); //.pipe(tap((e) => console.log(e)));
     // '/assets/mock/products.json'
     // '/assets/mock/empty-arr.json'
@@ -35,7 +37,8 @@ export class ProductsService {
     size: string[],
     sort: string
   ): Observable<Product[]> {
-    let endpoint = environment.API_URL + ProductsEndpoints.PRODUCTS_URI;
+    let endpoint =
+      environment.authorizationApi + ProductsEndpoints.PRODUCTS_URI;
     let nameQuery = name !== undefined ? 'name=' + name : undefined;
     let categoryQuery =
       category.length > 0 ? 'category=' + category.toString() : undefined;
@@ -79,14 +82,14 @@ export class ProductsService {
 
   getProduct(id: string | number): Observable<Product> {
     let endpoint =
-      environment.API_URL + ProductsEndpoints.PRODUCTS_URI + '/' + id;
+      environment.authorizationApi + ProductsEndpoints.PRODUCTS_URI + '/' + id;
     return this.http.get<Product>(endpoint);
     // '/assets/mock/product:' + id + '.json'
   }
 
   updateProduct(updatedProduct: Product): Observable<any> {
     let endpoint =
-      environment.API_URL +
+      environment.authorizationApi +
       ProductsEndpoints.PRODUCTS_URI +
       '/' +
       updatedProduct.id;
@@ -95,7 +98,10 @@ export class ProductsService {
 
   deleteProduct(productId: string | number): Observable<any> {
     let endpoint =
-      environment.API_URL + ProductsEndpoints.PRODUCTS_URI + '/' + productId;
+      environment.authorizationApi +
+      ProductsEndpoints.PRODUCTS_URI +
+      '/' +
+      productId;
     return this.http.delete(endpoint);
   }
 }

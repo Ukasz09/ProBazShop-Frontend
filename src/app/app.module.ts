@@ -43,6 +43,7 @@ import { UserInfoContentComponent } from './view/user-info/user-info-content/use
 import { NavbarComponent } from './view/navbar/navbar.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { Page404Component } from './view/page404/page404.component';
+import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +79,7 @@ import { Page404Component } from './view/page404/page404.component';
     Page404Component,
   ],
   imports: [
+    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG})
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
