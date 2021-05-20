@@ -6,13 +6,43 @@ import { Product } from '../../model/product';
   providedIn: 'root',
 })
 export class CartService {
-  productsInCart: Map<Product, number> = new Map(); //id, qty
+  private cart: Map<Product, number> = new Map(); // <product, products qty>
+
+  constructor() {}
+
+  public addToCart(product: Product, qty: number): void {
+    const actualProductQty = this.productInCartQty(product);
+    const newProductQty = actualProductQty + qty;
+    this.changeProductInCartQty(product, newProductQty);
+  }
+
+  public productInCartQty(product: Product): number {
+    const actualProductQty = this.cart.get(product);
+    return actualProductQty ?? 0;
+  }
+
+  public isInCart(product: Product): boolean {
+    return this.productInCartQty(product) > 0;
+  }
+
+  public removeFromCart(product: Product): boolean {
+    return this.cart.delete(product);
+  }
+
+  public clear(): void {
+    this.cart.clear();
+  }
+
+  public changeProductInCartQty(product: Product, qty: number): void {
+    this.cart.set(product, qty);
+  }
+
+  /* ------------------------------------------- Getters & Setters ------------------------------------------- */
 
   get orderedProductList(): OrderedProduct[] {
-    let orderedProducts = [];
-    for (let productEntry of this.productsInCart.entries()) {
-      let product = productEntry[0];
-      let orderedProduct = new OrderedProduct(
+    const orderedProducts = [];
+    for (const product of this.cart.keys()) {
+      const orderedProduct = new OrderedProduct(
         product.id,
         product.name,
         product.description,
@@ -20,59 +50,11 @@ export class CartService {
         product.size,
         product.color,
         product.price,
-        productEntry[1],
+        this.cart.get(product),
         new Date()
       );
       orderedProducts.push(orderedProduct);
     }
     return orderedProducts;
-  }
-
-  constructor() {}
-
-  /**
-   * @return false - qtyToAdd is not valid, true  - otherwise
-   */
-  addProductWithQtyValidation(
-    product: Product,
-    qtyToAdd: number,
-    maxProductQty: number
-  ): boolean {
-    let actualProductQty = this.getProductQty(product);
-    if (
-      qtyToAdd <= 0 ||
-      maxProductQty <= 0 ||
-      qtyToAdd + actualProductQty > maxProductQty
-    )
-      return false;
-
-    this.productsInCart.set(product, actualProductQty + qtyToAdd);
-    return true;
-  }
-
-  getProductQty(product: Product) {
-    let actualProductQty = this.productsInCart.get(product);
-    return actualProductQty ?? 0;
-  }
-
-  removeProductFromCart(product: Product): boolean {
-    for (let p of this.productsInCart.keys())
-      if (p.id == product.id) return this.productsInCart.delete(p);
-    return false;
-  }
-
-  clearProductList() {
-    this.productsInCart.clear();
-  }
-
-  /**
-   * @return false - not update, true  - otherwise
-   */
-  updateProductsQty(product: Product, qty: number): boolean {
-    if (qty >= 1 && this.productsInCart.get(product) !== undefined) {
-      this.productsInCart.set(product, qty);
-      return true;
-    }
-    return false;
   }
 }

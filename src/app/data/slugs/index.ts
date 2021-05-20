@@ -1,2 +1,2 @@
-export { ItemsSlugs } from './ItemSlugs';
-export { UserSlugs } from './UserSlugs';
+export { ItemsSlugs } from './itemSlugs';
+export { UserSlugs } from './userSlugs';
