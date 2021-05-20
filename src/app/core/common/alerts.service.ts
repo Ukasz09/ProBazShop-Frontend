@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertModel } from '../model/alert.model';
+import { AlertModel } from '../../model/alert.model';
 
 @Injectable({
   providedIn: 'root',
