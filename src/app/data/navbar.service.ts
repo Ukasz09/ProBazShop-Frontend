@@ -6,19 +6,17 @@ import { Product } from '../model/product';
   providedIn: 'root',
 })
 export class NavbarService {
-  phraseSuggestion$: BehaviorSubject<string> = new BehaviorSubject('');
-  selectedProductFromSuggestion$: BehaviorSubject<
-    Product
-  > = new BehaviorSubject(undefined);
-  navbarIsVisible = true;
+  private phraseSuggestion$: BehaviorSubject<string> = new BehaviorSubject('');
+  private selectedProductFromSuggestion$: BehaviorSubject<Product> = new BehaviorSubject(undefined);
+  public navbarIsVisible = true;
 
   constructor() {}
 
-  addPhraseSuggestion(phrase: string) {
+  public addPhraseSuggestion(phrase: string): void {
     this.phraseSuggestion$.next(phrase);
   }
 
-  addSelectedProductFromSuggestion(product: Product) {
+  public addSelectedProductFromSuggestion(product: Product): void {
     this.selectedProductFromSuggestion$.next(product);
   }
 }
