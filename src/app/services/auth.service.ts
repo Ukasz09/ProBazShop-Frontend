@@ -32,13 +32,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   logonUser(email: string, password: string): Observable<User> {
-    let endpoint =
-      environment.API_URL +
-      UserEndpoints.LOGIN_URI +
-      '?email=' +
-      email +
-      '&password=' +
-      password;
+    const endpoint = `${environment.API_URL}${UserEndpoints.LOGIN_URI}`
     return this.http.get<User>(endpoint).pipe(tap((data) => console.log(data)));
     // return this.http.get<User>('/assets/mock/user.json');
   }

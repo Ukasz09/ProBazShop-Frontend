@@ -164,7 +164,7 @@
 <ng-template #logonBtnTemplate>
   <button
     class="btn btn-dark my-2 my-sm-0 pb-0"
-    routerLink="/authentication-choice"
+    (click)="redirectToFacebookAuth()"
   >
     <div class="btn-group py-0">
       <i id="login-icon" class="material-icons">login</i>

@@ -9,6 +9,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { AppAlerts } from 'src/app/shared/app-alerts';
+import { environment } from 'src/environments/environment';
+import { UserEndpoints } from 'src/app/data/UserEndpoints';
 
 @Component({
   selector: 'app-navbar',
@@ -77,5 +79,13 @@ export class NavbarComponent implements OnInit {
       this.navbarService.addPhraseSuggestion(this.searchedPhrase);
       this.searchedPhrase = '';
     }
+  }
+
+  redirectToFacebookAuth(){
+    const facebookAuthEndpoint = `${environment.API_URL}${UserEndpoints.LOGIN_URI}`
+    console.log('click done');
+
+    window.location.href=facebookAuthEndpoint;
+
   }
 }
