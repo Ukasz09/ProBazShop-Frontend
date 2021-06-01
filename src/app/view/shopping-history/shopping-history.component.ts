@@ -34,25 +34,30 @@ export class ShoppingHistoryComponent implements OnInit {
   actualDisplayedProduct: OrderedProduct = undefined;
   httpError: { statusCode: number; msg: string } = undefined;
 
-  constructor(private userServices: UserService, private authService:AuthService) {}
+  constructor(
+    private userServices: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.userServices.getClientShoppingHistory(this.authService.LoggedUser.id).subscribe(
-      (data: OrderedProduct[]) => {
-        let actualSortMethod = this.availableSortMethods.get(
-          this.initSortMethodKey
-        );
-        this.shoppingHistory = data.sort(actualSortMethod.comp);
-        if (this.shoppingHistory.length > 0)
-          this.actualDisplayedProduct = this.shoppingHistory[0];
-        this.shoppingHistoryFetched = true;
-      },
-      (e: HttpErrorResponse) =>
-        (this.httpError = {
-          statusCode: e.status,
-          msg: 'Data fetching error: ' + e.statusText,
-        })
-    );
+    this.userServices
+      .getClientShoppingHistory(this.authService.LoggedUser.email)
+      .subscribe(
+        (data: OrderedProduct[]) => {
+          let actualSortMethod = this.availableSortMethods.get(
+            this.initSortMethodKey
+          );
+          this.shoppingHistory = data.sort(actualSortMethod.comp);
+          if (this.shoppingHistory.length > 0)
+            this.actualDisplayedProduct = this.shoppingHistory[0];
+          this.shoppingHistoryFetched = true;
+        },
+        (e: HttpErrorResponse) =>
+          (this.httpError = {
+            statusCode: e.status,
+            msg: 'Data fetching error: ' + e.statusText,
+          })
+      );
   }
 
   onRowClick(product: OrderedProduct) {
@@ -60,9 +65,8 @@ export class ShoppingHistoryComponent implements OnInit {
   }
 
   changeSortingMethod(sortMethodKey: string) {
-    let sortMethod: SortMethod<OrderedProduct> = this.availableSortMethods.get(
-      sortMethodKey
-    );
+    let sortMethod: SortMethod<OrderedProduct> =
+      this.availableSortMethods.get(sortMethodKey);
     this.sortShopingHistoryInPlace(sortMethod);
   }
 

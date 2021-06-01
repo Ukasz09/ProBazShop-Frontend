@@ -83,7 +83,7 @@ export class UsersListComponent implements OnInit {
   }
 
   onDeleteUserConfirmed(user: User) {
-    this.userService.deleteUser(user.id).subscribe(
+    this.userService.deleteUser(user.email).subscribe(
       (response) => {
         this.onCorrectResponse(
           AppAlerts.USER_DELETE_SUCCESSFUL,

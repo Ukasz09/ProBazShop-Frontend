@@ -12,9 +12,9 @@ import { map } from 'rxjs/operators';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getClientShoppingHistory(clientId: string): Observable<OrderedProduct[]> {
+  getClientShoppingHistory(email: string): Observable<OrderedProduct[]> {
     let endpoint =
-      environment.API_URL + UserEndpoints.USER_HISTORY_URI + '/' + clientId;
+      environment.API_URL + UserEndpoints.USER_HISTORY_URI + '/' + email;
     return this.http.get<OrderedProduct[]>(endpoint).pipe(
       map((products) => {
         products.forEach(
@@ -39,11 +39,8 @@ export class UserService {
   }
 
   orderProducts(user: User, cartProducts: OrderedProduct[]) {
-    //let updatedHistory = user.history.concat(cartProducts);
-    //let updatedUser = { ...user };
-    //updatedUser.history = updatedHistory;
-    let endpoint = environment.API_URL + '/api/order?userId=' + user.id;
-    return this.http.post(endpoint, cartProducts);
+    const url = environment.API_URL + '/api/order?email=' + user.email;
+    return this.http.post(url, cartProducts);
   }
 
   getUsersList(): Observable<User[]> {
@@ -54,13 +51,13 @@ export class UserService {
     // '/assets/mock/empty-arr.json'
   }
 
-  deleteUser(userId: string): Observable<any> {
-    let endpoint = environment.API_URL + UserEndpoints.USERS_URI + '/' + userId;
+  deleteUser(email: string): Observable<any> {
+    let endpoint = environment.API_URL + UserEndpoints.USERS_URI + '/' + email;
     return this.http.delete(endpoint);
   }
 
-  public getUser(facebookId: string): Observable<User> {
-    const url = `${environment.API_URL}${UserEndpoints.USERS_URI}/${facebookId}`;
+  public getUser(email: string): Observable<User> {
+    const url = `${environment.API_URL}${UserEndpoints.USERS_URI}/${email}`;
     return this.http.get<User>(url);
   }
 }

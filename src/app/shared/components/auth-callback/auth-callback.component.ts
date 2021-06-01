@@ -26,9 +26,9 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   private checkAuthState(): void {
-    const facebookId = this.route.snapshot.queryParamMap.get('facebookId');
-    if (facebookId) {
-      this.onSuccessfulLogin(facebookId);
+    const email = this.route.snapshot.queryParamMap.get('email');
+    if (email) {
+      this.onSuccessfulLogin(email);
     } else {
       this.onFailedLogin();
     }
@@ -39,8 +39,8 @@ export class AuthCallbackComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  private fetchUser(facebookId: string): void {
-    this.userService.getUser(facebookId).subscribe({
+  private fetchUser(email: string): void {
+    this.userService.getUser(email).subscribe({
       next: (user: User) => {
         this.authService.setLoggedUser(user);
         this.alertService.clearAllAlerts();
