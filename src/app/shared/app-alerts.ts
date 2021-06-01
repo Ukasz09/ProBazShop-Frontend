@@ -22,7 +22,7 @@ export class AppAlerts {
     return new AlertModel(id, 'success', msg, 2000, true);
   }
 
-  static getDangerFormAlert(id: string, msg: string): AlertModel {
+  static getDangerAlert(id: string, msg: string): AlertModel {
     return new AlertModel(id, 'custom-danger', msg, 4000, true);
   }
 

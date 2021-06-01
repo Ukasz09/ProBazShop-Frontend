@@ -43,6 +43,7 @@ import { UserInfoContentComponent } from './view/user-info/user-info-content/use
 import { NavbarComponent } from './view/navbar/navbar.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { Page404Component } from './view/page404/page404.component';
+import { AuthCallbackComponent } from './shared/components/auth-callback/auth-callback.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +77,7 @@ import { Page404Component } from './view/page404/page404.component';
     UserInfoContentComponent,
     UnauthorizedComponent,
     Page404Component,
+    AuthCallbackComponent,
   ],
   imports: [
     HttpClientModule,

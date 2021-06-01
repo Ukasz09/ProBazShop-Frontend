@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private navbarService: NavbarService
   ) {}
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.subscribeNavbarProductSelect();
@@ -69,13 +69,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private subscribeNavbarProductSelect() {
-    this.selectedProductSubscription = this.navbarService.selectedProductFromSuggestion$.subscribe(
-      {
+    this.selectedProductSubscription =
+      this.navbarService.selectedProductFromSuggestion$.subscribe({
         next: (data: Product) => {
           if (data) this.showProductDetails(data, this.productDetailsTemplate);
         },
-      }
-    );
+      });
   }
 
   showProductDetails(selectedProduct: Product, template: TemplateRef<any>) {
@@ -108,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private showUnsuccessfulAddToCartAlert() {
-    let alertModel = AppAlerts.getDangerFormAlert(
+    let alertModel = AppAlerts.getDangerAlert(
       HomeComponent.UNSUCCESSFUL_ADD_TO_CART_ALERT_ID,
       "Don't add - in cart already maximum quantity of this product"
     );
@@ -181,7 +180,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private onErrorResponse(alertId: string, alertMsg: string) {
-    this.alertService.addAlert(AppAlerts.getDangerFormAlert(alertId, alertMsg));
+    this.alertService.addAlert(AppAlerts.getDangerAlert(alertId, alertMsg));
   }
 
   onDeleteProductBtnClick(product: Product, template: TemplateRef<any>) {

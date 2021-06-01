@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthCallbackComponent } from './shared/components/auth-callback/auth-callback.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { AuthenticationChoiceComponent } from './view/authentication/authentication-choice/authentication-choice.component';
 import { LoginComponent } from './view/authentication/login/login.component';
@@ -20,6 +21,9 @@ const routes: Routes = [
     component: RegistrationComponent,
   },
   { path: 'authentication-choice/login', component: LoginComponent },
+
+  { path: 'auth/callback', component: AuthCallbackComponent },
+
   { path: 'home', component: HomeComponent },
   { path: 'cart/shipment', component: ShipmentPageComponent },
   { path: 'cart', component: CartComponent },

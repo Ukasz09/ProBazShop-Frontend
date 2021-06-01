@@ -42,7 +42,7 @@ export class ShipmentPageComponent implements OnInit {
       this.router.navigateByUrl('/home');
     } else {
       this.alertService.addAlert(
-        AppAlerts.getDangerFormAlert(
+        AppAlerts.getDangerAlert(
           AppAlerts.INVALID_DATA_ALERT_ID,
           'Invalid data in form'
         )
@@ -68,7 +68,7 @@ export class ShipmentPageComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.alertService.addAlert(
-            AppAlerts.getDangerFormAlert(
+            AppAlerts.getDangerAlert(
               AppAlerts.INVALID_DATA_ALERT_ID,
               err.status + ': ' + err.statusText + ' - ' + err.error.message
             )

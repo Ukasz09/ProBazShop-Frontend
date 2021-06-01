@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
       if (this.passwordAreEquals()) this.registerUser();
       else {
         this.alertService.addAlert(
-          AppAlerts.getDangerFormAlert(
+          AppAlerts.getDangerAlert(
             AppAlerts.INVALID_DATA_ALERT_ID,
             'Passwords are not the same'
           )
@@ -50,7 +50,7 @@ export class RegistrationComponent implements OnInit {
       }
     } else {
       this.alertService.addAlert(
-        AppAlerts.getDangerFormAlert(
+        AppAlerts.getDangerAlert(
           AppAlerts.INVALID_DATA_ALERT_ID,
           'Invalid data in form'
         )

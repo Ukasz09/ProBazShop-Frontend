@@ -49,7 +49,7 @@ export class UserInfoComponent implements OnInit {
 
   private onErrorUserUpdateResponse(error: HttpErrorResponse) {
     this.alertService.addAlert(
-      AppAlerts.getDangerFormAlert(
+      AppAlerts.getDangerAlert(
         AppAlerts.USER_UPDATE_ERROR,
         error.status + ': ' + error.statusText + ' - ' + error.error?.message
       )

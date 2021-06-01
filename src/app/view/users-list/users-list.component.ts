@@ -75,7 +75,7 @@ export class UsersListComponent implements OnInit {
 
   private onErrorResponse(alertId: string, error: HttpErrorResponse) {
     this.alertService.addAlert(
-      AppAlerts.getDangerFormAlert(
+      AppAlerts.getDangerAlert(
         alertId,
         error.status + ': ' + error.statusText + ' - ' + error.error?.message
       )
