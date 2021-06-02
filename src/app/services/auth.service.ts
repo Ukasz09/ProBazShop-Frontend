@@ -37,4 +37,9 @@ export class AuthService {
     const url = `${environment.API_URL}/auth/logout`;
     return this.http.get<MessageHttpResponse>(url);
   }
+
+  public isAuthenticated(): Observable<{ email: string }> {
+    const url = `${environment.API_URL}/auth/isAuthenticated`;
+    return this.http.get<{ email: string }>(url);
+  }
 }
