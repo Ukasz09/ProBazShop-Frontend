@@ -21,7 +21,7 @@ export class ProductsService {
 
   getAllProducts(): Observable<Product[]> {
     let endpoint = environment.API_URL + ProductsEndpoints.PRODUCTS_URI;
-    return this.http.get<Product[]>(endpoint, { withCredentials: true}); //.pipe(tap((e) => console.log(e)));
+    return this.http.get<Product[]>(endpoint); //.pipe(tap((e) => console.log(e)));
     // '/assets/mock/products.json'
     // '/assets/mock/empty-arr.json'
   }
@@ -74,7 +74,7 @@ export class ProductsService {
       endpoint += endpoint.charAt(endpoint.length - 1) == '?' ? '' : '&';
       endpoint += 'sort=' + sort;
     }
-    return this.http.get<Product[]>(endpoint, { withCredentials: true});
+    return this.http.get<Product[]>(endpoint);
   }
 
   getProduct(id: string | number): Observable<Product> {

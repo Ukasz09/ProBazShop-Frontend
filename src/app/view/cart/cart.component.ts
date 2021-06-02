@@ -1,8 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
+import { AlertsService } from 'src/app/services/alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
+import { AppAlerts } from 'src/app/shared/app-alerts';
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +29,11 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    private alertService: AlertsService
   ) {}
 
   ngOnInit(): void {
@@ -74,5 +83,37 @@ export class CartComponent implements OnInit {
     this.priceToPay -= product.price * qtyOfRemovedProduct;
     this.cartService.removeProductFromCart(product);
     this.productsInCart.delete(product);
+  }
+
+  public onBuyBtnClick(): void {
+    this.updateUserData();
+    this.router.navigateByUrl('/home');
+  }
+
+  private updateUserData(): void {
+    this.userService
+      .orderProducts(
+        this.authService.LoggedUser,
+        this.cartService.orderedProductList
+      )
+      .subscribe(
+        () => {
+          this.cartService.clearProductList();
+          this.alertService.addAlert(
+            AppAlerts.getSuccessAlert(
+              AppAlerts.SUCCESSFUL_REGISTRATION_ALERT_ID,
+              'Successful purchase'
+            )
+          );
+        },
+        (err: HttpErrorResponse) => {
+          this.alertService.addAlert(
+            AppAlerts.getDangerAlert(
+              AppAlerts.INVALID_DATA_ALERT_ID,
+              err.status + ': ' + err.statusText + ' - ' + err.error.message
+            )
+          );
+        }
+      );
   }
 }

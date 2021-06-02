@@ -34,8 +34,8 @@ export class AuthCallbackComponent implements OnInit {
     }
   }
 
-  private onSuccessfulLogin(facebookId: string): void {
-    this.fetchUser(facebookId);
+  private onSuccessfulLogin(email: string): void {
+    this.fetchUser(email);
     this.router.navigateByUrl('/home');
   }
 

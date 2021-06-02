@@ -8,7 +8,6 @@ import { RegistrationComponent } from './view/authentication/registration/regist
 import { CartComponent } from './view/cart/cart.component';
 import { HomeComponent } from './view/home/home.component';
 import { Page404Component } from './view/page404/page404.component';
-import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
 import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
 import { UserInfoComponent } from './view/user-info/user-info.component';
 import { UsersListComponent } from './view/users-list/users-list.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
   { path: 'auth/callback', component: AuthCallbackComponent },
 
   { path: 'home', component: HomeComponent },
-  { path: 'cart/shipment', component: ShipmentPageComponent },
   { path: 'cart', component: CartComponent },
   { path: 'client/history', component: ShoppingHistoryComponent },
   { path: 'client/info', component: UserInfoComponent },

@@ -3,10 +3,10 @@ import { OrderedProduct } from './ordered-product';
 export class User {
   constructor(
     public id: string,
-    public name: String,
-    public surname: String,
-    public email: String,
-    public password: String,
+    public name: string,
+    public surname: string,
+    public email: string,
+    public password: string,
     public history: OrderedProduct[],
     public type: string
   ) {}

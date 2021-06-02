@@ -15,7 +15,7 @@ import { LoginComponent } from './view/authentication/login/login.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CategoriesPanelComponent } from './view/home/categories-panel/categories-panel.component';
 import { ProductsListComponent } from './view/home/products-list/products-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductItemRowComponent } from './view/home/products-list/product-item-row/product-item-row.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxStarsModule } from 'ngx-stars';
@@ -35,7 +35,6 @@ import { ProductsQtyPickerComponent } from './shared/components/products-qty-pic
 import { SortBtnComponent } from './shared/components/sort-btn/sort-btn.component';
 import { EmptyResultsComponent } from './shared/components/empty-results/empty-results.component';
 import { UserInfoComponent } from './view/user-info/user-info.component';
-import { ShipmentPageComponent } from './view/shipment-page/shipment-page.component';
 import { ErrorResponseComponent } from './shared/components/error-response/error-response.component';
 import { UsersListComponent } from './view/users-list/users-list.component';
 import { UserRowComponentComponent } from './view/users-list/user-row-component/user-row-component.component';
@@ -44,6 +43,7 @@ import { NavbarComponent } from './view/navbar/navbar.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { Page404Component } from './view/page404/page404.component';
 import { AuthCallbackComponent } from './shared/components/auth-callback/auth-callback.component';
+import { WithCredentialsInterceptor } from './core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +70,6 @@ import { AuthCallbackComponent } from './shared/components/auth-callback/auth-ca
     SortBtnComponent,
     EmptyResultsComponent,
     UserInfoComponent,
-    ShipmentPageComponent,
     ErrorResponseComponent,
     UsersListComponent,
     UserRowComponentComponent,
@@ -95,7 +94,15 @@ import { AuthCallbackComponent } from './shared/components/auth-callback/auth-ca
     ButtonsModule.forRoot(),
     NgxSliderModule,
   ],
-  providers: [],
+  providers: [
+    [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: WithCredentialsInterceptor,
+        multi: true,
+      },
+    ],
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

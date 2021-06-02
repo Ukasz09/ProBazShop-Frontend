@@ -33,7 +33,16 @@
       <!-- FINALIZE PANEL -->
       <div class="px-1" style="width: 35%">
         <div
-          class="d-flex flex-column bg-light border rounded px-4 py-3 sticky-to-navbar"
+          class="
+            d-flex
+            flex-column
+            bg-light
+            border
+            rounded
+            px-4
+            py-3
+            sticky-to-navbar
+          "
         >
           <!-- PRICE TO PAY INFO -->
           <div class="mb-2">
@@ -54,9 +63,9 @@
           <button
             class="btn btn-danger text-uppercase"
             style="font-size: inherit"
-            routerLink="/cart/shipment"
+            (click)="onBuyBtnClick()"
           >
-            Shipment and payment
+            Confirm transaction
           </button>
           <button
             class="btn btn-light text-uppercase"
