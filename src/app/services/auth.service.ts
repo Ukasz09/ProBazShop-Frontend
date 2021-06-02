@@ -5,6 +5,7 @@ import { UserEndpoints } from 'src/app/data/UserEndpoints';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { MessageHttpResponse } from '../model/message-response';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,8 +32,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  logoutUser() {
-    // TODO: tmp
+  public logout(): Observable<MessageHttpResponse> {
     this._loggedUser = undefined;
+    const url = `${environment.API_URL}/auth/logout`;
+    return this.http.get<MessageHttpResponse>(url);
   }
 }

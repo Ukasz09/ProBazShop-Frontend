@@ -11,6 +11,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { AppAlerts } from 'src/app/shared/app-alerts';
 import { environment } from 'src/environments/environment';
 import { UserEndpoints } from 'src/app/data/UserEndpoints';
+import { MessageHttpResponse } from 'src/app/model/message-response';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -63,14 +65,22 @@ export class NavbarComponent implements OnInit {
   }
 
   logoutUser() {
-    this.authService.logoutUser();
-    this.cartService.clearProductList();
-    this.alertService.addAlert(
-      AppAlerts.getSuccessAlert(
-        AppAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,
-        'Successful log off'
-      )
-    );
+    this.authService.logout().subscribe({
+      next: (response: MessageHttpResponse) => {
+        this.cartService.clearProductList();
+        this.alertService.addAlert(
+          AppAlerts.getSuccessAlert(
+            AppAlerts.SUCCESSFUL_LOGOFF_ALERT_ID,
+            response.message
+          )
+        );
+      },
+      error: () => {
+        this.alertService.addAlert(
+          AppAlerts.getDangerAlert('logout-error', 'Logging out failed')
+        );
+      },
+    });
   }
 
   onSearchClick() {
@@ -81,11 +91,8 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  redirectToFacebookAuth(){
-    const facebookAuthEndpoint = `${environment.API_URL}${UserEndpoints.LOGIN_URI}`
-    console.log('click done');
-
-    window.location.href=facebookAuthEndpoint;
-
+  redirectToFacebookAuth() {
+    const facebookAuthEndpoint = `${environment.API_URL}${UserEndpoints.LOGIN_URI}`;
+    window.location.href = facebookAuthEndpoint;
   }
 }
