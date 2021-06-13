@@ -1,0 +1,6 @@
+@use 'src/app/shared/styles' as shared;
+
+hr {
+  width: 75%;
+  background-color: shared.$primary-color;
+}

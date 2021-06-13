@@ -31,14 +31,13 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     ['high', new SortMethod<Product>('Price: high to low')],
   ]);
 
-  @Output() addToCartClick: EventEmitter<
-    [CartProduct, Product]
-  > = new EventEmitter();
+  @Output() addToCartClick: EventEmitter<[CartProduct, Product]> =
+    new EventEmitter();
   @Output() productRowClick: EventEmitter<Product> = new EventEmitter();
 
   actualSortMethodKey = 'newest';
   productsDataReady = false;
-  itemsPerPage = 5;
+  itemsPerPage = 10;
   maxPaginationItems = 12;
   products: Product[] = [];
   productsPerPage: Product[] = [];
@@ -112,13 +111,12 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private subscribeNavbarSearchBtnClick() {
-    this.phraseSuggestionSubscription = this.navbarService.phraseSuggestion$.subscribe(
-      {
+    this.phraseSuggestionSubscription =
+      this.navbarService.phraseSuggestion$.subscribe({
         next: (data: string) => {
           if (data) this.onSearchBtnClick(data);
         },
-      }
-    );
+      });
   }
 
   private onSearchBtnClick(searchedPhrase: string) {
@@ -191,7 +189,7 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
       if (pos > 0) window.scrollTo(0, pos - 30);
       // how far to scroll on each step
       else window.clearInterval(scrollToTop);
-    }, 16);
+    }, 5);
   }
 
   changeSortingMethod(sortMethodKey: string) {

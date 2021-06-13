@@ -44,6 +44,8 @@ import { UnauthorizedComponent } from './shared/components/unauthorized/unauthor
 import { Page404Component } from './view/page404/page404.component';
 import { AuthCallbackComponent } from './shared/components/auth-callback/auth-callback.component';
 import { WithCredentialsInterceptor } from './core';
+import { ContactComponent } from './view/contact/contact.component';
+import { MapComponent } from './view/contact/components/map/map.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +79,8 @@ import { WithCredentialsInterceptor } from './core';
     UnauthorizedComponent,
     Page404Component,
     AuthCallbackComponent,
+    ContactComponent,
+    MapComponent,
   ],
   imports: [
     HttpClientModule,

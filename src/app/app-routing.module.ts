@@ -6,6 +6,7 @@ import { AuthenticationChoiceComponent } from './view/authentication/authenticat
 import { LoginComponent } from './view/authentication/login/login.component';
 import { RegistrationComponent } from './view/authentication/registration/registration.component';
 import { CartComponent } from './view/cart/cart.component';
+import { ContactComponent } from './view/contact/contact.component';
 import { HomeComponent } from './view/home/home.component';
 import { Page404Component } from './view/page404/page404.component';
 import { ShoppingHistoryComponent } from './view/shopping-history/shopping-history.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'client/history', component: ShoppingHistoryComponent },
   { path: 'client/info', component: UserInfoComponent },
+  { path: 'contact', component: ContactComponent },
   {
     path: 'users',
     component: UsersListComponent,
