@@ -6,8 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docker-clean-build": "sudo docker system prune -f && npm run docker-build",
+    "docker-build": "sudo docker build -t probaz-frontend  .",
+    "docker-run": "sudo docker run -it --network=host probaz-frontend"
   },
   "private": true,
   "dependencies": {

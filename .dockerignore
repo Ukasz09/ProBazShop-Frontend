@@ -1,0 +1,11 @@
+./node_modules
+npm-debug.log
+.git
+.editorconfig
+./e2e
+./readme
+./prototyping
+.gitignore
+*.zip
+*.md
+./vscode
