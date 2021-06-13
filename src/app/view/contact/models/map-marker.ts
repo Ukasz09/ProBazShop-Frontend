@@ -1,5 +1,5 @@
 export interface MapMarker {
-  _id: number;
+  id: number;
   latitude: number;
   longitude: number;
 }

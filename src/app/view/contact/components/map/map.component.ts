@@ -8,8 +8,6 @@ import { MapMarker } from '../../models/map-marker';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  @Input() markers: MapMarker[] = [];
-
   private readonly startLatlng: [number, number] = [51.107883, 17.038538];
   private readonly defaultZoom = 13;
   private readonly tileProvider = {
@@ -33,7 +31,6 @@ export class MapComponent implements OnInit {
       zoom: this.defaultZoom,
     });
     this.initMapTiles();
-    this.addMarkersToMap();
   }
 
   private initMapTiles(): void {
@@ -44,8 +41,8 @@ export class MapComponent implements OnInit {
     this.tileLayer.addTo(this.map);
   }
 
-  private addMarkersToMap(): void {
-    for (const marker of this.markers) {
+  public addMarkersToMap(markers: MapMarker[]): void {
+    for (const marker of markers) {
       const leafletMarker = this.getLeafletMarker(marker);
       leafletMarker.addTo(this.map);
     }
@@ -74,7 +71,7 @@ export class MapComponent implements OnInit {
   private getMarkerWrapperStyles(): string {
     return `transform: rotate(-45deg);
       border-radius: 50% 50% 50% 0;
-      background-color: orangered`;
+      background-color: #f44e64`;
   }
 
   private getMarkerStyles(): string {

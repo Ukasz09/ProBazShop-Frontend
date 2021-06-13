@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MapMarker } from './models/map-marker';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MapService } from 'src/app/services/map.service';
+import { MapComponent } from './components/map/map.component';
 
 @Component({
   selector: 'app-contact',
@@ -7,30 +8,19 @@ import { MapMarker } from './models/map-marker';
   styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
-  public mockedMarkers: MapMarker[] = [
-    {
-      _id: 0,
-      latitude: 51.1075,
-      longitude: 17.032,
-    },
-    {
-      _id: 4,
-      latitude: 51.101,
-      longitude: 17.03,
-    },
-    {
-      _id: 1,
-      latitude: 51.1,
-      longitude: 17,
-    },
-    {
-      _id: 2,
-      latitude: 51.1,
-      longitude: 17.06,
-    },
-  ];
+  @ViewChild('map') mapComponent: MapComponent;
 
-  constructor() {}
+  constructor(private mapService: MapService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchShopsLocations();
+  }
+
+  private fetchShopsLocations(): void {
+    this.mapService.getShopsLocations().subscribe({
+      next: (markers) => {
+        this.mapComponent.addMarkersToMap(markers);
+      },
+    });
+  }
 }
